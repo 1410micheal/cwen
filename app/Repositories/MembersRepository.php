@@ -20,9 +20,9 @@ class MembersRepository{
         return $member;
     }
 
-    public function find_by_ref($email){
+    public function find_by_ref($ref){
 
-        $member = Member::where('unique_id',$email)->first();
+        $member = Member::where('unique_id',$ref)->first();
         return $member;
     }
 

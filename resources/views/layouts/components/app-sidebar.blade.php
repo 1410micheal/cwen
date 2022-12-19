@@ -27,7 +27,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon fe fe-package"></i><span class="side-menu__label">Manage Members</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
-                                    <li><a href="{{url('create-member')}}" class="slide-item">Add Member</a></li>
+                                    <li><a href="{{url('new-member')}}" class="slide-item">Add Member</a></li>
                                     <li><a href="{{url('members')}}" class="slide-item">Member List</a></li>
                                 </ul>
                             </li>

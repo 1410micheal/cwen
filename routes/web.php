@@ -17,7 +17,6 @@ use App\Http\Livewire\Institutions;
 use App\Http\Livewire\Products;
 use App\Http\Livewire\OrderSummary;
 use App\Http\Livewire\OrderApproval;
-use App\Http\Livewire\PendingOrders;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Roles;
 use App\Http\Livewire\Permissions;
@@ -27,6 +26,7 @@ use App\Http\Livewire\OtpVerification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionController;
+use App\Http\Livewire\NewMember;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,10 +60,10 @@ Route::get('add-product', AddProduct::class);
 Route::get('services', Services::class);
 Route::get('settings', Settings::class);
 
-//standing orders
-Route::get('create-member',Members::class);
+//members
+Route::get('new-member',NewMember::class);
 Route::get("members",Members::class);
-
+Route::get("member-details",[Members::class,'show']);
 
 Route::get('standing-orders',StandingOrders::class);
 Route::get('validate-policy',[Members::class,'validatePolicy']);//validate

@@ -10,7 +10,7 @@ class NewMember extends Component
 {
     public function render()
     {
-        return view('orders.new-standing-order');
+        return view('members.new-member');
     }
 
 

@@ -4,8 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Http\View\Composers\InstitutionsComposer;
-use App\Models\Institution;
+use App\View\Composers\MemberCategoriesComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -26,13 +25,13 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //avail institutions in all aprtials that need them
-        View::composer('partials/institutions/*', function($view){
+        //avail members in all aprtials that need them
+        View::composer('partials/categories/*', function($view){
 
-            $view->with('institutions', []);
+            $view->with('categories', []);
             
         });
 
-         View::composer('partials/accounts/*',InstitutionsComposer::class);
+         View::composer('partials/categories/*',MemberCategoriesComposer::class);
     }
 }

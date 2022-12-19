@@ -8,11 +8,11 @@
 
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
-                    <h1 class="page-title">Create Standing Order</h1>
+                    <h1 class="page-title">Add Member</h1>
                     <div>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">New Debit Order</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Member</li>
                         </ol>
                     </div>
                 </div>
@@ -25,50 +25,75 @@
                         <div class="card">
                             <div class="card-header border-bottom-0">
                                 <div class="card-title">
-                                   <i class="fa fa-address-card-o text-danger mr-2"></i> Complete Debit Order Details
+                                   <i class="fa fa-address-card-o text-danger mr-2"></i> Complete Member Details
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('save-order')}}" method="post" id="policywizard">
+                                <form action="{{ url('save-member')}}" method="post" id="policywizard">
 
                                     @csrf
 
-                                    <h3>Customer Information</h3>
+                                    <h3>Member Information</h3>
                                     <section>
-                                        <div class="control-group form-group">
-                                            <label class="form-label">Policy Number</label>
-                                            <input type="text" name="policy_number" class="form-control required" placeholder="Policy Number" id="policy" onblur="policyChanged($(this).val())">
+                                        <div class="row">
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" name="first_name" class="form-control required" placeholder="First Name" id="first_name">
                                         </div>
 
-                                        <div class="policy-info"></div>
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">Middle Name</label>
+                                            <input type="text" name="middle_name" class="form-control required" placeholder="Middle Name" id="middle_name">
+                                        </div>
+
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" name="last_name" class="form-control required" placeholder="Last Name" id="last_name">
+                                        </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Member Category</label>
+                                                @include('partials.categories.dropdown')
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Gender</label>
+                                                <select name="gender" class="form-control">
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">HIV Status</label>
+                                                <select name="gender" class="form-control">
+                                                    <option>Negative</option>
+                                                    <option>Positive</option>
+                                                </select>
+                                        </div>
+
+                                        </div>
                                         
                                     </section>
 
-                                      <h3>Debit Order Information</h3>
+                                      <h3>Product Information</h3>
                                     <section class="row">
                                         <div class="col-lg-6">
                                             <div class="control-group form-group">
-                                                <label class="form-label">Amount</label>
-                                                <input type="number" class="form-control required amount" placeholder="Amount" id="amount" name="amount">
-                                            </div>
-
-                                            <div class="control-group form-group">
-                                                <label class="form-label">Execution Day</label>
-                                                <select name="execution_date" class="form-control required">
-                                                    @for($i=1;$i<31;$i++)
-                                                        <option value="{{$i}}">{{$i}}</option>
-                                                    @endfor
+                                                <label class="form-label">Product Type</label>
+                                                <select name="product_type" class="form-control required">
+                                                        <option value="1">Generic</option>
                                                 </select>
-                                                 <small>Day of the month</small>
+                                                 <small>Product Type/ Catgeory</small>
                                             </div>
                                        </div>
                                        <div class="col-lg-6">
-                                             <div class="form-group">
-                                                <label class="form-label">Bank</label>
-                                                @include('partials.institutions.dropdown')
-                                            </div>
+                                            
                                             <div class="form-group">
-                                                <label class="form-label">Account number</label>
+                                                <label class="form-label">Product Name</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Account Number" onblur="accountChanged($(this).val())" name="account_no" id="accountNo">
                                                     </span>
@@ -76,7 +101,6 @@
                                             </div>
                                        </div>
                                        
-                                       <div class="col-lg-12 account-info"></div>
                                         
                                     </section>
 
@@ -124,12 +148,7 @@
     
     <script>
 
-        var validatedPolicy  = false;
-        var validatedAccount = false;
-        var policyNum = null;
-        var accountNum = null;
-
-        
+      
 
         $('#policywizard').steps({
         headerTag: 'h3',
@@ -145,39 +164,14 @@
                 // Step 1 form validation
                 if (currentIndex === 0) {
 
-                    if ($('#policy').val()){
-
-                    console.log('check1',validatedPolicy);
-
-                    if(!validatedPolicy)
-                      validatePolicy($('#policy').val());
-
-                      return validatedPolicy;
-
-                    }else{
-
-                        if($('#policy').val()){
-                           return true;
-                        }else{
-                            showAlert('Invalid Data','Please provide a policy number','warning');
-                        }
-
-                    }
+                    return true;
                     
                 }
                 // Step 2 form validation
                 if (currentIndex === 1) {
-                    var amount = $('#amount').val();
-                    var institution_id = $('#institution_id').find("option:selected").val();
-
-                    console.log('Instituion Id',institution_id);
-                    
-                    if (amount>0) {
+                   
                         return true;
-                    } else {
-                        //
-                        showAlert('Invalid Data','Please complete all fields','warning');
-                    }
+                        //showAlert('Invalid Data','Please complete all fields','warning');
                 }
 
                  // Step 3 form validation
@@ -206,79 +200,6 @@
        }
     });
 
-
-function policyChanged(policy_no){
-
-        if(policy_no !== policyNum && policy_no!=="")
-        validatePolicy(policy_no);
-
-        return;
-  }
-//VALDIATE POLICY
-
-function validatePolicy(policyNumber){
-
-        policyNum = policyNumber;
-
-        showLoader('Checking Policy Details...');
-
-            $.ajax({
-                method:'get',
-                url:`{{ url('validate-policy'); }}?policy_number=${policyNumber}`,
-                success:function(response){
-                    
-                    console.log(response);
-
-                    let resp = JSON.parse(response);
-
-                    hideLoader();
-                    if(resp.success){
-
-                      $('.policy-info').html(resp.html);
-                      $('.amount').val(resp.policy.n_contribution);
-                      validatedPolicy = true;
-
-                    }else{
-                        showAlert($('.policy-info').html(response.resp));
-                    }
-
-                }
-            });
-        }
-
-    function accountChanged(acc_no){
-
-        if(acc_no !== accountNum && acc_no!=="")
-        validateAccount(acc_no);
-
-        return;
-     }
-
-    function validateAccount(accountNumber){
-
-        accountNum = accountNumber;
-
-       showLoader('Checking Account Details...');
-
-       $.ajax({
-        method:'get',
-        url:`{{ url('validate-account'); }}?account_no=${accountNumber}`,
-        success:function(response){
-            
-            console.log(response);
-
-            let resp = JSON.parse(response);
-
-            hideLoader();
-            if(resp){
-
-              $('.account-info').html(resp.html);
-              validatedAccount = true;
-            }
-
-        }
-    });
-}
 
     </script>
 
