@@ -39,7 +39,6 @@ use App\Http\Livewire\NewMember;
 |
 */
 
-
 Auth::routes();
 
 Route::get('/', Login::class);
