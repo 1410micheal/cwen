@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FollowupLog extends Model
+class Regulator extends Model
 {
     use HasFactory;
-
-    public function followup_services(){
-        return $this->hasMany(FollowupService::class);
-    }
 }

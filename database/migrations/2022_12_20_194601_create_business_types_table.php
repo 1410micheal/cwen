@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFollowupServicesTable extends Migration
+class CreateBusinessTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateFollowupServicesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('followup_services');
-        
-        Schema::create('followup_services', function (Blueprint $table) {
+        Schema::create('business_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('followup_log_id');
-            $table->foreignId('service_id');
-            $table->text('narrative')->nullable();
+            $table->string('biz_type_name')->nullable();
+            $table->string('biz_type_desc')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateFollowupServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followup_services');
+        Schema::dropIfExists('business_types');
     }
 }

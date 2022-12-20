@@ -16,8 +16,15 @@ class Members extends Component
 
     public function show(Request $request, MembersRepository $membersRepo)
     {
-        $data['member'] = $membersRepo->find_by_ref($request->ref);
-        $data['visits_count']=0;
+        $member = $membersRepo->find_by_ref($request->ref);
+
+        $data['member']          = $member;
+        $data['visits_count']    =  count($member->visits);
+        $data['products_count']  =  count($member->products);
+        $data['offences_count']  =  count($member->offences);
+        $data['business']        =  $member->business;
+        
+
         return view('members.details',$data);
     }
 }

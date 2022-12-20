@@ -33,8 +33,6 @@ class PermissionController extends Controller
     */
     public function users(Request $request){
 
-        //$data['users']  = User::paginate(15);
-        $data['institutions'] = Institution::orderBy('id','asc')->get();
         $data['roles'] = Role::all();
 
         $name     = $request->name;

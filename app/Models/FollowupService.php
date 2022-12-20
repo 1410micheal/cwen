@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class FollowupService extends Model
 {
     use HasFactory;
+
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }

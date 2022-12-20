@@ -25,7 +25,7 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                    <i class="side-menu__icon fe fe-package"></i><span class="side-menu__label">Manage Members</span><i class="angle fe fe-chevron-right"></i></a>
+                                    <i class="side-menu__icon fe fe-users"></i><span class="side-menu__label">Manage Members</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
                                     <li><a href="{{url('new-member')}}" class="slide-item">Add Member</a></li>
                                     <li><a href="{{url('members')}}" class="slide-item">Member List</a></li>
@@ -38,9 +38,9 @@
                             
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                    <i class="side-menu__icon fe fe-bell"></i><span class="side-menu__label">Manage Followups</span><span class="badge bg-orange side-badge text-white">4 New</span><i class="angle fe fe-chevron-right hor-angle"></i></a>
+                                    <i class="side-menu__icon fe fe-list"></i><span class="side-menu__label">Manage Followups</span><span class="badge bg-orange side-badge text-white">4 New</span><i class="angle fe fe-chevron-right hor-angle"></i></a>
                                 <ul class="slide-menu">
-                                    <li><a href="{{ url('notifications') }}" class="slide-item">Followup List</a></li>
+                                    <li><a href="{{ url('followup-report') }}" class="slide-item">Followup List</a></li>
                                     
                                 </ul>
                             </li>
@@ -62,8 +62,8 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-bar-chart-2"></i><span class="side-menu__label">Reports</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
-                                    <li><a href="{{ url('ordersummary') }}" class="slide-item">Order Performance Summary</a></li>
-                                    <li><a href="#" class="slide-item">Notifications Summary</a></li>
+                                    <li><a href="{{ url('membership-summary') }}" class="slide-item">Membership Summary</a></li>
+                                    <li><a href="#" class="slide-item">Folowup Report</a></li>
                                  </ul>
                             </li>
 

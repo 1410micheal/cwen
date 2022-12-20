@@ -11,22 +11,6 @@
                  @csrf
                 <div class="row pb-3">
                     
-                    <div class="form-group col-md-6  col-sm-12">
-                        <label>{{ __('institutions.institution') }}</label>
-                        <select class="form-control form-control-select2 select text-bold" name="institution_id" required>
-
-                            @if(!@$search->institution)
-                             <option value=""> {{ __('general.select').' '.__('institutions.institution')}}</option>
-                            @endif
-                            @foreach($institutions as $institution)
-                             @if(@$institution->inst_name)
-                                 <option value='{{ $institution->id}}'
-                                    {{ (@old('institution_id')== $institution->id)?'selected':''}} >
-                                    {{ $institution->inst_name }}</option>
-                             @endif
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="form-group col-md-6  col-sm-12 ">
                         <label><i class="icon-user mr-2"></i>First name</label>
                         <input type="text"  class="form-control text-bold" placeholder="First Name" name="first_name" value="{{old('first_name')}}" required/>

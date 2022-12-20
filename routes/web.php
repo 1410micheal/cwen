@@ -11,7 +11,6 @@ use App\Http\Livewire\Notifications;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\Services;
 use App\Http\Livewire\Settings;
-use App\Http\Livewire\StandingOrders;
 
 use App\Http\Livewire\Institutions;
 use App\Http\Livewire\Products;
@@ -64,7 +63,6 @@ Route::get('new-member',NewMember::class);
 Route::get("members",Members::class);
 Route::get("member-details",[Members::class,'show']);
 
-Route::get('standing-orders',StandingOrders::class);
 Route::get('validate-policy',[Members::class,'validatePolicy']);//validate
 Route::get('validate-account',[Members::class,'validateAccount']);//validate
 Route::get('orderapproval',OrderApproval::class);

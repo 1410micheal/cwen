@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFollowupServicesTable extends Migration
+class CreateRegulatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateFollowupServicesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('followup_services');
-        
-        Schema::create('followup_services', function (Blueprint $table) {
+        Schema::create('regulators', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('followup_log_id');
-            $table->foreignId('service_id');
-            $table->text('narrative')->nullable();
+            $table->string('regulator_name');
+            $table->string('regulator_desc')->nullable();
+            $table->string('regulator_logo')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateFollowupServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followup_services');
+        Schema::dropIfExists('regulators');
     }
 }

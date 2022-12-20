@@ -41,22 +41,7 @@
                         <form action="{{ route('permissions.filerusers') }}" method="POST">
                             @csrf
                             <div class="row pb-3">
-                                 <div class="form-group col-md-3  col-sm-12">
-                                    <label>Institution</label>
-                                    <select class="form-control form-control-select2 select text-bold" name="institution_id" >
-
-                                         <option value="">All</option>
-                                       
-                                        @foreach($institutions as $institution)
-                                            @if(@$institution->inst_name)
-                                             <option value='{{ $institution->id}}'
-                                                {{ (@$search->institution == $institution->id)?'selected':''}} >
-                                                {{ $institution->inst_name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-
+                                
                                 <div class="form-group col-md-3">
                                     <label>{{ __('general.name') }}</label>
                                     <input type="text" name="name"  value="{{$search->name}}" class="form-control" placeholder="Search by Name">
@@ -83,7 +68,6 @@
                                     <th>{{ __('auth.user') }}</th>
                                     <th>{{ __('general.email') }}</th>
                                     <th>{{ __('general.phone') }}</th>
-                                    <th>{{ __('institutions.institution') }}</th>
                                     <th>{{ __('general.status') }}</th>
                                     <th>{{ __('auth.role') }}</th>
                                     <th></th>
@@ -94,7 +78,6 @@
                             @foreach($users as $user)
 
                                 @php
-                                  $institution    = get_institution($user->institution_id);
                                   $userRole = get_role($user->id);
                                   $statuses = array(
                                   "0"=>"Blocked",
@@ -103,12 +86,10 @@
                                   "1"=>"Active");
                                 @endphp
 
-                                @if($institution)
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->mobile }}</td>
-                                    <td>{{ @$institution->names }}</td>
                                     <td><b class="badge badge-dark">{{  $statuses[$user->status] }}</b></td>
                                     <td>{{ strtoupper((@$userRole->name)?$userRole->name:'NO ROLE') }}</td>
                                     <td class="text-center">
@@ -140,7 +121,6 @@
                                     </td>
                                 </tr>
 
-                                 @endif
                                       
                                 @endforeach
                             </tbody>
