@@ -27,4 +27,9 @@ class Members extends Component
 
         return view('members.details',$data);
     }
+
+    public function followups(Request $request, MembersRepository $membersRepo)
+    {
+        dd('Helo');
+    }
 }

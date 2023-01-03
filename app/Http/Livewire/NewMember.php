@@ -2,15 +2,19 @@
 
 namespace App\Http\Livewire;
 
+use App\Repositories\BusinessRepository;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use App\Repositories\MembersRepository;
 
 class NewMember extends Component
 {
-    public function render()
+    public function render(Request $request, MembersRepository $membersRepo, BusinessRepository $businessRepo)
     {
-        return view('members.new-member');
+        $data['business_types']    = $businessRepo->get();
+        $data['regulators']        = $businessRepo->regulators();
+
+        return view('members.new-member',$data);
     }
 
 
@@ -18,27 +22,31 @@ class NewMember extends Component
     {
         
         $request->validate([
-            'account_name'   => 'required|max:50',
-            'institution_id' => 'required',
-            'account_no'     => 'required',
-            'execution_date' => 'required',
-            'policy_number'  => 'required'
+            'first_name'     => 'required|max:50|min:3',
+            'last_name'      => 'required|max:50|min:3',
+            'gender'         => 'required',
+            'hiv_status'     => 'required',
+            'business_name'  => 'required|max:100',
+            'business_type'  => 'required',
+            'employee_count' => 'required',
+            'biz_ownership'  => 'required',
+            'prem_ownership' => 'required',
+            'has_biz_skills' => 'required',
+            'is_licenced'    => 'required',
+            'regulator'      => 'required',
+            'address'        => 'required'
         ]);
 
 
-         $customer = $membersRepo->save($request->all());
+        $member = $membersRepo->save($request);
 
-        $request['customer_id'] = $customer->id;
-
-        $saved    = $membersRepo->save($request);
-
-        $msg = (!$saved)?"Operation failed, try again":"Order saved successfuly";
+        $msg = (!$member)?"Operation failed, try again":"Member saved successfuly";
         $data["message"] = $msg;
        
-        $alert_class = ($saved)?'success':'danger';
+        $alert_class = ($member)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
 
-        return redirect('pendingorders')->with($alert);
+        return redirect('member-details?ref='.$member->unique_id)->with($alert);
 
     }
 }

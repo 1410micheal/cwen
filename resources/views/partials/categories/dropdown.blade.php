@@ -1,4 +1,4 @@
-<select class="form-control form-select" 
+<select class="form-control" 
 name="{{ $field ?? 'member_category_id' }}" id="{{ $field ?? 'member_category_id' }}">
     <option value="{{  $all_value ?? 0 }}">{{  $all_field ?? 'Select' }}</option>
     @foreach($categories as $row)

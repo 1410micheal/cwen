@@ -63,28 +63,10 @@ Route::get('new-member',NewMember::class);
 Route::get("members",Members::class);
 Route::get("member-details",[Members::class,'show']);
 
-Route::get('validate-policy',[Members::class,'validatePolicy']);//validate
-Route::get('validate-account',[Members::class,'validateAccount']);//validate
-Route::get('orderapproval',OrderApproval::class);
-Route::get('approve',[OrderApproval::class,'approve']);
-Route::get('bank-approve',[OrderApproval::class,'bank_approval']);
+Route::post('save-member',[NewMember::class,'save']);
+Route::get('followup-report',[Members::class,'followups']);
 
-Route::post('save-order',[Members::class,'save']);
-Route::get('ordersummary',OrderSummary::class)->name('profile');
-
-Route::get("orderschedule",OrderSchedules::class);
-
-//notifications
-Route::get('notifications',Notifications::class);
-Route::get('notificationqueries',NotificationQueries::class);
-
-//institutions
-Route::get('institutions',Institutions::class);
-Route::post('save-institution',[Institutions::class,'save']);
-Route::post('institution-toggle',[Institutions::class,'toggle']);
-
-
-//jubilee products
+// products
 Route::get('products',Products::class);
 
 });
@@ -93,6 +75,7 @@ Route::get('products',Products::class);
 
 //permissions and access control
 Route::group(['prefix' => 'permissions','middleware'=>'auth'], function() {
+	
 	Route::get('/',  [PermissionController::class,'permissions'])->name('permissions.permissions');
 	Route::get('/roles',  [PermissionController::class,'index'])->name('permissions.roles');
 	Route::post('/role',  [PermissionController::class,'saveRole'])->name('permissions.role');

@@ -33,11 +33,12 @@
                     <h5>Registered: {{ $member->date_registered }}</h5>
                     <h5>Member Category:<strong>{{$member->category->category_name}}</strong></h5>
                     <h5>Marital Status: {{ $member->marital_status }}</h5>
+                    <h5>NIN: {{ $member->nin }}</h5>
                     
                 </div>
 
                 <div class="col-lg-4">
-                    <p class="h3">Member Details:</p>
+                    <p class="h3">Identity Details:</p>
                     <address>
                             First Name:  {{ $member->first_name }}<br>
                             Last Name:   {{ $member->last_name }}<br>
@@ -48,7 +49,7 @@
                 </div>
                 <div class="col-lg-4 text-start">
                     <p class="h4 fw-semibold">Other Details:</p>
-                    <p class="mb-1">Phone No: {{$member->telephone}}</p>
+                    <p class="mb-1">Phone No: {{$member->phone_no}}</p>
                     <p class="mb-1">Email: {{$member->email}}</p>
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
                 </div>
@@ -118,6 +119,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title mb-0">Member Additional Data</h3>
+                <div class="btn-group">
+                    <a href="" class="btn"><i class="fa fa-bar-chart"></i> Add Followup Data</a>
+                    <a href="" class="btn"><i class="fe fe-box"></i> Add Product</a>
+                    <a href="" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
+                </div>
             </div>
             <div class="card-body pt-4">
                 <div class="grid-margin">

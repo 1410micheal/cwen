@@ -38,28 +38,58 @@
                                         <div class="row">
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control required" placeholder="First Name" id="first_name">
+                                            <input type="text" name="first_name" class="form-control required" value="{{old('first_name')}}" placeholder="First Name" id="first_name" required>
                                         </div>
 
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Middle Name</label>
-                                            <input type="text" name="middle_name" class="form-control required" placeholder="Middle Name" id="middle_name">
+                                            <input type="text" name="middle_name" class="form-control required" placeholder="Middle Name" value="{{old('middle_name')}}" id="middle_name">
                                         </div>
 
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control required" placeholder="Last Name" id="last_name">
+                                            <input type="text" name="last_name" class="form-control required" placeholder="Last Name" id="last_name" value="{{old('last_name')}}" required>
                                         </div>
 
                                         </div>
+
+                                        <div class="row">
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" name="phone_no" class="form-control required" value="{{old('phone_no')}}" placeholder="Phone No" id="phone_no">
+                                        </div>
+
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control required" placeholder="Email" value="{{old('email')}}" id="email">
+                                        </div>
+
+                                        <div class="control-group form-group col-lg-4">
+                                            <label class="form-label">National ID No.</label>
+                                            <input type="text" name="nin" class="form-control" placeholder="National ID" id="nin" value="{{old('nin')}}">
+                                        </div>
+
+                                        </div>
+
                                         <div class="row">
 
-                                        <div class="form-group col-lg-4">
+                                       
+                                        <div class="control-group form-group col-lg-3">
+                                            <label class="form-label">Date of Membership</label>
+                                            <input type="date" name="date_registered" class="form-control" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required>
+                                        </div>
+
+                                        <div class="control-group form-group col-lg-3">
+                                            <label class="form-label">Date of Birth</label>
+                                            <input type="date" name="dob" class="form-control required" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
                                                 <label class="form-label">Member Category</label>
                                                 @include('partials.categories.dropdown')
                                         </div>
 
-                                        <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-3">
                                                 <label class="form-label">Gender</label>
                                                 <select name="gender" class="form-control">
                                                     <option>Male</option>
@@ -67,52 +97,146 @@
                                                 </select>
                                         </div>
 
+                                        </div>
+
+                                        <div class="row">
+                                        
+                                        
                                         <div class="form-group col-lg-4">
                                                 <label class="form-label">HIV Status</label>
-                                                <select name="gender" class="form-control">
+                                                <select name="hiv_status" class="form-control">
                                                     <option>Negative</option>
                                                     <option>Positive</option>
                                                 </select>
                                         </div>
 
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Education Level</label>
+                                                <select name="education" class="form-control">
+                                                    <option>Degree</option>
+                                                    <option>High School</option>
+                                                    <option>Secondary</option>
+                                                    <option>Primary</option>
+                                                    <option>None</option>
+                                                </select>
+                                        </div>
+
+                                        
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Marital Status</label>
+                                                <select name="marital_status" class="form-control">
+                                                    <option>Married</option>
+                                                    <option>Single</option>
+                                                    <option>Divorced</option>
+                                                </select>
+                                        </div>
+
+
                                         </div>
                                         
                                     </section>
 
-                                      <h3>Product Information</h3>
+                                      <h3>Business Profile</h3>
                                     <section class="row">
-                                        <div class="col-lg-6">
+
+                                       <div class="col-lg-12">
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label">Business Name</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Business Name"  name="business_name" id="business_name" value="{{old('business_name')}}" required>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                       </div>
+                                       <div class="col-lg-6">
                                             <div class="control-group form-group">
-                                                <label class="form-label">Product Type</label>
-                                                <select name="product_type" class="form-control required">
-                                                        <option value="1">Generic</option>
+                                                <label class="form-label">Business Type</label>
+                                                <select name="business_type" class="form-control required">
+                                                    @foreach($business_types as $type)
+                                                        <option value="{{$type->id}}">{{$type->biz_type_name}}</option>
+                                                    @endforeach
                                                 </select>
-                                                 <small>Product Type/ Catgeory</small>
+                                                 <small class="text-muted">Type of Business</small>
                                             </div>
                                        </div>
                                        <div class="col-lg-6">
                                             
                                             <div class="form-group">
-                                                <label class="form-label">Product Name</label>
+                                                <label class="form-label">No. of Employees</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Account Number" onblur="accountChanged($(this).val())" name="account_no" id="accountNo">
+                                                    <input type="number" min="1" class="form-control" placeholder="No. of Employees"  name="employee_count" id="employee_count" value="{{old('employee_count')}}" required>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                            <div class="control-group form-group">
+                                                <label class="form-label">Ownership</label>
+                                                <select name="biz_ownership" class="form-control required">
+                                                        <option value="1">Member Owned</option>
+                                                        <option value="0">Member Employed</option>
+                                                </select>
+                                                 <small class="text-muted">Does member own the business?</small>
+                                            </div>
+                                       </div>
+
+                                       <div class="col-lg-6">
+                                            <div class="control-group form-group">
+                                                <label class="form-label">Premise Ownership</label>
+                                                <select name="prem_ownership" class="form-control required">
+                                                        <option value="1">Owned</option>
+                                                        <option value="0">Rented</option>
+                                                </select>
+                                                 <small class="text-muted">Does member own the business premises?</small>
+                                            </div>
+                                       </div>
+                                       <div class="col-lg-4">
+                                            <div class="control-group form-group">
+                                                <label class="form-label">Received Business Dev't Training</label>
+                                                <select name="has_biz_skills" class="form-control required">
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
+                                                </select>
+                                                 <small class="text-muted">Member trained in business development?</small>
+                                            </div>
+                                       </div>
+
+                                       <div class="col-lg-4">
+                                            <div class="control-group form-group">
+                                                <label class="form-label">Licenced</label>
+                                                <select name="is_licenced" class="form-control" required>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
+                                                </select>
+                                                 <small class="text-muted">Is business licenced?</small>
+                                            </div>
+                                       </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="control-group form-group">
+                                                <label class="form-label">Regulating Authority</label>
+                                                <select name="regulator" class="form-control" required>
+                                                    <option value="" disabled selected>Select</option>
+                                                   @foreach($regulators as $reg)
+                                                        <option value="{{$reg->id}}">{{$reg->regulator_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                 <small class="text-muted">Government Regulator</small>
+                                            </div>
+                                       </div>
+                                       
+                                       <div class="col-lg-12">
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label">Business Address</label>
+                                                <div class="input-group">
+                                                    <textarea class="form-control" placeholder="Business Address"  name="address" id="address">{{old('address')}}</textarea>
                                                     </span>
                                                 </div>
                                             </div>
                                        </div>
                                        
-                                        
-                                    </section>
-
-                                    <h3>Upload Attachments</h3>
-                                    <section>
-                                        <div class="control-group form-group  row">
-                                            <div class="col-lg-12 col-sm-12">
-                                                <label class="form-label text-muted">Upload suppoting attachments</label>
-                                                <input id="demo" type="file" name="attachments"
-                                                    accept=".jpg,.pdf, .png, image/jpeg, image/png" multiple>
-                                            </div>
-                                        </div>
                                         
                                     </section>
                                     
