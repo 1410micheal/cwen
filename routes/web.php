@@ -7,20 +7,10 @@ use App\Http\Livewire\Index;
 use App\Http\Livewire\Lockscreen;
 use App\Http\Livewire\Login;
 use App\Http\Livewire\Members;
-use App\Http\Livewire\Notifications;
-use App\Http\Livewire\Profile;
 use App\Http\Livewire\Services;
 use App\Http\Livewire\Settings;
 
-use App\Http\Livewire\Institutions;
 use App\Http\Livewire\Products;
-use App\Http\Livewire\OrderSummary;
-use App\Http\Livewire\OrderApproval;
-use App\Http\Livewire\Users;
-use App\Http\Livewire\Roles;
-use App\Http\Livewire\Permissions;
-use App\Http\Livewire\OrderSchedules;
-use App\Http\Livewire\NotificationQueries;
 use App\Http\Livewire\OtpVerification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -70,7 +60,6 @@ Route::get('followup-report',[Members::class,'followups']);
 Route::get('products',Products::class);
 
 });
-
 
 
 //permissions and access control

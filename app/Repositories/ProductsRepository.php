@@ -30,11 +30,15 @@ class ProductsRepository{
 
         $product = new ProductDetail();
 
-        $product->inst_name     = $request->name;
-        $product->inst_email    = $request->email;
-        $product->inst_tel      = $request->tel;
-        $product->inst_address  = $request->address;
-        $product->product_type_id  = $request->type;
+        $product->product_name           = $request->product_name;
+        $product->product_type_id        = $request->prod_type_id;
+        $product->is_registered_brand    = $request->is_registered;
+        $product->member_id              = $request->member_id;
+        $product->package_type_id        = $request->package_type_id;
+        $product->is_unbs_certified      = $request->unbs_certified;
+        $product->eco_packaging_trained  = $request->eco_trained;
+        $product->recycles_packagin      = $request->recyclable;
+        $product->packaging_type         = $request->packaging_type;
 
         return $product->save();
     }
