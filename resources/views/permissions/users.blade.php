@@ -75,7 +75,7 @@
                             <tbody>
 
                             @php
-                                  $userRole = get_role($user->id);
+                                  
                                   $statuses = array(
                                   "0"=>"Blocked",
                                   "2"=>"Restricted",
@@ -85,6 +85,11 @@
 
                             @foreach($users as $user)
 
+                            @php
+
+                            $userRole = get_role($user->id);
+
+                            @endphp
 
                                 <tr>
                                     <td>{{ $user->name }}</td>
