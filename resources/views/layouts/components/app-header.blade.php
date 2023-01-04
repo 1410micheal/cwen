@@ -46,12 +46,12 @@
                                             <div class="dropdown-menu dropdown-menu-arrow" style="margin-left:-100px!important;">
                                                 <div class="drop-heading">
                                                     <div class="text-center">
-                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">Kiyingi  Paul</h5>
-                                                        <small class="text-muted">Senior Admin</small>
+                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">{{ current_user()->name }}</h5>
+                                                        <small class="text-muted">{{ @get_role(current_user()->id)->name }}</small>
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="{{ url('profile') }}/{{ current_user()->id }}">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="{{url('lockscreen')}}">
