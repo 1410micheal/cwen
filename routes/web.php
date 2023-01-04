@@ -15,6 +15,7 @@ use App\Http\Livewire\OtpVerification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\NewMember;
 
 /*
@@ -59,6 +60,14 @@ Route::get('followup-report',[Members::class,'followups']);
 // products
 Route::get('products',Products::class);
 
+});
+
+
+//profile
+Route::group(['prefix' => 'profile','middleware'=>'auth'], function() {
+	Route::get('/{user_id?}',  [ProfileController::class,'index'])->name('profile');
+	Route::post('/update',  [ProfileController::class,'update'])->name('profile.update');
+	Route::post('/changepass',  [ProfileController::class,'changePass'])->name('profile.changepass');
 });
 
 

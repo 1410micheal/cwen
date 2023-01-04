@@ -11,6 +11,7 @@
                  @csrf
                 <div class="row pb-3">
                     
+                   
                     <div class="form-group col-md-6  col-sm-12 ">
                         <label><i class="icon-user mr-2"></i>First name</label>
                         <input type="text"  class="form-control text-bold" placeholder="First Name" name="first_name" value="{{old('first_name')}}" required/>

@@ -10,7 +10,7 @@ use Auth;
 class ProfileController extends Controller
 {
     
-    use Traits\Utils;
+    use \App\Http\Traits\Utils;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,7 @@ class ProfileController extends Controller
         if(!$user_id):
          $user = Auth::user();
         else:
-         $useId = $this->revealValue($user_id);
+         $useId = $user_id;
          $user  = User::find($useId);
         endif;
         $data['user'] = $user;
@@ -50,15 +50,27 @@ class ProfileController extends Controller
 
        $editor = Auth::user();
 
-       $secure_id = $request->id;
-       $useId = $this->revealValue($secure_id);
-       $user  = User::find($useId);
+       $userId = $request->id;
+       $user  = User::find($userId);
 
        $user->firstname =  $request->firstname;
        $user->lastname  =  $request->lastname;
+       $user->name      =  $request->firstname. " ".$request->lastname;
        $user->email     =  $request->email;
        $user->nin       =  $request->nin;
        $user->mobile    =  $request->mobile;
+
+       if($request->hasFile('photo'))
+        {
+            $file = $request->file('photo');
+            $file_name = md5_file($file->getRealPath());
+            $extension = $file->guessExtension();
+            $image_file = $file_name.'.'.$extension;
+
+            $file->move(storage_path().'/app/public/users/',$image_file);
+
+            $user->photo = $image_file;
+        }
 
        $saved = $user->update();
 
@@ -70,7 +82,7 @@ class ProfileController extends Controller
             $class  = "danger";
         endif;
 
-        $toUser = ($editor->id == $useId)?false:$secure_id;
+        $toUser = ($editor->id == $userId)?false:$userId;
 
         $alert = ["alert-$class"=>$message];
         return redirect()->route('profile',$toUser)->with($alert);
@@ -94,13 +106,12 @@ class ProfileController extends Controller
 
 
        $editor = Auth::user();
-       $secure_id = $request->id;
-       $useId = $this->revealValue($secure_id);
-       
+       $userId = $request->id;
+      
 
         if($request->pass1 == $request->pass2){
 
-           $user  = User::find($useId);
+           $user  = User::find($userId);
            $user->password = Hash::make($request->pass1);
            $saved = $user->update();
 
@@ -118,7 +129,7 @@ class ProfileController extends Controller
             $class  = "danger";
         }
 
-        $toUser = ($editor->id == $useId)?false:$secure_id;
+        $toUser = ($editor->id == $userId)?false:$userId;
         $alert = ["alert-$class"=>$message];
         return redirect()->route('profile',$toUser)->with($alert);
 

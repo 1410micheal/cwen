@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\institution;
-use App\Models\institutionStatement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,25 +31,19 @@ class PermissionController extends Controller
     */
     public function users(Request $request){
 
+        //$data['users']  = User::paginate(15);
         $data['roles'] = Role::all();
 
         $name     = $request->name;
-        $institutionId  = $request->institution_id;
         $phone    = $request->mobile;
         $count    = (!empty($request->count))?$request->count:20;
-       
-       if (!$this->isAdmin())
-            $institutionId = Auth::user()->institution_id;
-
+  
         $users = DB::table('users')
                 ->when($phone, function ($query, $phone) {
                     return $query->where('users.mobile','like',$phone.'%');
                 })
                 ->when($name, function ($query, $name) {
                     return $query->where('users.name','like', $name.'%');
-                })
-                ->when($institutionId, function ($query, $institutionId) {
-                    return $query->where('users.institution_id',$institutionId);
                 })
                 ->orderBy('users.id','desc')
                 ->paginate($count);
@@ -62,7 +54,6 @@ class PermissionController extends Controller
 
 
         $data['search'] = (object) array(
-            "institution"=>$institutionId,
             "name"=>$name,
             "count" =>$count,
             "phone" =>$phone
@@ -87,7 +78,6 @@ class PermissionController extends Controller
 
         $lastName       = $request->last_name;
         $firstName      = $request->first_name;
-        $institutionId  = $request->institution_id;
         $nin       = $request->nin;
         $email     = $request->email;
         $mobile    = $request->mobile;
@@ -100,7 +90,6 @@ class PermissionController extends Controller
 
         $user->firstname = $firstName;
         $user->lastname  = $lastName;
-        $user->institution_id  = $institutionId;
         $user->mobile    = $mobile;
         $user->nin       = $nin;
         $user->email     = $email;
@@ -119,7 +108,7 @@ class PermissionController extends Controller
 
         $msg = (!$saved)?"Operation failed, try again":"User <b> $user->name </b> created successfuly with default password <b> $password </b>";
        
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
         return redirect()->route('permissions.users')->with($alert);
     }
@@ -142,7 +131,7 @@ class PermissionController extends Controller
                 $user->pwd_changed = 1;
                 $user->update();
         
-        	   $this->logTrail('Changed Password for '.$user->name." ".$user->mobile,(current_user()->id)?current_user()->id:0,[], $user);
+        	   log_trail('Changed Password for '.$user->name." ".$user->mobile,(current_user()->id)?current_user()->id:0,[], $user);
         
                 return redirect()->route('home');
             else:
@@ -174,7 +163,7 @@ class PermissionController extends Controller
         $data["message"] = $msg;
         $data['data'] = ($saved)?$role:[];
         
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
 
         return redirect()->route('permissions.roles')->with($alert);
@@ -201,7 +190,7 @@ class PermissionController extends Controller
         $data["message"] = $msg;
         $data['data'] = ($saved)?$perm:[];
         
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
 
         return redirect()->route('permissions.permissions')->with($alert);
@@ -222,7 +211,7 @@ class PermissionController extends Controller
         $data["message"] = $msg;
         $data['data'] = $permissions;
 
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
 
         $alert = ['alert-'.$alert_class=>$msg];
 
@@ -248,7 +237,7 @@ class PermissionController extends Controller
         $data["message"] = $msg;
         $data['data']    = [];
 
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
         $alert       = ['alert-'.$alert_class=>$msg];
 
         return redirect()->route('permissions.roles')->with($alert);
@@ -264,15 +253,14 @@ class PermissionController extends Controller
         //assign new
         $saved  = $user->assignRole($roleId);
 
-
         $msg = (!$saved)?"Operation failed, try again":"Role assigned successfuly,refresh to view changes";
     
     	if($saved)
-        	$this->logTrail('Assigned Role to user '.$user->name." ".$user->mobile,current_user()->id,[], $user);
+        	log_trail('Assigned Role to user '.$user->name." ".$user->mobile,current_user()->id,[], $user);
     
         $data["message"] = $msg;
         $data['data'] = [$userId,$roleId];
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
 
         $alert = ['alert-'.$alert_class=>$msg];
 
@@ -285,7 +273,7 @@ class PermissionController extends Controller
     public function resetUser(Request $request){
 
         $password = $this->generatePin(6);
-        $user_id  = $this->revealValue($request->user_id);
+        $user_id  = reveal_value($request->user_id);
 
         $user    = User::find($user_id);
         $status  = $request->status;
@@ -298,12 +286,12 @@ class PermissionController extends Controller
         $saved = $user->update();
     
         $msg = (!$saved)?"Operation failed, try again":"User <b> $user->name </b>, with username <b>$user->mobile or $user->email</b> has been reset with default password <b> $password </b>";
-        $alert_class = ($saved)?'info':'danger';
+        $alert_class = ($saved)?'success':'danger';
     	
-      if($saved)
-        $this->sendSMS("Hello institution, your CASHAWO password has been reset by ADMIN, your new password is $password",$user->mobile);
+      //if($saved)
+      //  $this->sendSMS("Hello institution, your CASHAWO password has been reset by ADMIN, your new password is $password",$user->mobile);
     
-        $this->logTrail('Reset institution Password '.$user->name." ".$user->mobile,current_user()->id,[],[]);
+        log_trail('Reset institution Password '.$user->name." ".$user->mobile,current_user()->id,[],[]);
     
         $alert = ['alert-'.$alert_class=>$msg];
         return redirect()->route('permissions.users')->with($alert);
@@ -348,15 +336,15 @@ class PermissionController extends Controller
 
      public function deleteUser(Request $request){
 
-        $user_id = $this->revealValue($request->user_id);
+        $user_id = reveal_value($request->user_id);
         $user    = User::find($user_id);
         $deleted = $user->delete();
 
         if($deleted){
-            $this->logTrail('Deleted user '.$user->name,current_user()->id,[],$user);
+            log_trail('Deleted user '.$user->name,current_user()->id,[],$user);
         }
         $msg = (!$deleted)?"Operation failed, try again":"User <b> $user->name </b>, with username <b>$user->email</b> has been  <b> deleted</b>";
-        $alert_class = ($deleted)?'info':'danger';
+        $alert_class = ($deleted)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
         return redirect()->route('permissions.users')->with($alert);
     }

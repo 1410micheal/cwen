@@ -41,7 +41,6 @@
                         <form action="{{ route('permissions.filerusers') }}" method="POST">
                             @csrf
                             <div class="row pb-3">
-                                
                                 <div class="form-group col-md-3">
                                     <label>{{ __('general.name') }}</label>
                                     <input type="text" name="name"  value="{{$search->name}}" class="form-control" placeholder="Search by Name">
@@ -75,16 +74,16 @@
                             </thead>
                             <tbody>
 
-                            @foreach($users as $user)
-
-                                @php
-                                  $userRole = get_role($user->id);
+                            @php
                                   $statuses = array(
                                   "0"=>"Blocked",
                                   "2"=>"Restricted",
                                   "3"=>"Reset",
                                   "1"=>"Active");
                                 @endphp
+
+                            @foreach($users as $user)
+
 
                                 <tr>
                                     <td>{{ $user->name }}</td>
@@ -93,35 +92,15 @@
                                     <td><b class="badge badge-dark">{{  $statuses[$user->status] }}</b></td>
                                     <td>{{ strtoupper((@$userRole->name)?$userRole->name:'NO ROLE') }}</td>
                                     <td class="text-center">
+                                             @include('permissions.partials.user_row_dropdown')
 
-                                            <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-                                                    <i class="fa fa-menu"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                               
-                                                    <a href="#user{{$user->id}}0" data-bs-toggle="modal" class="dropdown-item"><i class="icon-touch-pinch"></i> 
-                                                    {{ __('general.change') }}  {{ __('auth.role') }} </a>
-
-                                               <a href="#login_state{{$user->id}}0" data-bs-toggle="modal" class="dropdown-item"><i class="fa fa-expand"> Reset Password</i> 
-                                              
-                                                <a href="{{ url('profile', secure_value($user->id))}}" class="dropdown-item"><i class="fa fa-expand"></i> 
-                                                    {{ __('general.details') }}  </a>
-                                                
-                                                <a href="#delete{{$user->id}}0" data-bs-toggle="modal" class="dropdown-item text-danger"><i class="icon-trash"></i> 
-                                                    Delete </a>
-                                                </div>
-                                            </div>
-                                
                                              @include('permissions.partials.user_edit_form_modal')
                                              @include('permissions.partials.reset_modal')
                                              @include('permissions.partials.delete_user_modal')
-
   
                                     </td>
                                 </tr>
 
-                                      
                                 @endforeach
                             </tbody>
                         </table> 
