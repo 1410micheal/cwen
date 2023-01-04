@@ -75,6 +75,7 @@
                             <tbody>
 
                             @php
+                                  $userRole = get_role($user->id);
                                   $statuses = array(
                                   "0"=>"Blocked",
                                   "2"=>"Restricted",
