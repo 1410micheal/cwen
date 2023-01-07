@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
     @section('styles')
-
+        <link href="{{asset('assets/plugins/select2/select2.full.min.js')}}">
     @endsection
 
-        @section('content')
+   @section('content')
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -120,8 +120,7 @@
             <div class="card-header">
                 <h3 class="card-title mb-0">Member Additional Data</h3>
                 <div class="btn-group">
-                    <a href="" class="btn"><i class="fa fa-bar-chart"></i> Add Followup Data</a>
-                    <a href="" class="btn"><i class="fe fe-box"></i> Add Product</a>
+                    <a href="#add-product" data-bs-toggle="modal" class="btn"><i class="fe fe-box"></i> Add Product</a>
                     <a href="" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
                 </div>
             </div>
@@ -145,7 +144,10 @@
                             <div class="panel-body tabs-menu-body border-0 pt-0">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="followup">
+                                        @include('members.partials.followup_form')
+
                                         <div class="table-responsive pt-4">
+                                            
                                         @if($visits_count < 1)
                                             @include('partials.general.no_records',['message'=>'No followup data for this member!'])
                                         @else
@@ -186,35 +188,22 @@
 </div>
 <!-- ROW-4 END -->
 
+@include('members.partials.product_modal')
 
-        @endsection
+@endsection
 
     @section('scripts')
+    
+    @include('partials.general.datepicker')
 
-    <!-- CHART-CIRCLE JS-->
-    <script src="{{asset('assets/plugins/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
 
-    <!-- MORRIS CHART JS-->
-    <script src="{{asset('assets/plugins/morris/raphael-min.js')}}"></script>
-    <script src="{{asset('assets/plugins/morris/morris.js')}}"></script>
+    <script>
+    // Select2
+    $('.select2').select2({
+        width: '100%'
+    });
 
-    <!-- C3 CHART JS-->
-    <script src="{{asset('assets/plugins/charts-c3/d3.v5.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/charts-c3/c3-chart.js')}}"></script>
-
-    <!-- CHARTJS CHART JS-->
-    <script src="{{asset('assets/plugins/chart/Chart.bundle.js')}}"></script>
-    <script src="{{asset('assets/plugins/chart/utils.js')}}"></script>
-
-    <!-- PIETY CHART JS-->
-    <script src="{{asset('assets/plugins/peitychart/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/peitychart/peitychart.init.js')}}"></script>
-
-    <!-- GALLERY JS -->
-    <script src="{{asset('assets/plugins/SmartPhoto-master/smartphoto.js')}}"></script>
-    <script src="{{asset('assets/js/gallery.js')}}"></script>
-
-    <!-- INTERNAL INDEX JS -->
-    <script src="{{asset('assets/js/widget.js')}}"></script>
+    </script>
 
     @endsection

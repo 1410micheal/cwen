@@ -53,6 +53,8 @@ Route::get('settings', Settings::class);
 Route::get('new-member',NewMember::class);
 Route::get("members",Members::class);
 Route::get("member-details",[Members::class,'show']);
+Route::post("save-followup",[Members::class,'save_followup']);
+Route::post("save-product",[Members::class,'save_product']);
 
 Route::post('save-member',[NewMember::class,'save']);
 Route::get('followup-report',[Members::class,'followups']);

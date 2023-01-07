@@ -106,21 +106,8 @@
     @section('scripts')
 
       <!-- DATEPICKER JS -->
-      
-      <script src="{{asset('assets/plugins/date-picker/date-picker.js')}}"></script>
-    <script src="{{asset('assets/plugins/date-picker/jquery-ui.js')}}"></script>
-    <script src="{{asset('assets/plugins/input-mask/jquery.maskedinput.js')}}"></script>
        <!-- INTERNAL Bootstrap-Datepicker js-->
-       <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js')}}"></script>
-    
-    <!-- FORMELEMENTS JS -->
-    <script>
-         // Datepicker
-            $('.fc-datepicker').datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true
-            });
+   @include('partials.general.datepicker')
 
-    </script>
 
     @endsection
