@@ -121,7 +121,7 @@
                 <h3 class="card-title mb-0">Member Additional Data</h3>
                 <div class="btn-group">
                     <a href="#add-product" data-bs-toggle="modal" class="btn"><i class="fe fe-box"></i> Add Product</a>
-                    <a href="" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
+                    <a href="#add-sgbv" data-bs-toggle="modal" class="btn" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
                 </div>
             </div>
             <div class="card-body pt-4">
@@ -171,7 +171,7 @@
                                         @if($offences_count < 1)
                                              @include('partials.general.no_records',['message'=>'No offences reported from this member!'])
                                         @else
-                                             @include('partials.members.member_products')
+                                             @include('partials.members.member_sgbv')
                                         @endif
 
                                         </div>
@@ -189,6 +189,7 @@
 <!-- ROW-4 END -->
 
 @include('members.partials.product_modal')
+@include('members.partials.sgbv_modal')
 
 @endsection
 
@@ -203,6 +204,13 @@
     $('.select2').select2({
         width: '100%'
     });
+
+    $('.select2Modal').select2({
+        width: '100%',
+        dropdownParent: $("#add-sgbv")
+    });
+
+    
 
     </script>
 

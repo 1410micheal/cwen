@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Repositories\FollowupRepository;
 use Livewire\Component;
 use App\Repositories\MembersRepository;
+use App\Repositories\OffenceRepository;
 use App\Repositories\ProductsRepository;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class Members extends Component
         return view('members.index',$data);
     }
 
-    public function show(Request $request, MembersRepository $membersRepo,FollowupRepository $followupRepo,ProductsRepository $productsRepo)
+    public function show(Request $request, MembersRepository $membersRepo,FollowupRepository $followupRepo,ProductsRepository $productsRepo,OffenceRepository $offenceRepo)
     {
         $member = $membersRepo->find_by_ref($request->ref);
 
@@ -28,6 +29,7 @@ class Members extends Component
         $data['services']        =  $followupRepo->get_services();
         $data['product_types']   =  $productsRepo->get_types();
         $data['packaging_types'] =  $productsRepo->get_packaging_types();
+        $data['offence_types']   =  $offenceRepo->get_types();
         
         return view('members.details',$data);
     }
@@ -59,6 +61,21 @@ class Members extends Component
 
         return back()->with($alert);
     }
+
+    public function save_offence(Request $request, OffenceRepository $offenceRepo)
+    {
+        $record = $offenceRepo->save($request);
+
+        $msg = (!$record)?"Operation failed, try again":"SGBV record saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
 
 
     public function followups(Request $request, MembersRepository $membersRepo)

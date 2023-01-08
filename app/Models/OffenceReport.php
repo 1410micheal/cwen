@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class OffenceReport extends Model
 {
     use HasFactory;
+
+    public function case_type(){
+
+        return $this->belongsTo(OffenceType::class);
+    }
+
+    public function services(){
+
+        return $this->hasMany(OffenceService::class);
+    }
 }
