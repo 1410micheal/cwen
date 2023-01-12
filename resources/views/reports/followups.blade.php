@@ -14,7 +14,7 @@
                         <div>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashbaord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Member List</li>
+                                <li class="breadcrumb-item active" aria-current="page">Member Followup List</li>
                     </ol>
                         </div>
                     </div>
@@ -41,15 +41,8 @@
                                     <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="end_date">
+                                                </div><input class="form-control fc-datepicker"  placeholder="MM/DD/YYYY" type="text" name="end_date">
                                     </div></div>
-
-                                 <div class="from-group col-xl-3 col-md-3">
-                                    <label>Status </label>
-                                    <select class="form-control">
-                                        <option>All</option>
-                                    </select>
-                                 </div>
 
                                  <div class="from-group col-xl-3 col-md-3 mt-5">
                                     <button type="submit" class="btn btn-primary">Apply Filter</button>
@@ -65,42 +58,32 @@
                                             class="table table-bordered text-nowrap mb-0">
                                             <thead class="border-top">
                                                 <tr>
-                                                    <th class="bg-transparent border-bottom-0"
-                                                        style="width: 5%;">Unique Id</th>
-                                                    <th
+                                                   <th
                                                         class="bg-transparent border-bottom-0">
-                                                        Date Registered</th>
+                                                        Date </th>
                                                         <th
                                                         class="bg-transparent border-bottom-0">
-                                                        Member Name</th>
-                                                        <th
+                                                        Member</th>
+                                                        <th colspan="2"
                                                         class="bg-transparent border-bottom-0">
-                                                        Gender</th>
-                                                    <th class="bg-transparent border-bottom-0"
-                                                        style="width: 10%;">Marital Status</th>
-                                                    <th class="bg-transparent border-bottom-0"
-                                                        style="width: 10%;">HIV Status</th>
-                                                        <th class="bg-transparent border-bottom-0"
-                                                        style="width: 10%;">Education</th>
+                                                        Details</th>
+                                                    
                                                     <th class="bg-transparent border-bottom-0"
                                                         style="width: 5%;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                             @foreach($members as $row)
+                                             @foreach($followups as $row)
                                                        
-                                                 @include('partials.members.table_row',['row'=>$row])
+                                                 @include('partials.followups.table_row',['row'=>$row])
 
                                               @endforeach
 
                                              </tbody>
                                             </table>
                                     </div>
-
-                                    
-
-                                    {{ $members->links() }}
+                                    {{ $followups->links() }}
 
                                 </div>
                             </div>

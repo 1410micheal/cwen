@@ -13,9 +13,9 @@ class OffenceRepository{
     }
 
     //Get all followup
-    public function get(){
+    public function get(Request $request){
 
-        $report = OffenceReport::all();
+        $report = OffenceReport::paginate(20);
         return $report;
     }
 

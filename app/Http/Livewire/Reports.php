@@ -13,7 +13,22 @@ class Reports extends Component
 {
     public function followups(Request $request,FollowupRepository $followupRepo)
     {
+        $from_date = ($request->start_date)?$request->start_date:date('Y-m-01');
+        $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
+
+        $request['from'] = $from_date;
+        $request['to']   = $to_date;
+
+        if($request->export_pdf == 1)
+         $request['rows'] = 1000;
+
+        $data['search'] = (Object) array(
+            'from' => date('m/d/Y',strtotime($from_date)),
+            'to'   => date('m/d/Y',strtotime($to_date))
+        );
         
+        $data['followups'] = $followupRepo->get($request);
+        return view('reports.followups',$data);
 
     }
 
@@ -41,7 +56,21 @@ class Reports extends Component
 
     public function offences(Request $request, OffenceRepository $offenceRepo)
     {
-        
+        $from_date = ($request->start_date)?$request->start_date:date('Y-m-01');
+        $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
 
+        $request['from'] = $from_date;
+        $request['to']   = $to_date;
+
+        if($request->export_pdf == 1)
+         $request['rows'] = 1000;
+
+        $data['search'] = (Object) array(
+            'from' => date('m/d/Y',strtotime($from_date)),
+            'to'   => date('m/d/Y',strtotime($to_date))
+        );
+        
+        $data['offences'] = $offenceRepo->get($request);
+        return view('reports.offences',$data);
     }
 }

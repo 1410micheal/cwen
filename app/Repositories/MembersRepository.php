@@ -5,6 +5,7 @@ use App\Models\BusinessProfile;
 use App\Models\Member;
 use App\Models\MemberCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MembersRepository{
 
@@ -21,13 +22,13 @@ class MembersRepository{
     public function get(Request $request){
 
         $query = Member::orderBy('id','desc');
-        $row_count  = ($request->rows)?$request->rows:0;
+        $row_count  = ($request->rows)?$request->rows:20;
 
-        if($request->start_date)
-        $query->where('date_registered','>=',$request->start_date);
+        if($request->from)
+        $query->where(DB::raw('DATE(date_registered)'),'>=',$request->from);
 
-        if($request->end_date)
-        $query->where('date_registered','<=',$request->end_date);
+        if($request->to)
+        $query->where(DB::raw('DATE(date_registered)'),'<=',$request->to);
         
         $members = $query->paginate($row_count);
         return $members;

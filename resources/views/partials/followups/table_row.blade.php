@@ -10,5 +10,12 @@
             class="fw-semibold mt-sm-2 d-block">{{ $row->member->first_name }} {{ $row->member->middle_name }} {{ $row->member->last_name }}</span>
     </td>
     <td>{{ $row->details }}</td>
+    <td>
+    <ul class="list-group">
+        @foreach($row->followup_services as $service)
+            <li>{{ $service->service->service_name}}</li>
+        @endforeach
+    </ul>
+    </td>
     
 <tr>

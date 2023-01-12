@@ -12,4 +12,8 @@ class FollowupLog extends Model
     public function followup_services(){
         return $this->hasMany(FollowupService::class);
     }
+
+    public function member(){
+        return $this->belongsTo(Member::class);
+    }
 }

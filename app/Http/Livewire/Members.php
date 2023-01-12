@@ -11,9 +11,21 @@ use Illuminate\Http\Request;
 
 class Members extends Component
 {
-    public function render(MembersRepository $membersRepo)
+    public function render(Request $request,MembersRepository $membersRepo)
     {
-        $data['members'] = $membersRepo->get();
+        
+        $from_date = ($request->from)?$request->from:date('Y-m-01');
+        $to_date   = ($request->from)?$request->to:date('Y-m-d');
+
+        $request['from'] = $from_date;
+        $request['to']   = $to_date;
+
+        $data['search'] = (Object) array(
+            'from' => date('m/d/Y',strtotime($from_date)),
+            'to'   => date('m/d/Y',strtotime($to_date))
+        );
+        
+        $data['members'] = $membersRepo->get($request);
         return view('members.index',$data);
     }
 
@@ -37,6 +49,7 @@ class Members extends Component
     public function save_followup(Request $request, FollowupRepository $followupRepo)
     {
         $record = $followupRepo->save($request);
+
 
         $msg = (!$record)?"Operation failed, try again":"Followup saved successfuly";
         $data["message"] = $msg;
@@ -77,9 +90,4 @@ class Members extends Component
     }
 
 
-
-    public function followups(Request $request, MembersRepository $membersRepo)
-    {
-        dd('Helo');
-    }
 }

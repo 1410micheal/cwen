@@ -4,6 +4,7 @@ use App\Models\FollowupLog;
 use App\Models\FollowupService;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class FollowupRepository{
 
     public function __construct(){
@@ -11,9 +12,19 @@ class FollowupRepository{
     }
 
     //Get all followup
-    public function get(){
+    public function get(Request $request){
 
-        $followups = FollowupLog::all();
+        
+        $query = FollowupLog::orderBy('id','desc');
+        $row_count  = ($request->rows)?$request->rows:20;
+
+        if($request->from)
+        $query->where(DB::raw('DATE(followup_date)'),'>=',$request->from);
+
+        if($request->to)
+        $query->where(DB::raw('DATE(followup_date)'),'<=',$request->to);
+
+        $followups = $query->paginate($row_count);
         return $followups;
     }
 

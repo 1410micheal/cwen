@@ -55,8 +55,8 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-bar-chart-2"></i><span class="side-menu__label">Reports</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
-                                    <li><a href="{{ url('membership-summary') }}" class="slide-item">Membership Summary</a></li>
-                                    <li><a href="#" class="slide-item">Folowup Report</a></li>
+                                    <li><a href="{{ route('reports.membership') }}" class="slide-item">Membership Summary</a></li>
+                                    <li><a href="{{ route('reports.followups') }}" class="slide-item">Folowup Report</a></li>
                                  </ul>
                             </li>
 
