@@ -43,13 +43,13 @@
                             First Name:  {{ $member->first_name }}<br>
                             Last Name:   {{ $member->last_name }}<br>
                             Middle Name: {{ $member->middle_name }}<br>
-                            Age: <strong class="text-primary">{{ $member->age }} Years</strong></br>
+                            Age: <strong class="text-primary">{{ get_age($member->dob) }} Years</strong></br>
                    
                       </address>
                 </div>
                 <div class="col-lg-4 text-start">
                     <p class="h4 fw-semibold">Other Details:</p>
-                    <p class="mb-1">Phone No: {{$member->phone_no}}</p>
+                    <p class="mb-1">Phone No: {{$member->telephone}}</p>
                     <p class="mb-1">Email: {{$member->email}}</p>
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
                 </div>

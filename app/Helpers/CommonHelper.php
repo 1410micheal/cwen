@@ -57,3 +57,9 @@ function month_day($day_no){
 
 	return $day_no.$post_fix;
 }
+
+function get_age($dob){
+	$date1 = new DateTime($dob);
+	$date2 = new DateTime(date("Y-m-d"));
+	return $date2->diff($date1)->format("%d");
+}

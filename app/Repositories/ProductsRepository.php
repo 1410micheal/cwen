@@ -21,13 +21,13 @@ class ProductsRepository{
 
     public function get_types(){
 
-        $types = ProductType::all();
+        $types = ProductType::paginate(15);
         return $types;
     }
 
     public function get_packaging_types(){
 
-        $types = PackagingType::all();
+        $types = PackagingType::paginate(15);
         return $types;
     }
    
@@ -56,6 +56,27 @@ class ProductsRepository{
 
         return $product->save();
     }
+
+    public function save_packaging_type(Request $request){
+
+        $packaging = new PackagingType();
+
+        $packaging->packaging_type_name = $request->packaging_type;
+        $packaging->packaging_type_desc = $request->description;
+
+        return $packaging->save();
+    }
+
+    public function save_category(Request $request){
+
+        $category = new ProductType();
+
+        $category->type_name = $request->category_name;
+        $category->desc_name = $request->description;
+
+        return $category->save();
+    }
+
 
 
 }

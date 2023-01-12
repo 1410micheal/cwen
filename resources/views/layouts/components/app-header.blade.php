@@ -32,16 +32,11 @@
                                         </div>
 
                                       
-                                        <!-- MESSAGE-BOX -->
-                                        <div class="dropdown d-flex header-settings">
-                                            <a href="javascript:void(0);" class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right">
-                                                <i class="fe fe-align-right"></i>
-                                            </a>
-                                        </div>
+                                        
                                         <!-- SIDE-MENU -->
                                         <div class="dropdown d-flex profile-2">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                                <img src="{{asset('assets/images/users/21.jpg')}}" alt="profile-user" class="avatar  profile-user brround cover-image">
+                                                <img src="{{ asset('/storage/users/') }}/{{current_user()->photo}}" alt="profile-user" class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-arrow" style="margin-left:-100px!important;">
                                                 <div class="drop-heading">
@@ -53,9 +48,6 @@
                                                 <div class="dropdown-divider m-0"></div>
                                                 <a class="dropdown-item" href="{{ url('profile') }}/{{ current_user()->id }}">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
-                                                </a>
-                                                <a class="dropdown-item" href="{{url('lockscreen')}}">
-                                                    <i class="dropdown-icon fe fe-lock"></i> Lock Session
                                                 </a>
                                                 <a class="dropdown-item" href="{{url('login')}}">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out

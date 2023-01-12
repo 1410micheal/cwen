@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\NewMember;
+use App\Http\Livewire\Reports;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,4 +93,28 @@ Route::group(['prefix' => 'permissions','middleware'=>'auth'], function() {
 
 	Route::post('/delete',  [PermissionController::class,'deleteUser'])->name('permissions.delete');
     Route::any('/trail',  [PermissionController::class,'trail'])->name('permissions.trail');
+});
+
+//products
+
+Route::group(['prefix' => 'products','middleware'=>['auth','web']], function() {
+	
+	Route::get('/categories',  [Products::class,'categories'])->name('products.categories');
+	Route::get('/packaging',  [Products::class,'packagings'])->name('products.packaging');
+	Route::post('/save-packaging-type',  [Products::class,'save_packaging'])->name('products.save_packaging');
+	Route::post('/save-category',  [Products::class,'save_category'])->name('products.save_category');
+});
+
+//settings
+Route::group(['prefix' => 'settings','middleware'=>['auth','web']], function() {
+	
+    Route::get('/', Settings::class)->name('settings');
+	Route::get('/general',  [Settings::class,'general'])->name('settings.general');
+	Route::post('/save',  [Settings::class,'store'])->name('settings.savegen');
+});
+
+//settings
+Route::group(['prefix' => 'reports','middleware'=>['auth','web']], function() {
+	Route::get('/followups',  [Reports::class,'followups'])->name('reports.followups');
+	Route::get('/membership',  [Reports::class,'membership'])->name('reports.membership');
 });

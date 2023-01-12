@@ -18,9 +18,18 @@ class MembersRepository{
         return $categories;
     }
 
-    public function get(){
+    public function get(Request $request){
 
-        $members = Member::orderBy('id','desc')->get();
+        $query = Member::orderBy('id','desc');
+        $row_count  = ($request->rows)?$request->rows:0;
+
+        if($request->start_date)
+        $query->where('date_registered','>=',$request->start_date);
+
+        if($request->end_date)
+        $query->where('date_registered','<=',$request->end_date);
+        
+        $members = $query->paginate($row_count);
         return $members;
     }
 

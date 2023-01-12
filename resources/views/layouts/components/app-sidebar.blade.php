@@ -20,9 +20,6 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="{{url('home')}}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
                             </li>
-                            <li class="sub-category">
-                                <h3>Members</h3>
-                            </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon fe fe-users"></i><span class="side-menu__label">Manage Members</span><i class="angle fe fe-chevron-right"></i></a>
@@ -32,7 +29,7 @@
                                 </ul>
                             </li>
 
-                            <li class="sub-category">
+                            <!-- <li class="sub-category">
                                 <h3>Followup Visits</h3>
                             </li>
                             
@@ -43,32 +40,24 @@
                                     <li><a href="{{ url('followup-report') }}" class="slide-item">Followup List</a></li>
                                     
                                 </ul>
-                            </li>
+                            </li> -->
 
                             
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Products</span><i class="angle fe fe-chevron-right"></i></a>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Product Setup</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
-                                    <li><a href="{{ url('products') }}" class="slide-item">Products</a></li>
-                                    <li><a href="#" class="slide-item">Product Categories</a></li>
-                                    <li><a href="#" class="slide-item">Packaging Types</a></li>
+                                    <li><a href="{{ route('products.categories') }}" class="slide-item">Product Categories</a></li>
+                                    <li><a href="{{ route('products.packaging') }}" class="slide-item">Packaging Types</a></li>
                                  </ul>
                             </li>
                           
-                            <li class="sub-category">
-                                <h3>Reporting</h3>
-                            </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-bar-chart-2"></i><span class="side-menu__label">Reports</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
                                     <li><a href="{{ url('membership-summary') }}" class="slide-item">Membership Summary</a></li>
                                     <li><a href="#" class="slide-item">Folowup Report</a></li>
                                  </ul>
-                            </li>
-
-                            <li class="sub-category">
-                                <h3>Configurations</h3>
                             </li>
 
                             <li class="slide">
