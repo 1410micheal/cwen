@@ -29,6 +29,9 @@ class MembersRepository{
 
         if($request->to)
         $query->where(DB::raw('DATE(date_registered)'),'<=',$request->to);
+
+        if($request->excel_export)
+          $this->excel_export($query);
         
         $members = $query->paginate($row_count);
         return $members;
@@ -50,7 +53,7 @@ class MembersRepository{
 
         $member = new Member();
 
-        $member->unique_id   = mt_rand(1111111,9999999).current_user()->id;
+        $member->unique_id   = "CWN".time().current_user()->id;
 
         $member->first_name  = $request->first_name;
         $member->date_registered  = $request->date_registered;
@@ -90,10 +93,46 @@ class MembersRepository{
         $profile->is_premise_owner = $request->prem_ownership;
         $profile->address_detail   = $request->address;
         $profile->is_licenced      = $request->is_licenced;
-        $profile->village_id      = 1;
+        $profile->village_id       = 1;
 
         $profile->save();
 
+    }
+
+    private function excel_export($results){
+
+        $export_file = 'member-list-'.time().'.xls';
+        $export_data = [];
+
+        $results->chunk(100, function($rows) use(&$export_data) {
+
+            foreach ($rows as $row){
+
+               $data_row = [
+                   "UNIQUE ID"         => $row->unique_id,
+                   "FIRST NAME"        => $row->first_name,
+                   "LAST NAME"         => $row->last_name,
+                   "AGE"               => get_age($row->dob),
+                   "GENDER"            => $row->gender,
+                   "PHONE"             => $row->telephone,
+                   "HIV STAUS"         => $row->hiv_status,
+                   "EDUCATION"         => $row->education_level,
+                   "MARITAL STATUS"    => $row->marital_status,
+                   "CATEGORY"          => $row->category->category_name,
+               ];
+
+               array_push($export_data,$data_row);
+            }
+
+        });
+
+       set_time_limit(0);
+
+        $filename =  $export_file;      
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+       export_excel($export_data);
     }
 
 

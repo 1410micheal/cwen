@@ -27,7 +27,7 @@
                                 <div class="card-header ">
                                  <form class="px-5 row">
                     
-                                 <div class="from-group col-xl-3 col-md-3 mb-2">
+                                 <div class="from-group col-xl-2 col-md-2 mb-2">
                                     <label>Date from </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -36,7 +36,7 @@
                                     </div>
                                  </div>
 
-                                 <div class="from-group col-xl-3 col-md-3 mb-2">
+                                 <div class="from-group col-xl-2 col-md-2 mb-2">
                                  <label>Date To </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -44,7 +44,18 @@
                                                 </div><input class="form-control fc-datepicker"  placeholder="MM/DD/YYYY" type="text" name="end_date">
                                     </div></div>
 
-                                 <div class="from-group col-xl-3 col-md-3 mt-5">
+                                    @if(count($followups)>0)
+                                    <div class="from-group col-xl-2 col-md-2">                          
+                                        <a href="{{ current_url() }}excel_export=1" class="btn btn-dark"><i class="fa fa fa-file-excel-o"></i> Export to Excel</a>
+                                    </div>
+
+                                    <div class="from-group col-xl-2 col-md-2">                          
+                                        <a href="{{ current_url() }}export_pdf=1" class="btn btn-dark"><i class="fa fa fa-file-pdf-o"></i> Export to PDF</a>
+                                    </div>
+
+                                    @endif
+
+                                 <div class="from-group col-xl-2 col-md-3 mt-5">
                                     <button type="submit" class="btn btn-primary">Apply Filter</button>
                                  </div>
 

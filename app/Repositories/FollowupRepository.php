@@ -24,6 +24,9 @@ class FollowupRepository{
         if($request->to)
         $query->where(DB::raw('DATE(followup_date)'),'<=',$request->to);
 
+        if($request->excel_export)
+          $this->excel_export($query);
+
         $followups = $query->paginate($row_count);
         return $followups;
     }
@@ -72,5 +75,40 @@ class FollowupRepository{
         return true;
     }
 
+    private function excel_export($results){
+
+        $export_file = 'member-list-'.time().'.xls';
+        $export_data = [];
+
+        $results->chunk(100, function($rows) use(&$export_data) {
+
+            foreach ($rows as $row):
+
+                $services = "";
+
+                foreach($row->followup_services as $service){
+                    $services .= "\n".$service->service->service_name;
+                }
+
+               $data_row = [
+                   "DATE"             => $row->followup_date,
+                   "MEMBER"           => $row->member->first_name." ".$row->member->last_name,
+                   "SERVICES OFFERED" => $services
+               ];
+
+               array_push($export_data,$data_row);
+
+            endforeach;
+
+        });
+
+       set_time_limit(0);
+
+        $filename =  $export_file;      
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+       export_excel($export_data);
+    }
 
 }
