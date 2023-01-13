@@ -60,12 +60,9 @@ Route::post("save-offence",[Members::class,'save_offence']);
 
 Route::post('save-member',[NewMember::class,'save']);
 Route::get('followup-report',[Members::class,'followups']);
-
-// products
-Route::get('products',Products::class);
+Route::get('villages',[Members::class,'villages'])->name('villages');
 
 });
-
 
 //profile
 Route::group(['prefix' => 'profile','middleware'=>'auth'], function() {

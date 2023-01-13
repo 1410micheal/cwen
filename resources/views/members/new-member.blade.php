@@ -2,6 +2,8 @@
 
     @section('styles')
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     @endsection
 
         @section('content')
@@ -102,7 +104,7 @@
                                         <div class="row">
                                         
                                         
-                                        <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-3">
                                                 <label class="form-label">HIV Status</label>
                                                 <select name="hiv_status" class="form-control">
                                                     <option>Negative</option>
@@ -110,7 +112,7 @@
                                                 </select>
                                         </div>
 
-                                        <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-3">
                                                 <label class="form-label">Education Level</label>
                                                 <select name="education" class="form-control">
                                                     <option>Degree</option>
@@ -122,13 +124,19 @@
                                         </div>
 
                                         
-                                        <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-3">
                                                 <label class="form-label">Marital Status</label>
                                                 <select name="marital_status" class="form-control">
                                                     <option>Married</option>
                                                     <option>Single</option>
                                                     <option>Divorced</option>
                                                 </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                                <label class="form-label">Village/Address</label>
+                                                <input type="text" id="village" class="form-control" placeholder="Village">
+                                                <input type="hidden" name="id" id="village_id">
                                         </div>
 
 
@@ -251,6 +259,7 @@
 
     @section('scripts')
 
+
     <!-- INTERNAL File-Uploads Js-->
     <script src="{{asset('assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
     <script src="{{asset('assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
@@ -266,6 +275,7 @@
     <!-- INTERNAl Jquery.steps js -->
     <script src="{{asset('assets/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
     <script src="{{asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <!-- INTERNAL Accordion-Wizard-Form js-->
 
@@ -334,6 +344,50 @@
                 form.submit();
        }
     });
+
+
+    $('#village').autocomplete({
+            type: "GET",
+            minLength: 3,
+            autoFocus:true,
+            classes: {
+                "ui-autocomplete": "highlight"
+            },
+            source : function (request, response) 
+            {                         
+                var source_url = "<?php echo route('villages'); ?>?q=" + $("#village").val();
+
+                $.ajax({
+                    url: source_url,
+                    dataType: "json",
+                    data: request,
+                    success: function (data) { 
+                        
+                        var datas = data;
+
+                        console.log(datas);
+
+                        var list  = [];
+
+                        datas.forEach(function(item){
+                            let list_item = {
+                                label:item.village_name+" "+item.district_name,
+                                value:item.village_name+" "+item.district_name,
+                                row_id:item.id
+                            }
+
+                            list.push(list_item);
+                        });
+
+                        response(list);
+                     },
+                    error : function (a,b,c) { console.log(a)}
+                    });
+            },                
+            select: function (event, ui) { 
+                $('#village_id').val(ui.item.row_id); 
+            }               
+        });
 
 
     </script>

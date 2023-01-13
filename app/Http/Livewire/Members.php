@@ -89,5 +89,10 @@ class Members extends Component
         return back()->with($alert);
     }
 
+    public function  villages(Request $request, MembersRepository $membersRepo){
+        $villages = $membersRepo->get_vilages($request);
+        return response()->json($villages);
+    }
+
 
 }

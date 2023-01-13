@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\BusinessProfile;
 use App\Models\Member;
 use App\Models\MemberCategory;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,16 @@ class MembersRepository{
         return $member;
     }
 
+    public function get_vilages(Request $request){
+        $hint     = $request->q;
+
+        if(empty($hint))
+         return [];
+
+        $villages = Village::where('village_name','like', $hint.'%');
+        return $villages->get();
+    }
+
     public function find_by_ref($ref){
 
         $member = Member::where('unique_id',$ref)->first();
@@ -67,7 +78,7 @@ class MembersRepository{
         $member->marital_status  = $request->marital_status;
         $member->hiv_status      = $request->hiv_status;
         $member->education_level = $request->education;
-        $member->village_id      = 1;
+        $member->village_id      = $request->village_id;
         $member->nin = $request->nin;
 
         $member->save();
