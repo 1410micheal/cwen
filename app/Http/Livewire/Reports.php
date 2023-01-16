@@ -6,8 +6,8 @@ use App\Repositories\FollowupRepository;
 use Livewire\Component;
 use App\Repositories\MembersRepository;
 use App\Repositories\OffenceRepository;
-use App\Repositories\ProductsRepository;
 use Illuminate\Http\Request;
+use PDF;
 
 class Reports extends Component
 {
@@ -28,6 +28,18 @@ class Reports extends Component
         );
         
         $data['followups'] = $followupRepo->get($request);
+
+        if($request->export_pdf == 1):
+
+            $exportdata['followups'] = $data['followups'] ;
+            $exportdata['title']  = "Member Followup Records";
+            $exportdata['search'] =  (Object) $request->all();
+
+            $pdf = PDF::loadView('reports.followups-pdf',$exportdata)->setPaper('a4', 'landscape');;
+           return $pdf->download("member-followups-".time().'.pdf');
+           
+        endif;
+
         return view('reports.followups',$data);
 
     }

@@ -8,10 +8,11 @@ use App\Repositories\MembersRepository;
 use App\Repositories\OffenceRepository;
 use App\Repositories\ProductsRepository;
 use Illuminate\Http\Request;
+use PDF;
 
 class Members extends Component
 {
-    public function render(Request $request,MembersRepository $membersRepo)
+    public function index(Request $request,MembersRepository $membersRepo)
     {
         
         $from_date = ($request->from)?$request->from:date('Y-m-01');
@@ -24,8 +25,20 @@ class Members extends Component
             'from' => date('m/d/Y',strtotime($from_date)),
             'to'   => date('m/d/Y',strtotime($to_date))
         );
+
         
         $data['members'] = $membersRepo->get($request);
+
+        if($request->export_pdf == 1):
+
+            $exportdata['members'] = $data['members'] ;
+            $exportdata['title']  = "Member List";
+            $exportdata['search'] =  (Object) $request->all();
+
+            $pdf = PDF::loadView('members.members-pdf',$exportdata)->setPaper('a4', 'landscape');;
+           return $pdf->download("member-list-".time().'.pdf');
+        endif;
+        
         return view('members.index',$data);
     }
 

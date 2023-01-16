@@ -15,6 +15,7 @@
     <td>{{ $row->marital_status }}</td>
     <td>{{ $row->hiv_status }}</td>
     <td>{{ $row->education_level }}</td>
+    @if(@$export!==1)
     <td>
         <div class="g-2">
             
@@ -22,4 +23,5 @@
 
         </div>
     </td>
+    @endif
 <tr>

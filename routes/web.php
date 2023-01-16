@@ -32,6 +32,14 @@ use App\Http\Livewire\Reports;
 
 Auth::routes();
 
+
+Route::get('/logout', function(){
+
+	Auth::logout(); 
+	return redirect('/login');
+});
+
+
 Route::get('/', Login::class);
 Route::get('lockscreen', Lockscreen::class);
 Route::get('forgot-password', ForgotPassword::class);
@@ -52,7 +60,7 @@ Route::get('settings', Settings::class);
 
 //members
 Route::get('new-member',NewMember::class);
-Route::get("members",Members::class);
+Route::get("members",[Members::class,'index']);
 Route::get("member-details",[Members::class,'show']);
 Route::post("save-followup",[Members::class,'save_followup']);
 Route::post("save-product",[Members::class,'save_product']);
@@ -112,6 +120,9 @@ Route::group(['prefix' => 'settings','middleware'=>['auth','web']], function() {
 
 //settings
 Route::group(['prefix' => 'reports','middleware'=>['auth','web']], function() {
+
 	Route::get('/followups',  [Reports::class,'followups'])->name('reports.followups');
 	Route::get('/membership',  [Reports::class,'membership'])->name('reports.membership');
+	Route::get('/membershipsummary',  [Reports::class,'membership'])->name('reports.membershipsummary');
+	
 });

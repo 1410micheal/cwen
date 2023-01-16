@@ -1,4 +1,4 @@
- @include('partials.layouts.pdf_header')
+ @include('layouts.components.pdf_header')
  
  @yield('content')
     

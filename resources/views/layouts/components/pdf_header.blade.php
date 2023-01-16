@@ -15,6 +15,12 @@ body {
 	display: block;
 }
 p {	margin: 0pt; }
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
 table.items {
 	border: 0.1mm solid #000000;
 }
@@ -32,7 +38,7 @@ table thead th {
 
 tr td {
 	border: 0.2mm solid #000000;
-	padding: 4px;
+	padding: 1px;
 }
 
 tr td, tr th{
@@ -56,7 +62,7 @@ tr:nth-child(even) {
 	border: 0px;
 }
 h1{
-	color: #25AA4D;
+	color: #ba0c2f;
 }
 footer {
 	position: fixed; 
@@ -66,7 +72,7 @@ footer {
 	height: 50px; 
 
 	/** Extra personal styles **/
-	background-color: #25AA4D;
+	background-color: #ba0c2f;
 	color: white;
 	text-align: center;
 	line-height: 35px;
@@ -77,15 +83,11 @@ footer {
 
  <table class="heading" border="0" width="100%">
  	<tr>
- 	<td><img src="{{asset('images/logo.png') }}" width="100px" alt=""></td>
  	<td>
- 		<h1>Cashawo Agent Statement</h1>
- 		<h4>From {{$search->start}} to {{$search->end}}</h4>
- 		<h4>{{ __('reports.starting_balance') }}: {{ __('general.mycurrency')}} 
-			{{ number_format($start_balance->balance,2) }}</h4>
-	    <h4>{{ __('reports.closing_balance') }}: {{ __('general.mycurrency')}} 
-			{{ number_format($close_balance->balance,2) }}</h4>
-		
+ 		<h1>{{$title ?? 'Data Export'}}</h1>
+        @if(@$search)
+ 		<h4>From {{$search->from}} to {{$search->to}}</h4>
+        @endif
  	</td>
  	</tr>
  </table>

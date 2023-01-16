@@ -49,7 +49,7 @@
                                                 <a class="dropdown-item" href="{{ url('profile') }}/{{ current_user()->id }}">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
-                                                <a class="dropdown-item" href="{{url('login')}}">
+                                                <a class="dropdown-item" href="{{url('logout')}}">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
