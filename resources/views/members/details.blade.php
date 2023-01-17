@@ -52,6 +52,9 @@
                     <p class="mb-1">Phone No: {{$member->telephone}}</p>
                     <p class="mb-1">Email: {{$member->email}}</p>
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
+                    <a href="{{ url('edit-member') }}?ref={{$member->unique_id}}" class="btn btn-lg btn-outline-primary mt-2">
+                       <i class="fa fa-pencil"></i> Edit Member Profile
+                    </a>
                 </div>
             </div>
         </div>

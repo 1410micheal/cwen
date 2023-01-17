@@ -32,7 +32,7 @@
                                     <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="start_date">
+                                                </div><input class="form-control fc-datepicker" value="{{@$search->from}}" placeholder="MM/DD/YYYY" type="text" name="start_date" autocomplete="off">
                                     </div>
                                  </div>
 
@@ -41,34 +41,34 @@
                                     <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="end_date">
+                                                </div><input class="form-control fc-datepicker" value="{{@$search->to}}" placeholder="MM/DD/YYYY" type="text" name="end_date" autocomplete="off">
                                     </div></div>
 
                                  <div class="from-group col-lg-2 col-md-2">
                                     <label class="form-label">Gender </label>
                                     <select class="form-control" name="gender">
-                                        <option value="">All</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="" {{ (@$search->gender=="")?"selected":"" }}>All</option>
+                                        <option value="Male" {{ (@$search->gender=="Male")?"selected":"" }}>Male</option>
+                                        <option value="Female" {{ (@$search->gender=="Female")?"selected":"" }}>Female</option>
                                     </select>
                                  </div>
 
                                  <div class="from-group col-lg-2 col-md-2">
                                          <label class="form-label">Marital Status</label>
                                         <select name="marital_status" class="form-control">
-                                            <option value="">All</option>
-                                            <option>Married</option>
-                                            <option>Single</option>
-                                            <option>Divorced</option>
+                                            <option value="" {{ (@$search->marital_status=="")?"selected":"" }}>All</option>
+                                            <option value="Married"  {{ (@$search->marital_status=="Married")?"selected":"" }}>Married</option>
+                                            <option value="Single"   {{ (@$search->marital_status=="Single")?"selected":"" }}>Single</option>
+                                            <option value="Divorced" {{ (@$search->marital_status=="Divorced")?"selected":"" }}>Divorced</option>
                                         </select>
                                  </div>
 
                                  <div class="from-group col-lg-2 col-md-2">
                                     <label class="form-label">HIV Status </label>
                                     <select class="form-control" name="hiv_status">
-                                        <option value="">All</option>
-                                        <option value="Positive">Positive</option>
-                                        <option value="Negative">Negative</option>
+                                        <option value="" {{ (@$search->hiv_status=="")?"selected":"" }}>All</option>
+                                        <option value="Positive" {{ (@$search->hiv_status=="Positive")?"selected":"" }}>Positive</option>
+                                        <option value="Negative" {{ (@$search->hiv_status=="Negative")?"selected":"" }}>Negative</option>
                                     </select>
                                  </div>
 
@@ -76,16 +76,16 @@
                                     <label class="form-label">Education</label>
                                     <select name="education" class="form-control">
                                         <option value="">All</option>
-                                        <option>Degree</option>
-                                        <option>High School</option>
-                                        <option>Secondary</option>
-                                        <option>Primary</option>
-                                        <option>None</option>
+                                        <option {{ (@$search->education=="Degree")?"selected":"" }}>Degree</option>
+                                        <option {{ (@$search->education=="High School")?"selected":"" }}>High School</option>
+                                        <option {{ (@$search->education=="Secondary")?"selected":"" }}>Secondary</option>
+                                        <option {{ (@$search->education=="Primary")?"selected":"" }}>Primary</option>
+                                        <option {{ (@$search->education=="None")?"selected":"" }}>None</option>
                                     </select>
                                  </div>
 
                                  <div class="from-group col-lg-2 col-md-2 mt-5">
-                                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                                    <button type="submit" class="btn btn-primary">Search</button>
                                  </div>
 
                                  @if(count($members)>0)

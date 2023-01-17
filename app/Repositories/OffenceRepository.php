@@ -3,6 +3,7 @@ namespace App\Repositories;
 use App\Models\OffenceReport;
 use App\Models\OffenceService;
 use App\Models\OffenceType;
+use App\Models\Regulator;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -68,6 +69,36 @@ class OffenceRepository{
 
         return true;
     }
+
+   public function save_offence_type(Request $request){
+
+    $type = new OffenceType();
+    $type->offence_type_name = $request->offence_type;
+    $type->offence_type_desc = $request->description;
+
+    $type->save();
+
+    return $type;
+
+   }
+
+   public function get_regulators(){
+
+    $regulators = Regulator::all();
+    return $regulators;
+  }
+
+   public function  save_regulator(Request $request){
+
+    $regulator = new Regulator();
+    $regulator->regulator_name = $request->name;
+    $regulator->regulator_desc = $request->description;
+
+    $regulator->save();
+
+    return $regulator;
+
+   }
 
 
 }

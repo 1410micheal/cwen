@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="CWEN -  Management portal">
-    <meta name="author" content="CWEN">
-    <meta name="keywords" content="jubille Life Uganda,insurance,premiums,my insurance,life insurance">
+    <meta name="description" content="{{ env('APP_NAME','Community Women Enterprise Network') }}">
+    <meta name="author" content="{{ env('APP_NAME','Community Women Enterprise Network') }}">
+    <meta name="keywords" content="{{ env('APP_NAME','Community Women Enterprise Network') }}">
     <link rel="icon" href="{{asset('assets/images/brand/favicon.png')}}" />
     <!-- title -->
-    <title>CWEN</title>
+    <title>{{ env('APP_NAME','Community Women Enterprise Network') }}</title>
 
     @include('layouts.components.styles')
 

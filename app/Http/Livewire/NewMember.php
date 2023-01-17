@@ -17,6 +17,17 @@ class NewMember extends Component
         return view('members.new-member',$data);
     }
 
+    public function edit(Request $request, MembersRepository $membersRepo, BusinessRepository $businessRepo)
+    {
+        $member            = $membersRepo->find_by_ref($request->ref);
+        $data['member']    = $member;
+        $data['business']  = $member->business;
+        $data['business_types']    = $businessRepo->get();
+        $data['regulators']        = $businessRepo->regulators();
+
+        return view('members.edit-member',$data);
+    }
+
 
     public function save(Request $request, MembersRepository $membersRepo)
     {
@@ -40,7 +51,9 @@ class NewMember extends Component
 
         $member = $membersRepo->save($request);
 
-        $msg = (!$member)?"Operation failed, try again":"Member saved successfuly";
+        $action = ($request->ref)?"updated":"saved";
+
+        $msg = (!$member)?"Operation failed, try again":"Member $action successfuly";
         $data["message"] = $msg;
        
         $alert_class = ($member)?'success':'danger';

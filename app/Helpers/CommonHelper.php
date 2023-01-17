@@ -1,6 +1,7 @@
 <?php
+
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\URL;
 
@@ -31,7 +32,6 @@ if(!function_exists('text_to_amount')){
 }
 
 
-
  //encrypt value
 function secure_value($parameter){
   return Crypt::encrypt($parameter);
@@ -60,9 +60,15 @@ function month_day($day_no){
 }
 
 function get_age($dob){
-	$date1 = new DateTime($dob);
-	$date2 = new DateTime(date("Y-m-d"));
-	return $date2->diff($date1)->format("%d");
+
+	$birthDate =date("d/m/Y",strtotime($dob));
+	
+	$birthDate = explode("/", $birthDate);
+  //get age from date or birthdate
+  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+    ? ((date("Y") - $birthDate[2]) - 1)
+    : (date("Y") - $birthDate[2]));
+  return abs($age);
 }
 
 

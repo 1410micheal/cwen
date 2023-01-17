@@ -15,19 +15,21 @@ class Members extends Component
     public function index(Request $request,MembersRepository $membersRepo)
     {
         
-        $from_date = ($request->from)?$request->from:date('Y-m-01');
-        $to_date   = ($request->from)?$request->to:date('Y-m-d');
+        $from_date = ($request->start_date)?$request->start_date:date('Y-m-01');
+        $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
 
-        $request['from'] = $from_date;
-        $request['to']   = $to_date;
+        $request['from_date'] = date('Y/m/d',strtotime($from_date));
+        $request['to_date']   = date('Y/m/d',strtotime($to_date));
 
-        $data['search'] = (Object) array(
-            'from' => date('m/d/Y',strtotime($from_date)),
-            'to'   => date('m/d/Y',strtotime($to_date))
-        );
+        if($request->export_pdf == 1)
+         $request['rows'] = 1000;
 
-        
         $data['members'] = $membersRepo->get($request);
+
+        $request['from'] = date('m/d/Y',strtotime($from_date));
+        $request['to']   = date('m/d/Y',strtotime($to_date));
+
+        $data['search']  = (Object) $request->all();
 
         if($request->export_pdf == 1):
 
@@ -105,6 +107,47 @@ class Members extends Component
     public function  villages(Request $request, MembersRepository $membersRepo){
         $villages = $membersRepo->get_vilages($request);
         return response()->json($villages);
+    }
+
+    public function offence_types(Request $request, OffenceRepository $offenceRepo){
+       
+        $data['offence_types']   =  $offenceRepo->get_types();
+        $data['heading']         = "Offence Types";
+
+        return view('common.offence_types',$data);
+    }
+
+    public function save_offence_types(Request $request, OffenceRepository $offenceRepo){
+       
+        $record = $offenceRepo->save_offence_type($request);
+
+        $msg = (!$record)?"Operation failed, try again":"Offence type saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
+    public function regulators(Request $request, OffenceRepository $offenceRepo){
+       
+        $data['regulators']   =  $offenceRepo->get_regulators();
+        $data['heading']      = "Regulators";
+        return view('common.regulators',$data);
+    }
+
+    public function save_regulator(Request $request, OffenceRepository $offenceRepo){
+       
+        $record = $offenceRepo->save_regulator($request);
+
+        $msg = (!$record)?"Operation failed, try again":"Regulators saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
     }
 
 

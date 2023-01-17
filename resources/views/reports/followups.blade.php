@@ -27,32 +27,31 @@
                                 <div class="card-header ">
                                  <form class="px-5 row">
                     
-                                 <div class="from-group col-xl-2 col-md-2 mb-2">
-                                    <label>Date from </label>
+                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                    <label class="form-label">Date from </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="start_date">
+                                                </div><input class="form-control fc-datepicker" value="{{@$search->from}}" placeholder="MM/DD/YYYY" type="text" name="start_date" autocomplete="off">
                                     </div>
                                  </div>
 
-                                 <div class="from-group col-xl-2 col-md-2 mb-2">
-                                 <label>Date To </label>
+                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                 <label class="form-label">Date To </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div><input class="form-control fc-datepicker"  placeholder="MM/DD/YYYY" type="text" name="end_date">
+                                                </div><input class="form-control fc-datepicker" value="{{@$search->to}}" placeholder="MM/DD/YYYY" type="text" name="end_date" autocomplete="off">
                                     </div></div>
 
                                     @if(count($followups)>0)
-                                    <div class="from-group col-xl-2 col-md-2">                          
-                                        <a href="{{ current_url() }}excel_export=1" class="btn btn-dark"><i class="fa fa fa-file-excel-o"></i> Export to Excel</a>
-                                    </div>
+                                        <div class="from-group col-xl-2 col-md-2">                          
+                                            <a href="{{ current_url() }}excel_export=1" class="btn btn-dark"><i class="fa fa fa-file-excel-o"></i> Export to Excel</a>
+                                        </div>
 
-                                    <div class="from-group col-xl-2 col-md-2">                          
-                                        <a href="{{ current_url() }}export_pdf=1" class="btn btn-dark"><i class="fa fa fa-file-pdf-o"></i> Export to PDF</a>
-                                    </div>
-
+                                        <div class="from-group col-xl-2 col-md-2">                          
+                                            <a href="{{ current_url() }}export_pdf=1" class="btn btn-dark"><i class="fa fa fa-file-pdf-o"></i> Export to PDF</a>
+                                        </div>
                                     @endif
 
                                  <div class="from-group col-xl-2 col-md-3 mt-5">
@@ -78,16 +77,13 @@
                                                         <th colspan="2"
                                                         class="bg-transparent border-bottom-0">
                                                         Details</th>
-                                                    
-                                                    <th class="bg-transparent border-bottom-0"
-                                                        style="width: 5%;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                              @foreach($followups as $row)
                                                        
-                                                 @include('partials.followups.table_row',['row'=>$row])
+                                                 @include('partials.followups.table_row',['row'=>$row,'is_plain'=>true])
 
                                               @endforeach
 

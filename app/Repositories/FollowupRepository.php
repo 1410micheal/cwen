@@ -18,11 +18,11 @@ class FollowupRepository{
         $query = FollowupLog::orderBy('id','desc');
         $row_count  = ($request->rows)?$request->rows:20;
 
-        if($request->from)
-        $query->where(DB::raw('DATE(followup_date)'),'>=',$request->from);
+        if($request->from_date)
+        $query->where(DB::raw('DATE(followup_date)'),'>=',$request->from_date);
 
-        if($request->to)
-        $query->where(DB::raw('DATE(followup_date)'),'<=',$request->to);
+        if($request->to_date)
+        $query->where(DB::raw('DATE(followup_date)'),'<=',$request->to_date);
 
         if($request->excel_export)
           $this->excel_export($query);

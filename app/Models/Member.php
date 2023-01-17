@@ -31,4 +31,9 @@ class Member extends Model
 
         return $this->hasMany(OffenceReport::class);
     }
+
+    public function village(){
+
+        return $this->belongsTo(Village::class);
+    }
 }

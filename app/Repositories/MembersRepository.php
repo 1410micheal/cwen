@@ -25,12 +25,24 @@ class MembersRepository{
         $query = Member::orderBy('id','desc');
         $row_count  = ($request->rows)?$request->rows:20;
 
-        if($request->from)
-        $query->where(DB::raw('DATE(date_registered)'),'>=',$request->from);
+        if($request->from_date)
+        $query->where(DB::raw('DATE(date_registered)'),'>=',$request->from_date);
 
-        if($request->to)
-        $query->where(DB::raw('DATE(date_registered)'),'<=',$request->to);
+        if($request->to_date)
+        $query->where(DB::raw('DATE(date_registered)'),'<=',$request->to_date);
 
+        if($request->gender)
+        $query->where('gender',$request->gender);
+
+        if($request->hiv_status)
+        $query->where('hiv_status',$request->hiv_status);
+
+        if($request->education)
+        $query->where('education_level',$request->education);
+
+        if($request->marital_status)
+        $query->where('marital_status',$request->marital_status);
+      
         if($request->excel_export)
           $this->excel_export($query);
         
@@ -62,8 +74,10 @@ class MembersRepository{
 
     public function save(Request $request){
 
-        $member = new Member();
+        
+        $member = ($request->ref)?$this->find_by_ref($request->ref):new Member();
 
+        if(!$request->ref)
         $member->unique_id   = "CWN".time().current_user()->id;
 
         $member->first_name  = $request->first_name;
@@ -72,6 +86,7 @@ class MembersRepository{
         $member->middle_name = $request->middle_name;
         $member->email       = $request->email;
         $member->telephone   = $request->phone_no;
+        $member->phone_no   = $request->phone_no;
         $member->member_category_id  = $request->member_category_id;
         $member->dob             = $request->dob;
         $member->gender          = $request->gender;
@@ -81,18 +96,20 @@ class MembersRepository{
         $member->village_id      = $request->village_id;
         $member->nin = $request->nin;
 
-        $member->save();
+        $saved = ($request->ref)?$member->update():$member->save();
+        
+        $business_id =($request->ref)?$member->business->id:null;
 
         $request['member_id'] = $member->id;
 
-        $this->save_biz_profile($request);
+        $this->save_biz_profile($request,$business_id);
 
         return $member;
     }
 
-    private function save_biz_profile(Request $request){
+    private function save_biz_profile(Request $request,$business_id=null){
 
-        $profile = new BusinessProfile();
+        $profile = ($request->ref)?BusinessProfile::find($business_id):new BusinessProfile();
 
         $profile->business_name    = $request->business_name;
         $profile->has_biz_skills   = $request->has_biz_skills;
@@ -106,7 +123,7 @@ class MembersRepository{
         $profile->is_licenced      = $request->is_licenced;
         $profile->village_id       = 1;
 
-        $profile->save();
+        $saved = ($request->ref)?$profile->update():$profile->save();
 
     }
 
@@ -123,6 +140,7 @@ class MembersRepository{
                    "UNIQUE ID"         => $row->unique_id,
                    "FIRST NAME"        => $row->first_name,
                    "LAST NAME"         => $row->last_name,
+                   "DOB"               => $row->dob,
                    "AGE"               => get_age($row->dob),
                    "GENDER"            => $row->gender,
                    "PHONE"             => $row->telephone,
