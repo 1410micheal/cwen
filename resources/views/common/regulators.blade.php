@@ -28,7 +28,7 @@
                                         <h3 class="card-title mb-0">{{ $heading }}</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="modal-effect btn btn-outline-primary d-block d-grid mb-3 float-right" data-bs-effect="effect-rotate-bottom" data-bs-toggle="modal" href="#regulator"><i class="fa fa-plus-circle"></i> Add Offence Type</a>
+                                        <a class="modal-effect btn btn-outline-primary d-block d-grid mb-3 float-right" data-bs-effect="effect-rotate-bottom" data-bs-toggle="modal" href="#regulator"><i class="fa fa-plus-circle"></i> Add Regulator</a>
                                       </div>
 
                                     </div>
