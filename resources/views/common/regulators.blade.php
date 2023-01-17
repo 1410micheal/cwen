@@ -107,7 +107,7 @@
                     <div class="modal-body">
                             @csrf
                             <div class=" row mb-4">
-                                <label class="col-md-3 form-label">Offence Type</label>
+                                <label class="col-md-3 form-label">Regulator Name</label>
                                 <div class="col-md-9">
                                     <input type="text" name="name" class="form-control" placeholder="Regulator Name" required>
                                 </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button> 
-                        <button class="btn btn-light" >Close</button>
+                        <button class="btn btn-light"  data-bs-dismiss="modal">Close</button>
                     </div>
                     
                            
