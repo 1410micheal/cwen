@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-4 text-start">
                     <p class="h4 fw-semibold">Other Details:</p>
-                    <p class="mb-1">Phone No: {{$member->telephone}}</p>
+                    <p class="mb-1">Phone No: {{$member->phone_no}}</p>
                     <p class="mb-1">Email: {{$member->email}}</p>
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
                     <a href="{{ url('edit-member') }}?ref={{$member->unique_id}}" class="btn btn-lg btn-outline-primary mt-2">

@@ -86,7 +86,7 @@ class MembersRepository{
         $member->middle_name = $request->middle_name;
         $member->email       = $request->email;
         $member->telephone   = $request->phone_no;
-        $member->phone_no   = $request->phone_no;
+        $member->phone_no    = $request->phone_no;
         $member->member_category_id  = $request->member_category_id;
         $member->dob             = $request->dob;
         $member->gender          = $request->gender;
