@@ -8,11 +8,11 @@
 
                         <!-- PAGE-HEADER -->
                         <div class="page-header">
-                            <h1 class="page-title">Gov't Regulators</h1>
+                            <h1 class="page-title">Member Clusters</h1>
                             <div>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Gov't Regulators</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Member Clusters</li>
                                 </ol>
                             </div>
                         </div>

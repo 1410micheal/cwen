@@ -6,7 +6,7 @@
             
            <h3 class="text-primary">Business Profiles</h3>
            
-           <a href="#add-business" data-bs-toggle="modal" class="btn btn-lg btn-outline-dark mt-2 col-lg-3 mb-2">
+           <a href="#add-business" data-bs-toggle="modal" class="btn btn-lg btn-outline-dark mt-2 col-lg-3 mb-2 d-print-none">
                        <i class="fa fa-plus"></i> Add New Business
             </a>
            <hr>

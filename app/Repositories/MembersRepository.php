@@ -5,9 +5,11 @@ use App\Models\BusinessProfile;
 use App\Models\Cluster;
 use App\Models\Member;
 use App\Models\MemberCategory;
+use App\Models\MemberGroup;
 use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\TextUI\XmlConfiguration\Groups;
 
 class MembersRepository{
 
@@ -59,7 +61,6 @@ class MembersRepository{
 
     public function get_vilages(Request $request,$all=false){
         $hint     = $request->q;
-
         
         if($all)
          return Village::paginate(25);
@@ -109,7 +110,8 @@ class MembersRepository{
         $member->hiv_status      = $request->hiv_status;
         $member->education_level = $request->education;
         $member->village_id      = $request->village_id;
-        $member->nin = $request->nin;
+        $member->nin             = $request->nin;
+        $member->is_group        = $request->is_group;
 
         $saved = ($request->ref)?$member->update():$member->save();
         
@@ -194,6 +196,26 @@ class MembersRepository{
 
         return ($request->id)?$cluster->update():$cluster->save();
     }
+
+    
+    public function get_groups(){
+
+        $groups = MemberGroup::paginate(15);
+        return $groups;
+    }
+
+    public function save_group(Request $request){
+
+        $group = ($request->id)?MemberGroup::find($$request->id):new MemberGroup();
+
+        $group->group_name    = $request->group_name;
+        $group->group_email   = $request->group_email;
+        $group->group_phone   = $request->group_phone;
+        $group->village_id    = $request->village_id;
+
+        return ($request->id)?$group->update():$group->save();
+    }
+
 
 
 

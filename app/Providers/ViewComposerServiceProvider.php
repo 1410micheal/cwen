@@ -6,6 +6,7 @@ use App\View\Composers\BusinessTypesCompoer;
 use App\View\Composers\BusinessTypesComposer;
 use App\View\Composers\ClustersComposer;
 use App\View\Composers\DistrictsComposer;
+use App\View\Composers\GroupsViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\View\Composers\MemberCategoriesComposer;
@@ -38,6 +39,7 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('members/*',RegulatorsComposer::class);
          View::composer('partials/*',ClustersComposer::class);
          View::composer('partials/*',DistrictsComposer::class);
+         View::composer('partials/members/*',GroupsViewComposer::class);
          
     }
 }

@@ -40,6 +40,7 @@
                                     <li><a href="{{ url('regulators') }}" class="slide-item">Government Regulatory Bodies</a></li>
                                     <li><a href="{{ url('clusters') }}" class="slide-item">Member Clusters</a></li>
                                     <li><a href="{{ url('village-list') }}" class="slide-item">Villages</a></li>
+                                    <li><a href="{{ url('groups') }}" class="slide-item">Member Groups</a></li>
                                  </ul>
                             </li>
                           

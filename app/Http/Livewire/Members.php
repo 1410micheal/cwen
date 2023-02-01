@@ -220,6 +220,27 @@ class Members extends Component
         return back()->with($alert);
     }
 
+    public function group_list(Request $request, MembersRepository $membersRepo){
+       
+        $data['groups']   =  $membersRepo->get_groups();
+        $data['heading']      = "Groups";
+        return view('common.groups',$data);
+    }
+
+    public function save_group(Request $request, MembersRepository $membersRepo){
+       
+        $record = $membersRepo->save_group($request);
+
+        $msg = (!$record)?"Operation failed, try again":"Group saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
+
 
 
 }

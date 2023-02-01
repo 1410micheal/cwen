@@ -78,6 +78,10 @@ Route::post("save-cluster",[Members::class,'save_cluster']);
 Route::get("village-list",[Members::class,'village_list']);
 Route::post("save-village",[Members::class,'save_village']);
 
+Route::get("groups",[Members::class,'group_list']);
+Route::post("save-group",[Members::class,'save_group']);
+
+
 
 Route::get("edit-member",[NewMember::class,'edit']);
 Route::post('save-member',[NewMember::class,'save']);

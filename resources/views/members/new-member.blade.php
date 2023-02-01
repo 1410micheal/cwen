@@ -76,27 +76,33 @@
                                         <div class="row">
 
                                        
-                                        <div class="control-group form-group col-lg-3">
+                                        <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Membership</label>
                                             <input type="date" name="date_registered" class="form-control" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required>
                                         </div>
 
-                                        <div class="control-group form-group col-lg-3">
+                                        <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Birth</label>
                                             <input type="date" name="dob" class="form-control required" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required>
                                         </div>
 
-                                        <div class="form-group col-lg-3">
+                                        <div class="form-group col-lg-4">
                                                 <label class="form-label">Member Category</label>
                                                 @include('partials.categories.dropdown')
                                         </div>
 
-                                        <div class="form-group col-lg-3">
+                                        <div class="form-group col-lg-4">
                                                 <label class="form-label">Member CLuster</label>
                                                 @include('partials.cluster.dropdown')
                                         </div>
 
-                                        <div class="form-group col-lg-3">
+                                        
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Member Group</label>
+                                                @include('partials.members.group_dropdown')
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
                                                 <label class="form-label">Gender</label>
                                                 <select name="gender" class="form-control">
                                                     <option>Male</option>
@@ -117,7 +123,7 @@
                                                 </select>
                                         </div>
 
-                                        <div class="form-group col-lg-3">
+                                        <div class="form-group col-lg-2">
                                                 <label class="form-label">Education Level</label>
                                                 <select name="education" class="form-control">
                                                     <option>Degree</option>
@@ -128,8 +134,7 @@
                                                 </select>
                                         </div>
 
-                                        
-                                        <div class="form-group col-lg-3">
+                                        <div class="form-group col-lg-2">
                                                 <label class="form-label">Marital Status</label>
                                                 <select name="marital_status" class="form-control">
                                                     <option>Married</option>
@@ -138,7 +143,8 @@
                                                 </select>
                                         </div>
 
-                                        <div class="form-group col-lg-3">
+
+                                        <div class="form-group col-lg-5 " id="autoElem">
                                                 <label class="form-label">Village/Address</label>
                                                 <input type="text" id="village" class="form-control" placeholder="Village">
                                                 <input type="hidden" name="id" id="village_id">
@@ -162,9 +168,6 @@
 
     @section('scripts')
 
-
-   
-   
     <!-- FORM WIZARD JS-->
     <script src="{{asset('assets/plugins/formwizard/jquery.smartWizard.js')}}"></script>
     <script src="{{asset('assets/plugins/formwizard/fromwizard.js')}}"></script>
@@ -174,22 +177,16 @@
     <script src="{{asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-    <!-- INTERNAL Accordion-Wizard-Form js-->
-
-    
+   
     <script>
+
     var previewImage = function(event) {
         var output = document.getElementById('preview');
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
-        URL.revokeObjectURL(output.src) // free memory
+            URL.revokeObjectURL(output.src) // free memory
         }
-    };
-    </script>
-   
-    
-    <script>
-
+      };
 
         $('#policywizard').steps({
         headerTag: 'h3',
@@ -242,50 +239,10 @@
     });
 
 
-    $('#village').autocomplete({
-            type: "GET",
-            minLength: 3,
-            autoFocus:true,
-            classes: {
-                "ui-autocomplete": "highlight"
-            },
-            source : function (request, response) 
-            {                         
-                var source_url = "<?php echo route('villages'); ?>?q=" + $("#village").val();
-
-                $.ajax({
-                    url: source_url,
-                    dataType: "json",
-                    data: request,
-                    success: function (data) { 
-                        
-                        var datas = data;
-
-                        console.log(datas);
-
-                        var list  = [];
-
-                        datas.forEach(function(item){
-                            let list_item = {
-                                label:item.village_name+" "+item.district_name,
-                                value:item.village_name+" "+item.district_name,
-                                row_id:item.id
-                            }
-
-                            list.push(list_item);
-                        });
-
-                        response(list);
-                     },
-                    error : function (a,b,c) { console.log(a)}
-                    });
-            },                
-            select: function (event, ui) { 
-                $('#village_id').val(ui.item.row_id); 
-            }               
-        });
-
-
+    
     </script>
+
+   @include('partials.villages.autocomplete')
+    
 
     @endsection
