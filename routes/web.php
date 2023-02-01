@@ -72,6 +72,12 @@ Route::post("member-businesses",[Members::class,'save_business']);
 Route::get("regulators",[Members::class,'regulators']);
 Route::post("save-regulator",[Members::class,'save_regulator']);
 
+Route::get("clusters",[Members::class,'clusters']);
+Route::post("save-cluster",[Members::class,'save_cluster']);
+
+Route::get("village-list",[Members::class,'village_list']);
+Route::post("save-village",[Members::class,'save_village']);
+
 
 Route::get("edit-member",[NewMember::class,'edit']);
 Route::post('save-member',[NewMember::class,'save']);

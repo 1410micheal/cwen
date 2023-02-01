@@ -11,10 +11,7 @@ class NewMember extends Component
 {
     public function render(Request $request, MembersRepository $membersRepo, BusinessRepository $businessRepo)
     {
-        $data['business_types']    = $businessRepo->get();
-        $data['regulators']        = $businessRepo->regulators();
-
-        return view('members.new-member',$data);
+        return view('members.new-member');
     }
 
     public function edit(Request $request, MembersRepository $membersRepo, BusinessRepository $businessRepo)
@@ -22,9 +19,7 @@ class NewMember extends Component
         $member            = $membersRepo->find_by_ref($request->ref);
         $data['member']    = $member;
         $data['business']  = $member->business;
-        $data['business_types']    = $businessRepo->get();
-        $data['regulators']        = $businessRepo->regulators();
-
+       
         return view('members.edit-member',$data);
     }
 

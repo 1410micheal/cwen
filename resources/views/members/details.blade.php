@@ -7,7 +7,7 @@
    @section('content')
 
 <!-- PAGE-HEADER -->
-<div class="page-header">
+<div class="page-header d-print-none">
 <h1 class="page-title">Member Details</h1>
 <div>
     <ol class="breadcrumb">
@@ -52,7 +52,7 @@
                     <p class="mb-1">Phone No: {{$member->phone_no}}</p>
                     <p class="mb-1">Email: {{$member->email}}</p>
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
-                    <a href="{{ url('edit-member') }}?ref={{$member->unique_id}}" class="btn btn-lg btn-outline-primary mt-2">
+                    <a href="{{ url('edit-member') }}?ref={{$member->unique_id}}" class="btn btn-lg btn-outline-primary mt-2 d-print-none">
                        <i class="fa fa-pencil"></i> Edit Member Profile
                     </a>
                 </div>
@@ -125,7 +125,7 @@
             </div>
             <div class="card-body pt-4">
                 
-                <div class="row mb-3">
+                <div class="row mb-3 d-print-none">
                     <div class="col-lg-3 float-end">
                     <a href="#add-product" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12"><i class="fe fe-box"></i> Add Product</a>
                     </div>
@@ -153,7 +153,9 @@
                             <div class="panel-body tabs-menu-body border-0 pt-0">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="followup">
+                                        <div class="d-print-none">
                                         @include('members.partials.followup_form')
+                                        </div>
 
                                         <div class="table-responsive pt-4">
                                             

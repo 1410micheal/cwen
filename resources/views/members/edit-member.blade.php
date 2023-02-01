@@ -262,13 +262,6 @@
     @section('scripts')
 
 
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="{{asset('assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-    <script src="{{asset('assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-
    
     <!-- FORM WIZARD JS-->
     <script src="{{asset('assets/plugins/formwizard/jquery.smartWizard.js')}}"></script>

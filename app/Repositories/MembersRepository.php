@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\BusinessProfile;
+use App\Models\Cluster;
 use App\Models\Member;
 use App\Models\MemberCategory;
 use App\Models\Village;
@@ -56,14 +57,28 @@ class MembersRepository{
         return $member;
     }
 
-    public function get_vilages(Request $request){
+    public function get_vilages(Request $request,$all=false){
         $hint     = $request->q;
+
+        
+        if($all)
+         return Village::paginate(25);
 
         if(empty($hint))
          return [];
-
-        $villages = Village::where('village_name','like', $hint.'%');
+         
+        $villages = Village::where('village_name','like', $hint.'%')->groupBy('village_name','district_id');
         return $villages->get();
+    }
+
+    public function save_village(Request $request){
+
+        $village = ($request->id)?Village::find($$request->id):new Village();
+
+        $village->village_name   = $request->village_name;
+        $village->district_id   = $request->district_id;
+
+        return ($request->id)?$village->update():$village->save();
     }
 
     public function find_by_ref($ref){
@@ -163,6 +178,23 @@ class MembersRepository{
 
        export_excel($export_data);
     }
+
+    public function get_clusters(){
+
+        $clusters = Cluster::all();
+        return $clusters;
+    }
+
+    public function save_cluster(Request $request){
+
+        $cluster = ($request->id)?Cluster::find($$request->id):new Cluster();
+
+        $cluster->cluster_name   = $request->cluster_name;
+        $cluster->cluster_desc   = $request->description;
+
+        return ($request->id)?$cluster->update():$cluster->save();
+    }
+
 
 
 }

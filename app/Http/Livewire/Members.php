@@ -180,5 +180,46 @@ class Members extends Component
         return back()->with($alert);
     }
 
+    public function clusters(Request $request, MembersRepository $membersRepo){
+       
+        $data['clusters']   =  $membersRepo->get_clusters();
+        $data['heading']      = "Clusters";
+        return view('common.clusters',$data);
+    }
+
+    public function save_cluster(Request $request, MembersRepository $membersRepo){
+       
+        $record = $membersRepo->save_cluster($request);
+
+        $msg = (!$record)?"Operation failed, try again":"Cluster saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
+    public function village_list(Request $request, MembersRepository $membersRepo){
+       
+        $data['villages']   =  $membersRepo->get_vilages($request,true);
+        $data['heading']      = "Villages";
+        return view('common.villages',$data);
+    }
+
+    public function save_village(Request $request, MembersRepository $membersRepo){
+       
+        $record = $membersRepo->save_village($request);
+
+        $msg = (!$record)?"Operation failed, try again":"Village saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
+
 
 }

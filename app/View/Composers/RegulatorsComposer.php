@@ -1,12 +1,12 @@
 <?php
 namespace App\View\Composers;
 
-use App\Models\BusinessType;
+use App\Models\Regulator;
 
 class RegulatorsComposer{
 
     public function compose($view){
-    	$regulators = BusinessType::all();
+    	$regulators = Regulator::all();
         $view->with('regulators',$regulators);
     }
 }

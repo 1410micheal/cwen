@@ -38,6 +38,8 @@
                                     <li><a href="{{ route('products.packaging') }}" class="slide-item">Packaging Types</a></li>
                                     <li><a href="{{ url('offence-types') }}" class="slide-item">Offence Types</a></li>
                                     <li><a href="{{ url('regulators') }}" class="slide-item">Government Regulatory Bodies</a></li>
+                                    <li><a href="{{ url('clusters') }}" class="slide-item">Member Clusters</a></li>
+                                    <li><a href="{{ url('village-list') }}" class="slide-item">Villages</a></li>
                                  </ul>
                             </li>
                           
