@@ -52,7 +52,7 @@ class Members extends Component
         $data['visits_count']    =  count($member->visits);
         $data['products_count']  =  count($member->products);
         $data['offences_count']  =  count($member->offences);
-        $data['business']        =  $member->business;
+        $data['businesses']      =  $member->businesses;
         $data['services']        =  $followupRepo->get_services();
         $data['product_types']   =  $productsRepo->get_types();
         $data['packaging_types'] =  $productsRepo->get_packaging_types();
@@ -145,6 +145,36 @@ class Members extends Component
         $data["message"] = $msg;
        
         $alert_class = ($record)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
+    public function save_business(Request $request, MembersRepository $membersRepo)
+    {
+        
+        $request->validate([
+            'business_name'  => 'required|max:100',
+            'business_type'  => 'required',
+            'employee_count' => 'required',
+            'biz_ownership'  => 'required',
+            'prem_ownership' => 'required',
+            'has_biz_skills' => 'required',
+            'is_licenced'    => 'required',
+            'regulator'      => 'required',
+            'address'        => 'required',
+            'member_id'      => 'required',
+        ]);
+
+
+        $member = $membersRepo->save_biz_profile($request);
+
+        $action = ($request->ref)?"updated":"saved";
+
+        $msg = (!$member)?"Operation failed, try again":"Member $action successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($member)?'success':'danger';
         $alert = ['alert-'.$alert_class=>$msg];
 
         return back()->with($alert);

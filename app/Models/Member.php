@@ -14,8 +14,8 @@ class Member extends Model
         return $this->belongsTo(MemberCategory::class,"member_category_id","id");
     }
 
-    public function business(){
-        return $this->hasOne(BusinessProfile::class,"member_id","id");
+    public function businesses(){
+        return $this->hasMany(BusinessProfile::class,"member_id","id");
     }
 
     public function visits(){
@@ -35,5 +35,10 @@ class Member extends Model
     public function village(){
 
         return $this->belongsTo(Village::class);
+    }
+
+    public function cluster(){
+        
+        return $this->belongsTo(Cluster::class);
     }
 }

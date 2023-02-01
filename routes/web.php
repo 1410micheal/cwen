@@ -67,6 +67,7 @@ Route::post("save-product",[Members::class,'save_product']);
 Route::post("save-offence",[Members::class,'save_offence']);
 Route::get("offence-types",[Members::class,'offence_types']);
 Route::post("save-offence-type",[Members::class,'save_offence_types']);
+Route::post("member-businesses",[Members::class,'save_business']);
 
 Route::get("regulators",[Members::class,'regulators']);
 Route::post("save-regulator",[Members::class,'save_regulator']);

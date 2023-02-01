@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\View\Composers\BusinessTypesCompoer;
+use App\View\Composers\BusinessTypesComposer;
+use App\View\Composers\ClustersComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\View\Composers\MemberCategoriesComposer;
+use App\View\Composers\RegulatorsComposer;
 use App\View\Composers\VillagesViewComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -29,5 +33,9 @@ class ViewComposerServiceProvider extends ServiceProvider
        
          View::composer('partials/categories/*',MemberCategoriesComposer::class);
          View::composer('partials/villages/*',VillagesViewComposer::class);
+         View::composer('members/*',BusinessTypesComposer::class);
+         View::composer('members/*',RegulatorsComposer::class);
+         View::composer('partials/*',ClustersComposer::class);
+         
     }
 }

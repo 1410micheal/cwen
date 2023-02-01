@@ -107,7 +107,7 @@ class MembersRepository{
         return $member;
     }
 
-    private function save_biz_profile(Request $request,$business_id=null){
+    public function save_biz_profile(Request $request,$business_id=null){
 
         $profile = ($request->ref)?BusinessProfile::find($business_id):new BusinessProfile();
 

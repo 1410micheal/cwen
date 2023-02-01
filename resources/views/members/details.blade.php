@@ -29,7 +29,7 @@
             <hr>
             <div class="row">
                 <div class="col-lg-4  text-start border-bottom border-lg-0">
-                    <h3 class="text-dark">#{{$member->unique_id}}</h3>
+                    <h3 class="text-dark text-bold">#{{$member->unique_id}}</h3>
                     <h5>Registered: {{ $member->date_registered }}</h5>
                     <h5>Member Category:<strong>{{$member->category->category_name}}</strong></h5>
                     <h5>Marital Status: {{ $member->marital_status }}</h5>
@@ -66,7 +66,7 @@
 
 
 
-@if($member->business)
+@if(count($member->businesses))
  @include('partials.members.business_profile')
 @endif
 
@@ -122,12 +122,18 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title mb-0">Member Additional Data</h3>
-                <div class="btn-group">
-                    <a href="#add-product" data-bs-toggle="modal" class="btn"><i class="fe fe-box"></i> Add Product</a>
-                    <a href="#add-sgbv" data-bs-toggle="modal" class="btn" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
-                </div>
             </div>
             <div class="card-body pt-4">
+                
+                <div class="row mb-3">
+                    <div class="col-lg-3 float-end">
+                    <a href="#add-product" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12"><i class="fe fe-box"></i> Add Product</a>
+                    </div>
+                    <div class="col-lg-3 float-end">
+                    <a href="#add-sgbv" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
+                    </div>
+                </div>
+
                 <div class="grid-margin">
                     <div class="">
                         <div class="panel panel-primary">
