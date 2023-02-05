@@ -93,8 +93,24 @@ class MembersRepository{
         
         $member = ($request->ref)?$this->find_by_ref($request->ref):new Member();
 
+        $last_member    = Member::whereRaw('id = (select max(`id`) from members)')->first();
+        $last_member_id = $last_member->id;
+        $prefix = "000";
+
+        if($last_member_id > 10){
+            $prefix = "00";
+        }
+        else if($last_member_id > 100){
+            $prefix = "00";
+        }else if($last_member_id > 1000){
+            $prefix = "0";
+        }else if($last_member_id > 10000){
+            $prefix = "";
+        };
+
+        //current_user()->id
         if(!$request->ref)
-        $member->unique_id   = "CWN".time().current_user()->id;
+        $member->unique_id   = $prefix.$last_member_id;
 
         $member->first_name  = $request->first_name;
         $member->date_registered  = $request->date_registered;

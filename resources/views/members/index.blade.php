@@ -120,6 +120,9 @@
                                                         Member Name</th>
                                                         <th
                                                         class="bg-transparent border-bottom-0">
+                                                        Contact</th>
+                                                        <th
+                                                        class="bg-transparent border-bottom-0">
                                                         Gender</th>
                                                     <th class="bg-transparent border-bottom-0"
                                                         style="width: 10%;">Marital Status</th>

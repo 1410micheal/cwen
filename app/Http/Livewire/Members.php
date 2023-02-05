@@ -14,8 +14,7 @@ class Members extends Component
 {
     public function index(Request $request,MembersRepository $membersRepo)
     {
-        
-        $from_date = ($request->start_date)?$request->start_date:date('Y-m-01');
+        $from_date = ($request->start_date)?$request->start_date:date('Y-01-01');
         $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
 
         $request['from_date'] = date('Y/m/d',strtotime($from_date));
