@@ -111,7 +111,7 @@ class MembersRepository{
         $member->education_level = $request->education;
         $member->village_id      = $request->village_id;
         $member->nin             = $request->nin;
-        $member->is_group        = $request->is_group;
+        $member->is_group        = ($request->is_group)?$request->is_group:0;
 
         $saved = ($request->ref)?$member->update():$member->save();
         
@@ -206,7 +206,7 @@ class MembersRepository{
 
     public function save_group(Request $request){
 
-        $group = ($request->id)?MemberGroup::find($$request->id):new MemberGroup();
+        $group = ($request->id>0)?MemberGroup::find($request->id):new MemberGroup();
 
         $group->group_name    = $request->group_name;
         $group->group_email   = $request->group_email;
@@ -215,8 +215,6 @@ class MembersRepository{
 
         return ($request->id)?$group->update():$group->save();
     }
-
-
 
 
 }

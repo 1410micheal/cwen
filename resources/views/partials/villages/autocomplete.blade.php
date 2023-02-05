@@ -40,6 +40,7 @@
                     });
             },                
             select: function (event, ui) { 
+                //console.log(ui.item);
                 $('#village_id').val(ui.item.row_id); 
             }               
         });

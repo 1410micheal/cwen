@@ -159,7 +159,7 @@
                             <div class="form-group col-lg-5">
                                     <label class="form-label">Village/Address</label>
                                     <input type="text" id="village" class="form-control" placeholder="Village">
-                                    <input type="hidden" name="id" id="village_id">
+                                    <input type="hidden" name="village_id" id="village_id">
                             </div>
                             </div>
                         </div>
