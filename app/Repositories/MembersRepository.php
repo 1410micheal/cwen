@@ -11,7 +11,6 @@ use App\Models\ProductDetail;
 use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PHPUnit\TextUI\XmlConfiguration\Groups;
 
 class MembersRepository{
 
@@ -131,15 +130,15 @@ class MembersRepository{
         if(!$request->ref)
         $member->unique_id   = $prefix.$last_member_id;
 
-        $member->first_name  = $request->first_name;
-        $member->date_registered  = $request->date_registered;
+        $member->first_name       = $request->first_name;
+        $member->date_registered  = date('Y/m/d',strtotime($request->date_registered));
         $member->last_name   = $request->last_name;
         $member->middle_name = $request->middle_name;
         $member->email       = $request->email;
         $member->telephone   = $request->phone_no;
         $member->phone_no    = $request->phone_no;
         $member->member_category_id  = $request->member_category_id;
-        $member->dob             = $request->dob;
+        $member->dob             = date('Y/m/d',strtotime($request->dob));
         $member->gender          = $request->gender;
         $member->marital_status  = $request->marital_status;
         $member->hiv_status      = $request->hiv_status;

@@ -40,7 +40,8 @@ class NewMember extends Component
             'has_biz_skills' => 'required',
             'is_licenced'    => 'required',
             'regulator'      => 'required',
-            'address'        => 'required'
+            'address'        => 'required',
+            'village_id'     => 'required'
         ]);
 
 
