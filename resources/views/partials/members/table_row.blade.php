@@ -1,10 +1,6 @@
 <tr class="border-bottom">
-    <td class="text-center">
-        <div class="mt-0 mt-sm-2 d-block">
-            <h6 class="mb-0 fs-14 fw-semibold">
+    <td class="fw-semibold">
                 @include('partials.members.row_links',['row'=>$row,'label'=>'#'.$row->unique_id])
-            </h6>
-        </div>
     </td>
 
     <td>{{ $row->date_registered }}</td>
@@ -15,6 +11,7 @@
     <td>{{ $row->gender }}</td>
     <td>{{ $row->marital_status }}</td>
     <td>{{ $row->hiv_status }}</td>
+    <td>{{ $row->village->village_name }}, {{ $row->village->district->district_name }}</td>
     <td>{{ $row->education_level }}</td>
     @if(@$export!==1)
     <td>

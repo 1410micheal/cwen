@@ -29,15 +29,13 @@
                                 </ul>
                             </li>
 
-                            
-
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Data Setup</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
                                     <li><a href="{{ route('products.categories') }}" class="slide-item">Product Categories</a></li>
                                     <li><a href="{{ route('products.packaging') }}" class="slide-item">Packaging Types</a></li>
                                     <li><a href="{{ url('offence-types') }}" class="slide-item">Offence Types</a></li>
-                                    <li><a href="{{ url('regulators') }}" class="slide-item">Government Regulatory Bodies</a></li>
+                                    <li><a href="{{ url('regulators') }}" class="slide-item">Regulatory Bodies</a></li>
                                     <li><a href="{{ url('clusters') }}" class="slide-item">Member Clusters</a></li>
                                     <li><a href="{{ url('village-list') }}" class="slide-item">Villages</a></li>
                                     <li><a href="{{ url('groups') }}" class="slide-item">Member Groups</a></li>
@@ -50,6 +48,8 @@
                                     <li><a href="{{ route('reports.membership') }}" class="slide-item">Membership</a></li>
                                     <li><a href="{{ route('reports.membershipsummary') }}" class="slide-item">Membership Summary</a></li>
                                     <li><a href="{{ route('reports.followups') }}" class="slide-item">Folowup Report</a></li>
+                                    <li><a href="{{ route('reports.products') }}" class="slide-item">Products Report</a></li>
+                                    <li><a href="{{ route('reports.offences') }}" class="slide-item">Offences Report</a></li>
                                  </ul>
                             </li>
 

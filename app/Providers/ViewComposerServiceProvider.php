@@ -10,6 +10,8 @@ use App\View\Composers\GroupsViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\View\Composers\MemberCategoriesComposer;
+use App\View\Composers\OffenceTypeViewComposer;
+use App\View\Composers\ProductTypeViewComposer;
 use App\View\Composers\RegulatorsComposer;
 use App\View\Composers\VillagesViewComposer;
 
@@ -40,6 +42,8 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('partials/*',ClustersComposer::class);
          View::composer('partials/*',DistrictsComposer::class);
          View::composer('partials/members/*',GroupsViewComposer::class);
+         View::composer('partials/products/*',ProductTypeViewComposer::class);
+         View::composer('partials/offences/*',OffenceTypeViewComposer::class);
          
     }
 }

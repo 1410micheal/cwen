@@ -15,11 +15,16 @@ class="table table-bordered text-nowrap mb-0">
     Member Name</th>
     <th
     class="bg-transparent border-bottom-0">
+    Phone No.</th>
+    <th
+    class="bg-transparent border-bottom-0">
     Gender</th>
     <th class="bg-transparent border-bottom-0"
         style="width: 10%;">Marital Status</th>
     <th class="bg-transparent border-bottom-0"
         style="width: 10%;">HIV Status</th>
+        <th class="bg-transparent border-bottom-0"
+                                                        style="width: 10%;">Location</th>
     <th class="bg-transparent border-bottom-0"
     style="width: 10%;">Education</th>
 </tr>

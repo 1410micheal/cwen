@@ -78,12 +78,12 @@
                                        
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Membership</label>
-                                            <input type="date" name="date_registered" class="form-control" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required>
+                                            <input type="text" name="date_registered" class="form-control datepick" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required>
                                         </div>
 
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Birth</label>
-                                            <input type="date" name="dob" class="form-control required" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required>
+                                            <input type="text" name="dob" class="form-control dobdate" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required>
                                         </div>
 
                                         <div class="form-group col-lg-4">
@@ -168,6 +168,8 @@
 
     @section('scripts')
 
+    @include('partials.general.datepicker')
+
     <!-- FORM WIZARD JS-->
     <script src="{{asset('assets/plugins/formwizard/jquery.smartWizard.js')}}"></script>
     <script src="{{asset('assets/plugins/formwizard/fromwizard.js')}}"></script>
@@ -177,7 +179,25 @@
     <script src="{{asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-   
+    <script>
+        $( function() {
+            
+            var year  = new Date().getFullYear();
+            var month = new Date().getMonth();
+            var day   = new Date().getDay();
+
+            $( ".datepick" ).datepicker({
+                maxDate: new Date(year, month+1, day),
+            });
+            
+            $( ".dobdate" ).datepicker({
+                maxDate: new Date(year-17, 1 - 1, day),
+                changeYear: true
+            });
+            
+        } );
+    </script>
+
     <script>
 
     var previewImage = function(event) {

@@ -18,4 +18,10 @@ class ProductDetail extends Model
 
         return $this->hasMany(ProductPackaging::class,"product_id","id");
     }
+
+    public function member(){
+
+        return $this->belongsTo(Member::class,"member_id","id");
+    }
+    
 }

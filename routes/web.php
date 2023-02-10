@@ -142,5 +142,8 @@ Route::group(['prefix' => 'reports','middleware'=>['auth','web']], function() {
 	Route::get('/followups',  [Reports::class,'followups'])->name('reports.followups');
 	Route::get('/membership',  [Reports::class,'membership'])->name('reports.membership');
 	Route::get('/membershipsummary',  [Reports::class,'membership'])->name('reports.membershipsummary');
+
+	Route::get('/products',  [Reports::class,'products'])->name('reports.products');
+	Route::get('/offences',  [Reports::class,'offences'])->name('reports.offences');
 	
 });

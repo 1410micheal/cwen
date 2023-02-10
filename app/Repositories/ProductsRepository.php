@@ -6,6 +6,8 @@ use App\Models\ProductDetail;
 use App\Models\ProductPackaging;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class ProductsRepository{
 
     public function __construct(){
@@ -13,10 +15,67 @@ class ProductsRepository{
     }
 
     //Get all products
-    public function get(){
+    public function get($request){
 
-        $products = ProductDetail::all();
-        return $products;
+        
+        $query = ProductDetail::orderBy('id','desc')->with("packagings","type","member");
+        $row_count  = ($request->rows)?$request->rows:20;
+
+        if($request->from_date)
+        $query->where(DB::raw('DATE(created_at)'),'>=',$request->from_date);
+
+        if($request->to_date)
+        $query->where(DB::raw('DATE(created_at)'),'<=',$request->to_date);
+
+        if($request->type_id)
+        $query->where('product_type_id',$request->type_id);
+
+        if($request->packaging)
+        $query->where('product_packaging_id',$request->packaging);
+      
+        if($request->excel_export)
+          $this->excel_export($query);
+        
+        $records = $query->paginate($row_count);
+        return $records;
+    }
+
+    private function excel_export($results){
+
+        $export_file = 'product-list-'.time().'.xls';
+        $export_data = [];
+
+        $results->chunk(100, function($rows) use(&$export_data) {
+
+            foreach ($rows as $row){
+
+                $packing = "";
+                foreach($row->packagings as $pack):
+                 $packing = $pack->type->packaging_type_name."";
+                endforeach;
+
+               $data_row = [
+                   "PRODUCT NAME"      => $row->product_name,
+                   "TYPE"              => $row->type->type_name,
+                   "PACKAGING"         => $packing,
+                   "URSB"              => ($row->is_registered_brand)?'Registered':'Not Registered',
+                   "UNBS"              => ($row->is_unbs_certified)?'Certified':'Not Certified',
+                   "RECYLABLE PACKAGING" => ($row->recycles_packagin)?'Recyclable':'Not Recyclable',
+                   'MEMBER'=> $row->member->first_name." ".$row->member->first_name
+               ];
+
+               array_push($export_data,$data_row);
+            }
+
+        });
+
+       set_time_limit(0);
+
+        $filename =  $export_file;      
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+       export_excel($export_data);
     }
 
     public function get_types(){

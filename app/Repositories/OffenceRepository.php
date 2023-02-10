@@ -16,9 +16,66 @@ class OffenceRepository{
     //Get all followup
     public function get(Request $request){
 
-        $report = OffenceReport::paginate(20);
-        return $report;
+        $query = OffenceReport::orderBy('id','desc')->with("type","services","member");
+        $row_count  = ($request->rows)?$request->rows:20;
+
+        if($request->from_date)
+        $query->where(DB::raw('DATE(occurence_date)'),'>=',$request->from_date);
+
+        if($request->to_date)
+        $query->where(DB::raw('DATE(occurence_date)'),'<=',$request->to_date);
+
+        if($request->type_id)
+        $query->where('offence_type_id',$request->type_id);
+
+        if($request->member_id)
+        $query->where('member_id',$request->member_id);
+      
+        if($request->excel_export)
+          $this->excel_export($query);
+        
+        $records = $query->paginate($row_count);
+        return $records;
     }
+
+    private function excel_export($results){
+
+        $export_file = 'offences-list-'.time().'.xls';
+        $export_data = [];
+
+        $results->chunk(100, function($rows) use(&$export_data) {
+
+            foreach ($rows as $row){
+
+                $services = "";
+                foreach($row->services as $service):
+                 $services = $service->service_name."";
+                endforeach;
+
+               $data_row = [
+                   "DATE"              => $row->occurence_date,
+                   'MEMBER'            => $row->member->first_name." ".$row->member->first_name,
+                   "TYPE"              => $row->type->offence_type_name,
+                   "NATURE"            => $row->offence_nature,
+                   "STATUS"            => $row->case_type,
+                   "SERVICES"          => $services,
+                   "EFFECTS"           => $row->effects_on_biz,
+               ];
+
+               array_push($export_data,$data_row);
+            }
+
+        });
+
+       set_time_limit(0);
+
+        $filename =  $export_file;      
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+       export_excel($export_data);
+    }
+
 
     public function get_types(){
 

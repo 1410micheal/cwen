@@ -9,9 +9,13 @@ class OffenceReport extends Model
 {
     use HasFactory;
 
-    public function case_type(){
+    public function member(){
+        return $this->belongsTo(Member::class,"member_id","id");
+    }
 
-        return $this->belongsTo(OffenceType::class);
+    public function type(){
+
+        return $this->belongsTo(OffenceType::class,"offence_type_id","id");
     }
 
     public function services(){

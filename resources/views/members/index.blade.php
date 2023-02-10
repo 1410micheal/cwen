@@ -129,6 +129,8 @@
                                                     <th class="bg-transparent border-bottom-0"
                                                         style="width: 10%;">HIV Status</th>
                                                         <th class="bg-transparent border-bottom-0"
+                                                        style="width: 10%;">Location</th>
+                                                        <th class="bg-transparent border-bottom-0"
                                                         style="width: 10%;">Education</th>
                                                     <th class="bg-transparent border-bottom-0"
                                                         style="width: 5%;">Action</th>

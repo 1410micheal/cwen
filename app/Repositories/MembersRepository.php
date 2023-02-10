@@ -3,9 +3,11 @@ namespace App\Repositories;
 
 use App\Models\BusinessProfile;
 use App\Models\Cluster;
+use App\Models\FollowupLog;
 use App\Models\Member;
 use App\Models\MemberCategory;
 use App\Models\MemberGroup;
+use App\Models\ProductDetail;
 use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -230,6 +232,28 @@ class MembersRepository{
         $group->village_id    = $request->village_id;
 
         return ($request->id)?$group->update():$group->save();
+    }
+
+    public function get_widgets(){
+        
+        $members  = Member::all();
+        $products = ProductDetail::all();
+        $followups = FollowupLog::groupBy('member_id')->get();
+
+        $data['member_count']    = count($members);
+        $data['product_count']   = count($products);
+        $data['followup_count']  = count($followups);
+        $data['membership']      = [];
+        $data['products']        = $this->get_product_summary();
+
+        return (object) $data;
+    }
+
+    public function get_product_summary(){
+
+        $data = DB::select(DB::raw("SELECT count(pd.id) as count,pt.type_name from product_details pd JOIN product_types pt ON pd.product_type_id=pt.id group by pd.product_type_id"));
+
+        return $data;
     }
 
 
