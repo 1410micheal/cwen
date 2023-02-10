@@ -145,6 +145,7 @@ class MembersRepository{
         $member->hiv_status      = $request->hiv_status;
         $member->education_level = $request->education;
         $member->village_id      = $request->village_id;
+        $member->group_id        = $request->group_id;
         $member->nin             = $request->nin;
         $member->is_group        = ($request->is_group)?$request->is_group:0;
 
