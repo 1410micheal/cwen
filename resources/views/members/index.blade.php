@@ -84,6 +84,11 @@
                                     </select>
                                  </div>
 
+                                 <div class="from-group col-lg-12 col-md-12">
+                                    <label class="form-label">Custom Search</label>
+                                    <input type="text" class="form-control" value="{{@$search->term}}" name="term" placeholder="Search by Names,phone,nin,etc">
+                                </div>
+
                                  <div class="from-group col-lg-2 col-md-2 mt-5">
                                     <button type="submit" class="btn btn-primary">Search</button>
                                  </div>

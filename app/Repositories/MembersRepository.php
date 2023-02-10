@@ -47,6 +47,17 @@ class MembersRepository{
 
         if($request->marital_status)
         $query->where('marital_status',$request->marital_status);
+
+        if($request->term){
+            $query->where('first_name','like',$request->term.'%');
+            $query->orWhere('unique_id','like',$request->term.'%');
+            $query->orWhere('last_name','like',$request->term.'%');
+            $query->orWhere('email','like',$request->term.'%');
+            $query->orWhere('telephone','like',$request->term.'%');
+            $query->orWhere('nin','like',$request->term.'%');
+            $query->orWhere('phone_no','like',$request->term.'%');
+        }
+        
       
         if($request->excel_export)
           $this->excel_export($query);
