@@ -84,7 +84,17 @@
                                     </select>
                                  </div>
 
-                                 <div class="from-group col-lg-12 col-md-12">
+                                 <div class="from-group col-lg-2 col-md-2">
+                                    <label class="form-label">Group </label>
+                                    @include('partials.members.group_dropdown',['selected'=>@$search->group_id])
+                                 </div>
+
+                                 <div class="from-group col-lg-2 col-md-2">
+                                    <label class="form-label">Cluster </label>
+                                    @include('partials.cluster.dropdown',['selected'=>@$search->cluster_id])
+                                 </div>
+
+                                 <div class="from-group col-lg-8 col-md-8">
                                     <label class="form-label">Custom Search</label>
                                     <input type="text" class="form-control" value="{{@$search->term}}" name="term" placeholder="Search by Names,phone,nin,etc">
                                 </div>

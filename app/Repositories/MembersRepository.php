@@ -48,6 +48,12 @@ class MembersRepository{
         if($request->marital_status)
         $query->where('marital_status',$request->marital_status);
 
+        if($request->group_id)
+        $query->where('group_id',$request->group_id);
+
+        if($request->cluster_id)
+        $query->where('cluster_id',$request->cluster_id);
+
         if($request->term){
             $query->where('first_name','like',$request->term.'%');
             $query->orWhere('unique_id','like',$request->term.'%');
