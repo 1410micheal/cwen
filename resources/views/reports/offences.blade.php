@@ -10,11 +10,11 @@
 
                        <!-- PAGE-HEADER -->
                        <div class="page-header">
-                        <h1 class="page-title">Member List</h1>
+                        <h1 class="page-title">Offences Report</h1>
                         <div>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashbaord</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Member Followup List</li>
+                                <li class="breadcrumb-item active" aria-current="page">Offences Report</li>
                     </ol>
                         </div>
                     </div>
