@@ -46,7 +46,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-bar-chart-2"></i><span class="side-menu__label">Reports</span><i class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
                                     <li><a href="{{ route('reports.membership') }}" class="slide-item">Membership</a></li>
-                                    <li><a href="{{ route('reports.membershipsummary') }}" class="slide-item">Membership Summary</a></li>
+                                    <!-- <li><a href="{{ route('reports.membershipsummary') }}" class="slide-item">Membership Summary</a></li> -->
                                     <li><a href="{{ route('reports.followups') }}" class="slide-item">Folowup Report</a></li>
                                     <li><a href="{{ route('reports.products') }}" class="slide-item">Products Report</a></li>
                                     <li><a href="{{ route('reports.offences') }}" class="slide-item">Offences Report</a></li>
