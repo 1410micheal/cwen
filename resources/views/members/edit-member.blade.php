@@ -78,28 +78,43 @@
                                         <div class="row">
 
                                        
-                                        <div class="control-group form-group col-lg-3">
+                                        <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Membership</label>
-                                            <input type="date" name="date_registered" class="form-control" placeholder="Date of innitial Membership" id="date_registered" value="{{@$member->date_registered}}" required>
+                                            <input type="date" name="date_registered" class="form-control datepick" placeholder="Date of innitial Membership" id="date_registered" value="{{@$member->date_registered}}" required>
                                         </div>
 
-                                        <div class="control-group form-group col-lg-3">
+                                        <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Birth</label>
-                                            <input type="date" name="dob" class="form-control required" placeholder="Date of birth" id="dob" value="{{@$member->dob}}" required>
+                                            <input type="text" name="dob" class="form-control required dobdate" placeholder="Date of birth" id="dob" value="{{@$member->dob}}" required>
                                         </div>
-
-                                        <div class="form-group col-lg-3">
-                                                <label class="form-label">Member Category</label>
-                                                @include('partials.categories.dropdown',['selected'=>@$member->member_category_id])
-                                        </div>
-
-                                        <div class="form-group col-lg-3">
+                                        
+                                        <div class="form-group col-lg-4">
                                                 <label class="form-label">Gender</label>
                                                 <select name="gender" class="form-control">
                                                     <option {{ (@$member->gender=="Male")?"selected":""}}>Male</option>
                                                     <option {{ (@$member->gender=="Female")?"selected":""}}>Female</option>
                                                 </select>
                                         </div>
+                                        
+                                        
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Member Category</label>
+                                                @include('partials.categories.dropdown',['selected'=>@$member->member_category_id])
+                                        </div>
+
+
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Member Group</label>
+                                                @include('partials.members.group_dropdown',['selected'=>@$member->group_id])
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                                <label class="form-label">Member Cluster</label>
+                                                @include('partials.cluster.dropdown',['selected'=>@$member->cluster_id])
+                                        </div>
+
+                                        
+
 
                                         </div>
 
@@ -274,8 +289,25 @@
 
     <!-- INTERNAL Accordion-Wizard-Form js-->
 
-    
     <script>
+        $( function() {
+            
+            var year  = new Date().getFullYear();
+            var month = new Date().getMonth();
+            var day   = new Date().getDay();
+
+            $( ".datepick" ).datepicker({
+                maxDate: new Date(year, month+1, day),
+            });
+            
+            $( ".dobdate" ).datepicker({
+                maxDate: new Date(year-17, 1 - 1, day),
+                changeYear: true
+            });
+            
+        } );
+
+
     var previewImage = function(event) {
         var output = document.getElementById('preview');
         output.src = URL.createObjectURL(event.target.files[0]);

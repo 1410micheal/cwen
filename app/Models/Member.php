@@ -41,4 +41,10 @@ class Member extends Model
         
         return $this->belongsTo(Cluster::class);
     }
+
+    public function group(){
+        
+        return $this->belongsTo(MemberGroup::class);
+    }
+
 }

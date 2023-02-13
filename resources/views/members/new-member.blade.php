@@ -92,7 +92,7 @@
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                                <label class="form-label">Member CLuster</label>
+                                                <label class="form-label">Member Cluster</label>
                                                 @include('partials.cluster.dropdown')
                                         </div>
 

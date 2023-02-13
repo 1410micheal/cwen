@@ -44,7 +44,6 @@ class NewMember extends Component
             'village_id'     => 'required'
         ]);
 
-
         $member = $membersRepo->save($request);
 
         $action = ($request->ref)?"updated":"saved";
