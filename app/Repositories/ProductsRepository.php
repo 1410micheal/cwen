@@ -17,7 +17,7 @@ class ProductsRepository{
     //Get all products
     public function get($request){
 
-        
+
         $query = ProductDetail::orderBy('id','desc')->with("packagings","type","member");
         $row_count  = ($request->rows)?$request->rows:20;
 
@@ -32,6 +32,12 @@ class ProductsRepository{
 
         if($request->packaging)
         $query->where('product_packaging_id',$request->packaging);
+
+        if($request->unbs)
+        $query->where('is_unbs_certified',$request->unbs);
+
+        if($request->ursb)
+        $query->where('is_registered_brand',$request->ursb);
       
         if($request->excel_export)
           $this->excel_export($query);

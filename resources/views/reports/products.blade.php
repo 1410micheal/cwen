@@ -27,7 +27,7 @@
                                 <div class="card-header ">
                                  <form class="px-5 row">
                     
-                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                 <div class="from-group col-lg-2 col-md-2 mb-2">
                                     <label class="form-label">Date from </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -36,7 +36,7 @@
                                     </div>
                                  </div>
 
-                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                 <div class="from-group col-lg-2 col-md-2 mb-2">
                                  <label class="form-label">Date To </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -44,10 +44,28 @@
                                                 </div><input class="form-control fc-datepicker" value="{{@$search->to}}" placeholder="MM/DD/YYYY" type="text" name="end_date" autocomplete="off">
                                     </div></div>
 
-                                    <div class="from-group col-lg-4 col-md-4 mb-2">
+                                    <div class="from-group col-lg-2 col-md-2 mb-2">
                                     <label class="form-label">Product Type</label>
                                        @include('partials.products.types_dropdown',['selected'=>@$search->type_id])
                                     </div>
+
+                                    <div class="from-group col-lg-3 col-md-3 mb-2">
+                                    <label class="form-label">URSB Registration</label>
+                                        <select class="form-control form-select" name="ursb">
+                                            <option value="" {{ (@$search->ursb=="")?"selected":""}}>All</option>
+                                            <option value="1" {{ (@$search->ursb==1)?"selected":""}}>Registered</option>
+                                            <option value="0" {{ (@$search->ursb==0)?"selected":""}}>Not Registered</option>
+                                        </select>
+                                      </div>
+
+                                      <div class="from-group col-lg-3 col-md-3 mb-2">
+                                    <label class="form-label">UNBS Certification</label>
+                                        <select class="form-control form-select" name="unbs">
+                                            <option value="" {{ (@$search->unbs=="")?"selected":""}}>All</option>
+                                            <option value="1" {{ (@$search->unbs==1)?"selected":""}}>Certified</option>
+                                            <option value="0" {{ (@$search->unbs==0)?"selected":""}}>Not Certified</option>
+                                        </select>
+                                      </div>
 
                                     @if(count($products)>0)
                                         <div class="from-group col-xl-2 col-md-2 mt-5">                          
