@@ -201,6 +201,8 @@ class MembersRepository{
                    "EDUCATION"         => $row->education_level,
                    "MARITAL STATUS"    => $row->marital_status,
                    "CATEGORY"          => $row->category->category_name,
+                   "CLUSTER"          => ($row->cluster)?$row->cluster->cluster_name:'',
+                   "GROUP"          => ($row->group)?$row->group->group_name:'',
                ];
 
                array_push($export_data,$data_row);
