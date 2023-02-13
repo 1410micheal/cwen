@@ -147,6 +147,10 @@
                                                         style="width: 10%;">Location</th>
                                                         <th class="bg-transparent border-bottom-0"
                                                         style="width: 10%;">Education</th>
+                                                        <th class="bg-transparent border-bottom-0"
+                                                        style="width: 10%;">Group</th>
+                                                        <th class="bg-transparent border-bottom-0"
+                                                        style="width: 10%;">Cluster</th>
                                                     <th class="bg-transparent border-bottom-0"
                                                         style="width: 5%;">Action</th>
                                                 </tr>

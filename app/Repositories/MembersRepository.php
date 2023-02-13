@@ -151,7 +151,7 @@ class MembersRepository{
 
         $saved = ($request->ref)?$member->update():$member->save();
         
-        $business_id =($request->ref)?$member->business->id:null;
+        $business_id =($request->ref)?@$member->business->id:null;
 
         $request['member_id'] = $member->id;
 
@@ -162,7 +162,7 @@ class MembersRepository{
 
     public function save_biz_profile(Request $request,$business_id=null){
 
-        $profile = ($request->ref)?BusinessProfile::find($business_id):new BusinessProfile();
+        $profile = ($business_id)?BusinessProfile::find($business_id):new BusinessProfile();
 
         $profile->business_name    = $request->business_name;
         $profile->has_biz_skills   = $request->has_biz_skills;

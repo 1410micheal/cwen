@@ -13,6 +13,8 @@
     <td>{{ $row->hiv_status }}</td>
     <td>{{ $row->village->village_name }}, {{ $row->village->district->district_name }}</td>
     <td>{{ $row->education_level }}</td>
+    <td>{{ ($row->group)?$row->group->group_name:'N/A' }}</td>
+    <td>{{ ($row->cluster)?$row->cluster->cluster_name:'N/A' }}</td>
     @if(@$export!==1)
     <td>
         <div class="g-2">
