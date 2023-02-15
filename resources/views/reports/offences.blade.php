@@ -49,6 +49,16 @@
                                        @include('partials.offences.types_dropdown',['selected'=>@$search->type_id])
                                     </div>
 
+                                    <div class="from-group col-lg-4 col-md-4 mb-2">
+                                    <label class="form-label">Member</label>
+                                       <select name="member_id" class="form-control select2">
+                                        <option selected value="" >All</option>
+                                        @foreach($members as $member)
+                                        <option selected value="{{$member->id}}" >{{$member->first_name." ".$member->first_name }}</option>
+                                        @endforeach
+                                       </select>
+                                    </div>
+
                                     @if(count($offences)>0)
                                         <div class="from-group col-xl-2 col-md-2 mt-5">                          
                                             <a href="{{ current_url() }}excel_export=1" class="btn btn-dark"><i class="fa fa fa-file-excel-o"></i> Export to Excel</a>
@@ -74,6 +84,7 @@
                                             <thead class="border-top">
                                                 <tr>
                                                    <th class="bg-transparent border-bottom-0">Date</th>
+                                                   <th class="bg-transparent border-bottom-0">Member</th>
                                                     <th class="bg-transparent border-bottom-0">Nature</th>
                                                     <th class="bg-transparent border-bottom-0">Type</th>
                                                     <th class="bg-transparent border-bottom-0">Status</th>
