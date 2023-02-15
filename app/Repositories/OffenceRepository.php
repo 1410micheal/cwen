@@ -54,7 +54,7 @@ class OffenceRepository{
 
                $data_row = [
                    "DATE"              => $row->occurence_date,
-                   'MEMBER'            => $row->member->first_name." ".$row->member->first_name,
+                   'MEMBER'            => $row->member->last_name." ".$row->member->first_name,
                    "TYPE"              => $row->type->offence_type_name,
                    "NATURE"            => $row->offence_nature,
                    "STATUS"            => $row->case_type,

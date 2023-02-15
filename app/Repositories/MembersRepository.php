@@ -24,7 +24,10 @@ class MembersRepository{
         return $categories;
     }
 
-    public function get(Request $request){
+    public function get(Request $request=null){
+
+        if(!$request)
+        return Member::all();
 
         $query = Member::orderBy('id','desc');
         $row_count  = ($request->rows)?$request->rows:20;
@@ -263,7 +266,7 @@ class MembersRepository{
         $data['member_count']    = count($members);
         $data['product_count']   = count($products);
         $data['followup_count']  = count($followups);
-        $data['membership']      = [];
+        $data['membership']      = $this->get_member_summary();
         $data['products']        = $this->get_product_summary();
 
         return (object) $data;
@@ -273,6 +276,18 @@ class MembersRepository{
 
         $data = DB::select(DB::raw("SELECT count(pd.id) as count,pt.type_name from product_details pd JOIN product_types pt ON pd.product_type_id=pt.id group by pd.product_type_id"));
 
+        return $data;
+    }
+
+    
+    public function get_member_summary(){
+
+        $data = DB::select(DB::raw("SELECT count(m.id) as count,r.region_name from members m 
+        RIGHT JOIN villages v ON m.village_id=v.id
+        RIGHT JOIN districts d ON v.district_id=d.id
+        RIGHT JOIN regions r ON d.region_id=r.id
+         group by r.id"));
+         
         return $data;
     }
 

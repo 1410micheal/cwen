@@ -78,7 +78,7 @@ class Reports extends Component
     }
 
 
-    public function offences(Request $request, OffenceRepository $offenceRepo)
+    public function offences(Request $request, OffenceRepository $offenceRepo, MembersRepository $membersRepo)
     {
         $from_date = ($request->start_date)?$request->start_date:date('Y-m-01');
         $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
@@ -106,6 +106,8 @@ class Reports extends Component
             $pdf = PDF::loadView('reports.offences-pdf',$exportdata)->setPaper('a4', 'landscape');;
            return $pdf->download("member-offences-report-".time().'.pdf');
         endif;
+
+        $data['members'] = $membersRepo->get();
 
         return view('reports.offences',$data);
     }

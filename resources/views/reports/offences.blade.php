@@ -27,7 +27,7 @@
                                 <div class="card-header ">
                                  <form class="px-5 row">
                     
-                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                 <div class="from-group col-lg-2 col-md-2 mb-2">
                                     <label class="form-label">Date from </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -36,7 +36,7 @@
                                     </div>
                                  </div>
 
-                                 <div class="from-group col-lg-4 col-md-4 mb-2">
+                                 <div class="from-group col-lg-2 col-md-2 mb-2">
                                  <label class="form-label">Date To </label>
                                     <div class="input-group">
                                                 <div class="input-group-text">
@@ -46,15 +46,15 @@
 
                                     <div class="from-group col-lg-4 col-md-4 mb-2">
                                     <label class="form-label">Offence Type</label>
-                                       @include('partials.offences.types_dropdown',['selected'=>@$search->type_id])
+                                       @include('partials.offences.types_dropdown',['selected'=>@$search->type_id,'all_field'=>'All'])
                                     </div>
 
                                     <div class="from-group col-lg-4 col-md-4 mb-2">
                                     <label class="form-label">Member</label>
                                        <select name="member_id" class="form-control select2">
-                                        <option selected value="" >All</option>
+                                        <option selected value="">All</option>
                                         @foreach($members as $member)
-                                        <option selected value="{{$member->id}}" >{{$member->first_name." ".$member->first_name }}</option>
+                                        <option  value="{{$member->id}}" {{ ($member->id==@$search->member_id)?'selected':'' }} >{{$member->last_name." ".$member->first_name }}</option>
                                         @endforeach
                                        </select>
                                     </div>
@@ -120,6 +120,7 @@
       <!-- DATEPICKER JS -->
        <!-- INTERNAL Bootstrap-Datepicker js-->
    @include('partials.general.datepicker')
+   @include('partials.general.select2')
 
 
     @endsection
