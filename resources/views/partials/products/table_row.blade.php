@@ -10,5 +10,5 @@
     <td>{{ ($row->is_registered_brand)?'Regsitered':'Not Registered' }}</td>
     <td>{{ ($row->is_unbs_certified)?'Certified':'Not Certified' }}</td>
     <td>{{ ($row->recycles_packagin)?'Recyclable':'Non-Recyclable' }}</td>
-    <td>{{ ($row->actively_recycles)?'Actively Recycles':"Doesn't Recycle" }}</td>
+    <td>{{ ($row->actively_recycles)?'YES':"NO" }}</td>
 <tr>
