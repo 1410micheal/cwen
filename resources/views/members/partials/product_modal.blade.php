@@ -70,6 +70,30 @@
                     <small class="text-muted">Is packaging recylable?</small>
             </div>
 
+            <div class="control-group form-group col-lg-4">
+                <label class="form-label">Received Eco-Packaging Training</label>
+                <select name="eco_pack_trained" class="form-control required">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </select>
+                    <small class="text-muted">Was member trained about eco-packaging?</small>
+            </div>
+
+            <div class="control-group form-group col-lg-4">
+                <label class="form-label">Practices Recycling</label>
+                <select name="actively_recycles" class="form-control required">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </select>
+                <small class="text-muted">Does Member do recycling</small>
+            </div>
+
+            <div class="control-group form-group col-lg-4">
+                <label class="form-label">Processing Method</label>
+                @include('partials.products.process_dropdown')
+                <small class="text-muted">How is the product procesed?</small>
+            </div>
+
         </div>
 
    

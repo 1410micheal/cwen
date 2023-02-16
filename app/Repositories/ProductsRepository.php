@@ -115,9 +115,11 @@ class ProductsRepository{
         $product->is_registered_brand    = $request->brand_registered;
         $product->member_id              = $request->member_id;
         $product->is_unbs_certified      = $request->unbs_certified;
-        //$product->eco_packaging_trained  = $request->eco_trained;
+        $product->eco_packaging_trained  = $request->eco_pack_trained;
         $product->recycles_packagin      = $request->recyclable;
         $product->packaging_type         = $request->packaging_type;
+        $product->actively_recycles      = $request->actively_recycles;
+        $product->processing_method      = $request->method_id;
 
         return $product->save();
     }

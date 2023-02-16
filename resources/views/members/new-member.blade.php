@@ -110,6 +110,11 @@
                                                 </select>
                                         </div>
 
+                                        <div class="form-group col-lg-12">
+                                                <label class="form-label">How Did You Know About Us?</label>
+                                                @include('partials.members.infochannel_dropdown')
+                                        </div>
+
                                         </div>
 
                                         <div class="row">

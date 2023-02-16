@@ -156,6 +156,11 @@
                                                 <input type="hidden" name="village_id" id="village_id" value="{{ @$member->village->id }}">
                                         </div>
 
+                                        <div class="form-group col-lg-12">
+                                                <label class="form-label">How Did You Know About Us?</label>
+                                                @include('partials.members.infochannel_dropdown',['selected'=>$member->info_channel])
+                                        </div>
+
 
                                         </div>
                                         
@@ -262,13 +267,23 @@
                                             </div>
                                        </div>
 
-                                       <div class="col-lg-12">
+                                       <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-label">Service Required</label>
                                                 @php 
                                                  $selected = (count($member->expectations->toArray())>0)?array_column($member->expectations->toArray(),"service_id"):[];
                                                 @endphp
                                                 @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]','selected'=>$selected])
+                                            </div>
+                                       </div>
+
+                                       <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Distribution Channels</label>
+                                                @php 
+                                                 $selected_channels = (count($member->channels->toArray())>0)?array_column($member->channels->toArray(),"distribution_channel_id"):[];
+                                                @endphp
+                                                @include('partials.channels.dropdown',['class'=>'select2','field'=>'distribution_channels[]','selected'=>$selected_channels])
                                             </div>
                                        </div>
                                        

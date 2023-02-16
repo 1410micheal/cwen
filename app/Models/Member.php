@@ -51,4 +51,13 @@ class Member extends Model
         return $this->hasMany(ServiceExpectation::class);
     }
 
+    public function channels(){
+        return $this->hasMany(MemberDistributionChannel::class);
+    }
+
+    public function info_channel(){
+
+        return $this->belongsTo(InfoChannel::class,"info_channel","id");
+    }
+
 }

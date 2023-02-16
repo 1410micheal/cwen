@@ -6,6 +6,7 @@ use App\Models\Cluster;
 use App\Models\FollowupLog;
 use App\Models\Member;
 use App\Models\MemberCategory;
+use App\Models\MemberDistributionChannel;
 use App\Models\MemberGroup;
 use App\Models\ProductDetail;
 use App\Models\ServiceExpectation;
@@ -152,6 +153,7 @@ class MembersRepository{
         $member->cluster_id      = $request->cluster_id;
         $member->nin             = $request->nin;
         $member->is_group        = ($request->is_group)?$request->is_group:0;
+        $member->info_channel    = $request->infochannel_id;
 
         $saved = ($request->ref)?$member->update():$member->save();
         
@@ -162,6 +164,7 @@ class MembersRepository{
 
         $this->save_biz_profile($request,$business_id);
         $this->save_expected_services($request);
+        $this->save_channels($request);
 
         return $member;
     }
@@ -197,6 +200,22 @@ class MembersRepository{
                 $expectation->member_id = $request->member_id;
                 $expectation->service_id = $value;
                 $expectation->save();
+           endif;
+        }
+
+      }
+
+      public function save_channels(Request $request){
+
+        foreach($request->distribution_channels as $key=>$value){
+            
+            $channel = MemberDistributionChannel::where('member_id',$request->member_id)->where('distribution_channel_id',$value)->first();
+            
+            if(!$channel):
+                $channel = new MemberDistributionChannel();
+                $channel->member_id = $request->member_id;
+                $channel->distribution_channel_id = $value;
+                $channel->save();
            endif;
         }
 

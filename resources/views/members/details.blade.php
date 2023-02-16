@@ -83,7 +83,7 @@
 
 
 @if(count($member->businesses))
- @include('partials.members.business_profile')
+ @include('partials.members.business_profile',['businesses'=>$businesses,'channels'=>$member->channels])
 @endif
 
 

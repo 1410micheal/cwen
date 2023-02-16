@@ -19,9 +19,18 @@ class ProductDetail extends Model
         return $this->hasMany(ProductPackaging::class,"product_id","id");
     }
 
+    public function packaging(){
+
+        return $this->belongsTo(PackagingType::class,"packaging_type","id");
+    }
+
     public function member(){
 
         return $this->belongsTo(Member::class,"member_id","id");
+    }
+
+    public function processing_method(){
+        return $this->belongsTo(ProcessingMethod::class,"processing_method","id");
     }
     
 }

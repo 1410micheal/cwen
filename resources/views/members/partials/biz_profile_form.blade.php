@@ -103,10 +103,17 @@
                                             </div>
                                        </div>
 
-                                       <div class="col-lg-12">
+                                       <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-label">Service Required</label>
                                                 @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]'])
+                                            </div>
+                                       </div>
+
+                                       <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Distribution Channels</label>
+                                                @include('partials.channels.dropdown',['class'=>'select2','field'=>'distribution_channels[]'])
                                             </div>
                                        </div>
                                        

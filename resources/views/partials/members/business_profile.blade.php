@@ -46,6 +46,19 @@
                 </div>
             </div>
             @endforeach
+
+            @if(count($channels)>0)
+
+                <div class="row px-2 py-4">
+                    <div class="col-lg-12"><h4 class="fw-bold">Distribution Channels</h4></div>
+                    <ul class="list-group">
+                        @foreach($channels as $channel)
+                            <li>- {{$channel->channel->channel_name}}
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
             </div>
 
         </div>

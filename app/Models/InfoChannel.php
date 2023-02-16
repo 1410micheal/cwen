@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DistributionChannel extends Model
+class InfoChannel extends Model
 {
     use HasFactory;
-
 }

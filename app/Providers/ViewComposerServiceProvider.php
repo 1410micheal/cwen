@@ -5,12 +5,15 @@ namespace App\Providers;
 use App\View\Composers\BusinessTypesCompoer;
 use App\View\Composers\BusinessTypesComposer;
 use App\View\Composers\ClustersComposer;
+use App\View\Composers\DistributionChannelsViewComposer;
 use App\View\Composers\DistrictsComposer;
 use App\View\Composers\GroupsViewComposer;
+use App\View\Composers\InfoChannelsViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\View\Composers\MemberCategoriesComposer;
 use App\View\Composers\OffenceTypeViewComposer;
+use App\View\Composers\ProcessingMethodsViewComposer;
 use App\View\Composers\ProductTypeViewComposer;
 use App\View\Composers\RegulatorsComposer;
 use App\View\Composers\ServicesViewComposer;
@@ -48,6 +51,8 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('partials/offences/*',OffenceTypeViewComposer::class);
          View::composer('partials/services/*',ServicesViewComposer::class);
          View::composer('partials/trainings/*',TrainingsViewComposer::class);
-         
+         View::composer('partials/channels/*',DistributionChannelsViewComposer::class);
+         View::composer('partials/members/*',InfoChannelsViewComposer::class);
+         View::composer('partials/products/*',ProcessingMethodsViewComposer::class);
     }
 }
