@@ -47,4 +47,8 @@ class Member extends Model
         return $this->belongsTo(MemberGroup::class);
     }
 
+    public function expectations(){
+        return $this->hasMany(ServiceExpectation::class);
+    }
+
 }

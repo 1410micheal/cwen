@@ -66,6 +66,17 @@
 </div>
 <!-- ROW-1 CLOSED -->
 
+@if(count($member->expectations)>0)
+
+<div class="row">
+    <div class="col-lg-12"><h4>Services Required</h4></div>
+    <ul>
+        @foreach($member->expectations as $expectation)
+            <li>- {{$expectation->service->service_name}}
+        @endforeach
+    </ul>
+</div>
+@endif
 
 
 @if(count($member->businesses))
@@ -155,8 +166,9 @@
                             <div class="panel-body tabs-menu-body border-0 pt-0">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="followup">
-                                        <div class="d-print-none">
+                                        <div class="d-print-none py-3">
                                         @include('members.partials.followup_form')
+                                           <a href="#add-followup" data-bs-toggle="modal" class="btn btn-primary">Capture Folowup Record</a>
                                         </div>
 
                                         <div class="table-responsive pt-4">
@@ -164,7 +176,7 @@
                                         @if($visits_count < 1)
                                             @include('partials.general.no_records',['message'=>'No followup data for this member!'])
                                         @else
-                                            @include('partials.members.member_followup')
+                                            @include('partials.members.member_followup',['rows'=>$member->visits])
                                         @endif
                                         </div>
                                     </div>
@@ -211,5 +223,6 @@
     @include('partials.general.datepicker')
 
    @include('partials.general.select2')
+
 
     @endsection

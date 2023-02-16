@@ -9,7 +9,18 @@ $('.select2').select2({
 
 $('.select2Modal').select2({
     width: '100%',
-    dropdownParent: $(".modal")
+    dropdownParent: $(".selectOnModal")
+});
+
+$('.services').select2({
+    width: '100%',
+    dropdownParent: $(".modalselect")
+});
+
+
+$('.trainings').select2({
+    width: '100%',
+    dropdownParent: $(".modalselect")
 });
 
 

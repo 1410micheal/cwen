@@ -102,6 +102,14 @@
                                                 </div>
                                             </div>
                                        </div>
+
+                                       <div class="col-lg-12">
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label">Service Required</label>
+                                                @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]'])
+                                            </div>
+                                       </div>
                                        
                                         
                                     </section>

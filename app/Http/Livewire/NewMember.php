@@ -18,7 +18,7 @@ class NewMember extends Component
     {
         $member            = $membersRepo->find_by_ref($request->ref);
         $data['member']    = $member;
-        $data['business']  = $member->business;
+        $data['business']  = (count($member->businesses)>0)?$member->businesses[0]:null;
        
         return view('members.edit-member',$data);
     }

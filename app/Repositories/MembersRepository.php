@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\MemberCategory;
 use App\Models\MemberGroup;
 use App\Models\ProductDetail;
+use App\Models\ServiceExpectation;
 use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -157,6 +158,7 @@ class MembersRepository{
         $business_id =($request->ref)?@$member->business->id:null;
 
         $request['member_id'] = $member->id;
+        $request['business_id'] = $member->business_id;
 
         $this->save_biz_profile($request,$business_id);
 
@@ -183,6 +185,21 @@ class MembersRepository{
 
     }
 
+    public function save_expected_services(Request $request,$member_id){
+
+        $business_id = $request->business_id;
+
+        foreach($request->expected_services as $key=>$value){
+            
+            $expectation = ($business_id)?ServiceExpectation::find($business_id):new ServiceExpectation();
+            $expectation->member_id = $request->member_id;
+            $expectation->service_id = $value;
+
+            $saved = ($business_id)?$expectation->update():$expectation->save();
+        }
+
+      }
+
     private function excel_export($results){
 
         $export_file = 'member-list-'.time().'.xls';
@@ -196,8 +213,9 @@ class MembersRepository{
                    "UNIQUE ID"         => $row->unique_id,
                    "FIRST NAME"        => $row->first_name,
                    "LAST NAME"         => $row->last_name,
-                   "DOB"               => $row->dob,
+                   "DATE REGISTERED"   => $row->date_registered,
                    "AGE"               => get_age($row->dob),
+                   "DOB"               => $row->dob,
                    "GENDER"            => $row->gender,
                    "PHONE"             => $row->telephone,
                    "HIV STAUS"         => $row->hiv_status,

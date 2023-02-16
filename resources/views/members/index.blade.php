@@ -133,6 +133,8 @@
                                                         <th
                                                         class="bg-transparent border-bottom-0">
                                                         Member Name</th>
+                                                        <th>Age</th>
+                                                        <th>Date of Birth</th>
                                                         <th
                                                         class="bg-transparent border-bottom-0">
                                                         Contact</th>

@@ -9,4 +9,8 @@
         selectOtherMonths: true
     });
 
+    $( ".datepick" ).datepicker({
+        container: '.modal modal-body'
+    });
+
 </script>

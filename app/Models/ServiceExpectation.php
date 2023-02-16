@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FollowupLog extends Model
+class ServiceExpectation extends Model
 {
     use HasFactory;
 
-    public function followup_services(){
-        return $this->hasMany(FollowupService::class);
+    public function service(){
+        return $this->belongsTo(Service::class);
     }
 
     public function member(){
         return $this->belongsTo(Member::class);
     }
 
-    public function followup_trainings(){
-        return $this->hasMany(FollowupTraining::class);
-    }
 }

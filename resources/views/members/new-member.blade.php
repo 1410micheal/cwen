@@ -156,7 +156,7 @@
                                     </section>
 
                                       <h3>Business Profile</h3>
-                                     @include('members.partials.biz_profile_form')
+                                       @include('members.partials.biz_profile_form')
                                 </div>
                                 </form>
                         </div>
@@ -263,6 +263,7 @@
     </script>
 
    @include('partials.villages.autocomplete')
+   @include('partials.general.select2')
     
 
     @endsection

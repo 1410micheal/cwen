@@ -7,6 +7,8 @@
     <td>
         <span class="fw-semibold mt-sm-2 d-block">{{ $row->first_name }} {{ $row->middle_name }} {{ $row->last_name }}</span>
     </td>
+    <td>{{ get_age($row->dob)}} </td>
+    <td>{{ $row->dob }} </td>
     <td>{{ $row->phone_no }}</td>
     <td>{{ $row->gender }}</td>
     <td>{{ $row->marital_status }}</td>

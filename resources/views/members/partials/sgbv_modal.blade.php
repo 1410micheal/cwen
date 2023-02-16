@@ -1,5 +1,5 @@
 
-<div class="modal" id="add-sgbv">
+<div class="modal selectOnModal" id="add-sgbv">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
 

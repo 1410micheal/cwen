@@ -13,6 +13,8 @@ use App\View\Composers\MemberCategoriesComposer;
 use App\View\Composers\OffenceTypeViewComposer;
 use App\View\Composers\ProductTypeViewComposer;
 use App\View\Composers\RegulatorsComposer;
+use App\View\Composers\ServicesViewComposer;
+use App\View\Composers\TrainingsViewComposer;
 use App\View\Composers\VillagesViewComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -44,6 +46,8 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('partials/members/*',GroupsViewComposer::class);
          View::composer('partials/products/*',ProductTypeViewComposer::class);
          View::composer('partials/offences/*',OffenceTypeViewComposer::class);
+         View::composer('partials/services/*',ServicesViewComposer::class);
+         View::composer('partials/trainings/*',TrainingsViewComposer::class);
          
     }
 }
