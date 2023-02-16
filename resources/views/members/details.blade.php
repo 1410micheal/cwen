@@ -59,6 +59,20 @@
                     </a>
                 </div>
             </div>
+
+            
+            @if(count($member->expectations)>0)
+
+            <div class="row px-2">
+                <div class="col-lg-12"><h4 class="fw-bold">Services Required</h4></div>
+                <ul class="list-group">
+                    @foreach($member->expectations as $expectation)
+                        <li>- {{$expectation->service->service_name}}
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
         </div>
     </div>
 </div>
@@ -66,17 +80,6 @@
 </div>
 <!-- ROW-1 CLOSED -->
 
-@if(count($member->expectations)>0)
-
-<div class="row">
-    <div class="col-lg-12"><h4>Services Required</h4></div>
-    <ul>
-        @foreach($member->expectations as $expectation)
-            <li>- {{$expectation->service->service_name}}
-        @endforeach
-    </ul>
-</div>
-@endif
 
 
 @if(count($member->businesses))

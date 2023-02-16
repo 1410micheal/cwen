@@ -64,7 +64,7 @@
                                     <p class="text-muted">Use the filters above to refine the data as per reporting requirement</p>
                                     <div class="table-responsive">
                                         
-                                            @include('partials.members.member_followup',['rows'=>$followups])
+                                            @include('partials.members.member_followup',['rows'=>$followups,'show_member'=>true])
                                     </div>
                                     {{ $followups->links() }}
 

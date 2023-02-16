@@ -2,6 +2,9 @@
         <thead>
             <tr>
                 <th>Date</th>
+                @if(@$show_member)
+                <th>Member</th>
+                @endif
                 <th>Stock on shelf</th>
                 <th>Sales Volume</th>
                 <th>Profit Margin</th>
@@ -15,9 +18,12 @@
             @foreach($rows as $row)
             <tr>
                 <td>{{ $row->followup_date }}</td>
+                @if(@$show_member)
+                <td>{{ $row->member->first_name." ".$row->member->last_name}}</td>
+                @endif
                 <td>{{ number_format($row->products_on_shelf) }}</td>
                 <td>{{ number_format($row->sales_volume) }}</td>
-                <td>{{ $row->profit_margin }}%</td>
+                <td>{{ $row->profit_margin }} @if($row->profit_margin>0) % @endif</td>
                 <td>{{ number_format($row->employ_count) }}</td>
                 <td>{{ $row->ursb_registration }}</td>
                 <td>{{ $row->ursb_name_reservation }}</td>

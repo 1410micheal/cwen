@@ -161,6 +161,7 @@ class MembersRepository{
         $request['business_id'] = $member->business_id;
 
         $this->save_biz_profile($request,$business_id);
+        $this->save_expected_services($request);
 
         return $member;
     }
@@ -185,17 +186,18 @@ class MembersRepository{
 
     }
 
-    public function save_expected_services(Request $request,$member_id){
+    public function save_expected_services(Request $request){
 
-        $business_id = $request->business_id;
-
-        foreach($request->expected_services as $key=>$value){
+        foreach($request->services_expected as $key=>$value){
             
-            $expectation = ($business_id)?ServiceExpectation::find($business_id):new ServiceExpectation();
-            $expectation->member_id = $request->member_id;
-            $expectation->service_id = $value;
-
-            $saved = ($business_id)?$expectation->update():$expectation->save();
+            $expectation = ServiceExpectation::where('member_id',$request->member_id)->where('service_id',$value)->first();
+            
+            if(!$expectation):
+                $expectation = new ServiceExpectation();
+                $expectation->member_id = $request->member_id;
+                $expectation->service_id = $value;
+                $expectation->save();
+           endif;
         }
 
       }

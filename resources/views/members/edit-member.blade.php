@@ -261,6 +261,16 @@
                                                 </div>
                                             </div>
                                        </div>
+
+                                       <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Service Required</label>
+                                                @php 
+                                                 $selected = (count($member->expectations->toArray())>0)?array_column($member->expectations->toArray(),"service_id"):[];
+                                                @endphp
+                                                @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]','selected'=>$selected])
+                                            </div>
+                                       </div>
                                        
                                         
                                     </section>
@@ -416,5 +426,7 @@
 
 
     </script>
+
+     @include('partials.general.select2')
 
     @endsection
