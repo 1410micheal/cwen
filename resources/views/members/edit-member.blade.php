@@ -132,9 +132,9 @@
                                         <div class="form-group col-lg-3">
                                                 <label class="form-label">Education Level</label>
                                                 <select name="education" class="form-control">
-                                                    <option {{ (@$member->education_level=="Degree")?"selected":""}}>Degree</option>
-                                                    <option {{ (@$member->education_level=="High School")?"selected":""}} >High School</option>
-                                                    <option {{ (@$member->education_level=="Secondary")?"selected":""}}>Secondary</option>
+                                                    <option {{ (@$member->education_level=="Tertiary")?"selected":""}}>Tertiary</option>
+                                                    <option {{ (@$member->education_level=="Advanced Level")?"selected":""}} >Advanced Level </option>
+                                                    <option {{ (@$member->education_level=="Ordinary Level")?"selected":""}}>Ordinary Level</option>
                                                     <option {{ (@$member->education_level=="Primary")?"selected":""}}>Primary</option>
                                                     <option {{ (@$member->education_level=="None")?"selected":""}}>None</option>
                                                 </select>
