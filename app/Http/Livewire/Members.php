@@ -208,6 +208,11 @@ class Members extends Component
 
     public function save_village(Request $request, MembersRepository $membersRepo){
        
+        $request->validate([
+            'village_name'=>'require',
+            'district_id'=>'required'
+        ]);
+        
         $record = $membersRepo->save_village($request);
 
         $msg = (!$record)?"Operation failed, try again":"Village saved successfuly";
