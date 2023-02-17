@@ -1,21 +1,15 @@
-<tr class="border-bottom">
-    <td class="text-center">
-        <div class="mt-0 mt-sm-2 d-block">
-            <h6 class="mb-0 fs-14 fw-semibold">
-                {{$row->followup_date}}
-            </h6>
-        </div>
-    </td>
-    <td><span
-            class="fw-semibold mt-sm-2 d-block">{{ $row->member->first_name }} {{ $row->member->middle_name }} {{ $row->member->last_name }}</span>
-    </td>
-    <td>{{ $row->details }}</td>
-    <td>
-    <ul class="list-group">
-        @foreach($row->followup_services as $service)
-            <li>{{ $service->service->service_name}}</li>
-        @endforeach
-    </ul>
-    </td>
-    
 <tr>
+    <td>{{ $row->followup_date }}</td>
+    @if(@$show_member)
+    <td>{{ $row->member->unique_id}}</td>
+    <td>{{ $row->member->first_name." ".$row->member->last_name}}</td>
+    @endif
+    <td>{{ number_format($row->products_on_shelf) }}</td>
+    <td>{{ number_format($row->sales_volume) }}</td>
+    <td>{{ $row->profit_margin }} @if($row->profit_margin>0) % @endif</td>
+    <td>{{ number_format($row->employ_count) }}</td>
+    <td>{{ $row->ursb_registration }}</td>
+    <td>{{ $row->ursb_name_reservation }}</td>
+    <td>{{ $row->unbs_certification }}</td>
+    <td><a href="#folllowup{{$row->id}}" data-bs-toggle="modal">Details</a></td>
+</tr>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Common;
 use App\Http\Livewire\NewMember;
 use App\Http\Livewire\Reports;
 
@@ -87,6 +88,16 @@ Route::get("edit-member",[NewMember::class,'edit']);
 Route::post('save-member',[NewMember::class,'save']);
 Route::get('followup-report',[Members::class,'followups']);
 Route::get('villages',[Members::class,'villages'])->name('villages');
+
+Route::get('channels',[Common::class,'dsitribution_channels']);
+Route::get('infochannels',[Common::class,'info_channels']);
+Route::get('trainings',[Common::class,'trainings']);
+Route::get('methods',[Common::class,'methods']);
+
+Route::post('save-channel',[Common::class,'save_distchannel']);
+Route::post('save-method',[Common::class,'save_method']);
+Route::post('save-training',[Common::class,'save_training']);
+Route::post('save-infochannel',[Common::class,'save_infochannel']);
 
 });
 
