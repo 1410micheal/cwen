@@ -78,12 +78,12 @@
                                        
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Membership</label>
-                                            <input type="text" name="date_registered" class="form-control datepick" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required>
+                                            <input type="text" name="date_registered" class="form-control datepick" placeholder="Date of innitial Membership" id="date_registered" value="{{old('date_registered')}}" required autocomplete="off">
                                         </div>
 
                                         <div class="control-group form-group col-lg-4">
                                             <label class="form-label">Date of Birth</label>
-                                            <input type="text" name="dob" class="form-control dobdate" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required>
+                                            <input type="text" name="dob" class="form-control dobdate" placeholder="Date of birth" id="dob" value="{{old('dob')}}" required autocomplete="off">
                                         </div>
 
                                         <div class="form-group col-lg-4">
@@ -173,8 +173,7 @@
 
     @section('scripts')
 
-    @include('partials.general.datepicker')
-
+   
     <!-- FORM WIZARD JS-->
     <script src="{{asset('assets/plugins/formwizard/jquery.smartWizard.js')}}"></script>
     <script src="{{asset('assets/plugins/formwizard/fromwizard.js')}}"></script>

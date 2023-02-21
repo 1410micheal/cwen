@@ -25,4 +25,10 @@ $('.trainings').select2({
 
 
 
+$('.districts').select2({
+    width: '100%',
+    dropdownParent: $(".modalselect")
+});
+
+
 </script>

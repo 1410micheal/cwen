@@ -48,7 +48,7 @@
 
                                 <div class="form-group col-md-3">
                                     <label>{{ __('general.email') }}</label>
-                                    <input type="tel" name="email"  value="{{$search->phone}}" class="form-control" placeholder="Search by Phone">
+                                    <input type="tel" name="email"  value="{{$search->email}}" class="form-control" placeholder="Search by Email">
                                 </div>
 
                                 <div class="col-md-3">
@@ -77,7 +77,7 @@
                             @php
                                   
                                   $statuses = array(
-                                  "0"=>"Blocked",
+                                  "0"=>"Inactive",
                                   "2"=>"Restricted",
                                   "3"=>"Reset",
                                   "1"=>"Active");

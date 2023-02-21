@@ -83,7 +83,6 @@ Route::get("groups",[Members::class,'group_list']);
 Route::post("save-group",[Members::class,'save_group']);
 
 
-
 Route::get("edit-member",[NewMember::class,'edit']);
 Route::post('save-member',[NewMember::class,'save']);
 Route::get('followup-report',[Members::class,'followups']);
@@ -98,6 +97,10 @@ Route::post('save-channel',[Common::class,'save_distchannel']);
 Route::post('save-method',[Common::class,'save_method']);
 Route::post('save-training',[Common::class,'save_training']);
 Route::post('save-infochannel',[Common::class,'save_infochannel']);
+
+Route::get("businesstypes",[Common::class,'businesstypes']);
+Route::post("save-businesstype",[Common::class,'save_businesstype']);
+
 
 });
 

@@ -222,14 +222,14 @@
                                             </div>
                                        </div>
                                        <div class="col-lg-4">
-                                            <div class="control-group form-group">
-                                                <label class="form-label">Received Business Dev't Training</label>
-                                                <select name="has_biz_skills" class="form-control required">
-                                                        <option value="1" {{ (@$business->has_biz_skills == 1)?"selected":"" }}>Yes</option>
-                                                        <option value="0" {{ (@$business->has_biz_skills == 0)?"selected":"" }}>No</option>
-                                                </select>
-                                                 <small class="text-muted">Member trained in business development?</small>
-                                            </div>
+                                        <div class="form-group col-lg-12 modalselect">
+                                                <label class="form-label">Cascade of Trainings Attended</label>
+                                                @php
+                                                 $selected = (count($member->trainings->toArray())>0)?array_column($member->trainings->toArray(),'id'):[];
+                                                @endphp
+                                                @include('partials.trainings.dropdown',['field'=>'trainings[]','selected'=>$selected])
+                                                <small class="text-muted">Select trainings attended</small>
+                                        </div>
                                        </div>
 
                                        <div class="col-lg-4">

@@ -55,16 +55,13 @@
                                                  <small class="text-muted">Does member own the business premises?</small>
                                             </div>
                                        </div>
+                                       
                                        <div class="col-lg-4">
-                                            <div class="control-group form-group">
-                                                <label class="form-label">Received Business Dev't Training</label>
-                                                <select name="has_biz_skills" class="form-control required">
-                                                        <option value="" selected disabled>Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
-                                                </select>
-                                                 <small class="text-muted">Member trained in business development?</small>
-                                            </div>
+                                        <div class="form-group col-lg-12 modalselect">
+                                                <label class="form-label">Cascade of Trainings Attended</label>
+                                                @include('partials.trainings.dropdown',['field'=>'trainings[]'])
+                                                <small class="text-muted">Select trainings attended</small>
+                                        </div>
                                        </div>
 
                                        <div class="col-lg-4">

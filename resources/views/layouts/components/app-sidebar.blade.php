@@ -43,6 +43,7 @@
                                     <li><a href="{{ url('trainings') }}" class="slide-item">Training Options</a></li>
                                     <li><a href="{{ url('methods') }}" class="slide-item">Processing Methods</a></li>
                                     <li><a href="{{ url('infochannels') }}" class="slide-item">About Us Channels</a></li>
+                                    <li><a href="{{ url('business_types') }}" class="slide-item">Business Types</a></li>
                                  </ul>
                             </li>
                           

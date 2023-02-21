@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\MemberCategory;
 use App\Models\MemberDistributionChannel;
 use App\Models\MemberGroup;
+use App\Models\MemberTraining;
 use App\Models\ProductDetail;
 use App\Models\ServiceExpectation;
 use App\Models\Village;
@@ -165,16 +166,31 @@ class MembersRepository{
         $this->save_biz_profile($request,$business_id);
         $this->save_expected_services($request);
         $this->save_channels($request);
+        $this->save_member_training($request);
 
         return $member;
     }
+
+    private function save_member_training(Request $request){
+
+        foreach($request->trainings as $key=>$value){
+
+            $training = new MemberTraining();
+            $training->member_id = $request->member_id;
+            $training->training_id     = $value;
+            $training->save();
+        }
+
+        return true;
+    }
+
 
     public function save_biz_profile(Request $request,$business_id=null){
 
         $profile = ($business_id)?BusinessProfile::find($business_id):new BusinessProfile();
 
         $profile->business_name    = $request->business_name;
-        $profile->has_biz_skills   = $request->has_biz_skills;
+        $profile->has_biz_skills   = (count($request->trainings)>0)?1:0;
         $profile->business_type_id = $request->business_type;
         $profile->member_id        = $request->member_id;
         $profile->no_of_employees  = $request->employee_count;

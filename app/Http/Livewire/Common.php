@@ -43,6 +43,27 @@ class Common extends Component
         return view('common.infochannels')->with($data);
     }
 
+    public function businesstypes(Request $request,CommonRepository $commonRepo)
+    {
+        $data['heading'] = "Business Types";
+        $data['types'] = $commonRepo->get_businesstypes();
+
+        return view('common.business_types')->with($data);
+    }
+
+    public function save_businesstype(Request $request,CommonRepository $commonRepo){
+
+        $member = $commonRepo->save_business_type($request);
+
+        $msg = (!$member)?"Operation failed, try again":"Type  saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($member)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
     public function save_method(Request $request,CommonRepository $commonRepo){
 
         $member = $commonRepo->save_method($request);

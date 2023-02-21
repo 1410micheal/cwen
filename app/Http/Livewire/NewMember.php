@@ -37,7 +37,6 @@ class NewMember extends Component
             'employee_count' => 'required',
             'biz_ownership'  => 'required',
             'prem_ownership' => 'required',
-            'has_biz_skills' => 'required',
             'is_licenced'    => 'required',
             'regulator'      => 'required',
             'address'        => 'required',

@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\BusinessType;
 use App\Models\DistributionChannel;
 use App\Models\InfoChannel;
 use App\Models\ProcessingMethod;
@@ -46,6 +47,21 @@ class CommonRepository{
         $channel->infochannel_name           = $request->infochannel_name;
       
         return $channel->save();
+    }
+
+
+    public function get_businesstypes(){
+
+        $types = BusinessType::paginate(15);
+        return $types;
+    } 
+
+    public function save_business_type(Request $request){
+
+        $type = new BusinessType();
+        $type->biz_type_name  = $request->type_name;
+      
+        return $type->save();
     }
     
     public function save_channel(Request $request){

@@ -35,12 +35,12 @@ class PermissionController extends Controller
         $data['roles'] = Role::all();
 
         $name     = $request->name;
-        $phone    = $request->mobile;
+        $email    = $request->email;
         $count    = (!empty($request->count))?$request->count:20;
   
         $users = DB::table('users')
-                ->when($phone, function ($query, $phone) {
-                    return $query->where('users.mobile','like',$phone.'%');
+                ->when($email, function ($query, $email) {
+                    return $query->where('users.email','like',$email.'%');
                 })
                 ->when($name, function ($query, $name) {
                     return $query->where('users.name','like', $name.'%');
@@ -56,7 +56,7 @@ class PermissionController extends Controller
         $data['search'] = (object) array(
             "name"=>$name,
             "count" =>$count,
-            "phone" =>$phone
+            "email" =>$email
         );
 
 
@@ -129,6 +129,7 @@ class PermissionController extends Controller
             if($password == $confirm ):
                 $user->password    = Hash::make($password);
                 $user->pwd_changed = 1;
+                $user->status = 1;
                 $user->update();
         
         	   log_trail('Changed Password for '.$user->name." ".$user->mobile,(current_user()->id)?current_user()->id:0,[], $user);
@@ -248,6 +249,10 @@ class PermissionController extends Controller
         $userId = $request->user_id;
         $roleId = $request->role_id;
         $user   = User::find($userId);
+
+        $user->status = 1;
+        $user->update();
+        
         //first revoke all
         $user->syncRoles([]); 
         //assign new

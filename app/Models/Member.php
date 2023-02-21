@@ -60,4 +60,8 @@ class Member extends Model
         return $this->belongsTo(InfoChannel::class,"info_channel","id");
     }
 
+    public function trainings(){
+        return $this->hasMany(MemberTraining::class,"member_id","id");
+    }
+
 }
