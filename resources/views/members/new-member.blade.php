@@ -131,9 +131,9 @@
                                         <div class="form-group col-lg-2">
                                                 <label class="form-label">Education Level</label>
                                                 <select name="education" class="form-control">
-                                                    <option {{ (old('education') == 'Degree')?"selected":"" }}>Degree</option>
-                                                    <option {{ (old('education') == 'High School')?"selected":"" }}>High School</option>
-                                                    <option {{ (old('education') == 'Secondary')?"selected":"" }}>Secondary</option>
+                                                    <option {{ (old('education') == 'Tertiary')?"selected":"" }}>Tertiary</option>
+                                                    <option {{ (old('education') == 'Advanced Level')?"selected":"" }}>Advanced Level</option>
+                                                    <option {{ (old('education') == 'Ordinary Level')?"selected":"" }}>Ordinary Level</option>
                                                     <option {{ (old('education') == 'Primary')?"selected":"" }}>Primary</option>
                                                     <option {{ (old('education') == 'None')?"selected":"" }}>None</option>
                                                 </select>
