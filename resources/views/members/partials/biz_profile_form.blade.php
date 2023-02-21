@@ -16,7 +16,7 @@
                                                 <select name="business_type" class="form-control required">
                                                        <option value="" selected disabled>Select</option>
                                                     @foreach($business_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->biz_type_name}}</option>
+                                                        <option {{ (old('business_type')==$type->id)?'selected':''}} value="{{$type->id}}">{{$type->biz_type_name}}</option>
                                                     @endforeach
                                                 </select>
                                                  <small class="text-muted">Type of Business</small>
@@ -37,8 +37,8 @@
                                                 <label class="form-label">Ownership</label>
                                                 <select name="biz_ownership" class="form-control required">
                                                         <option value="" selected disabled>Select</option>
-                                                        <option value="1">Member Owned</option>
-                                                        <option value="0">Member Employed</option>
+                                                        <option value="1" {{ (old('biz_ownership') == '1')?"selected":"" }}>Member Owned</option>
+                                                        <option value="0" {{ (old('biz_ownership') == '0')?"selected":"" }}>Member Employed</option>
                                                 </select>
                                                  <small class="text-muted">Does member own the business?</small>
                                             </div>
@@ -49,8 +49,8 @@
                                                 <label class="form-label">Premise Ownership</label>
                                                 <select name="prem_ownership" class="form-control required">
                                                         <option value="" selected disabled>Select</option>
-                                                        <option value="1">Owned</option>
-                                                        <option value="0">Rented</option>
+                                                        <option value="1" {{ (old('prem_ownership') == '1')?"selected":"" }}>Owned</option>
+                                                        <option value="0"{{ (old('prem_ownership') == '0')?"selected":"" }}>Rented</option>
                                                 </select>
                                                  <small class="text-muted">Does member own the business premises?</small>
                                             </div>
@@ -59,7 +59,10 @@
                                        <div class="col-lg-4">
                                         <div class="form-group col-lg-12 modalselect">
                                                 <label class="form-label">Cascade of Trainings Attended</label>
-                                                @include('partials.trainings.dropdown',['field'=>'trainings[]'])
+                                                @php
+                                                 $selectd_tran = old('trainings');
+                                                @endphp
+                                                @include('partials.trainings.dropdown',['field'=>'trainings[]','selected'=>$selectd_tran])
                                                 <small class="text-muted">Select trainings attended</small>
                                         </div>
                                        </div>
@@ -69,8 +72,8 @@
                                                 <label class="form-label">Licenced</label>
                                                 <select name="is_licenced" class="form-control" required>
                                                         <option value="" selected disabled>Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                        <option value="1" {{ (old('is_licenced') == '1')?"selected":"" }}>Yes</option>
+                                                        <option value="0" {{ (old('is_licenced') == '0')?"selected":"" }}>No</option>
                                                 </select>
                                                  <small class="text-muted">Is business licenced?</small>
                                             </div>
@@ -82,7 +85,7 @@
                                                 <select name="regulator" class="form-control" required>
                                                     <option value="" disabled selected>Select</option>
                                                    @foreach($regulators as $reg)
-                                                        <option value="{{$reg->id}}">{{$reg->regulator_name}}</option>
+                                                        <option {{ (old('regulator')==$reg->id)?'selected':'' }} value="{{$reg->id}}">{{$reg->regulator_name}}</option>
                                                     @endforeach
                                                 </select>
                                                  <small class="text-muted">Government Regulator</small>
@@ -103,14 +106,21 @@
                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-label">Service Required</label>
-                                                @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]'])
+                                                @php
+                                                 $selected_svc = old('services_expected');
+                                                @endphp
+
+                                                @include('partials.services.dropdown',['class'=>'select2','field'=>'services_expected[]','selected'=>$selected_svc])
                                             </div>
                                        </div>
 
                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-label">Distribution Channels</label>
-                                                @include('partials.channels.dropdown',['class'=>'select2','field'=>'distribution_channels[]'])
+                                                @php
+                                                 $selected_ch = old('distribution_channels');
+                                                @endphp
+                                                @include('partials.channels.dropdown',['class'=>'select2','field'=>'distribution_channels[]','selected'=>$selected_ch])
                                             </div>
                                        </div>
                                        

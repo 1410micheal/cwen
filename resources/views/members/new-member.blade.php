@@ -88,25 +88,25 @@
 
                                         <div class="form-group col-lg-4">
                                                 <label class="form-label">Member Category</label>
-                                                @include('partials.categories.dropdown')
+                                                @include('partials.categories.dropdown',['selected'=>old('member_category_id')])
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                                 <label class="form-label">Member Cluster</label>
-                                                @include('partials.cluster.dropdown')
+                                                @include('partials.cluster.dropdown',['selected'=>old('cluster_id')])
                                         </div>
 
                                         
                                         <div class="form-group col-lg-4">
                                                 <label class="form-label">Member Group</label>
-                                                @include('partials.members.group_dropdown')
+                                                @include('partials.members.group_dropdown',['selected'=>old('group_id')])
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                                 <label class="form-label">Gender</label>
                                                 <select name="gender" class="form-control">
-                                                    <option>Male</option>
-                                                    <option>Female</option>
+                                                    <option {{ (old('gender') == 'Male')?"selected":"" }}>Male</option>
+                                                    <option {{ (old('gender') == 'Female')?"selected":"" }}>Female</option>
                                                 </select>
                                         </div>
 
@@ -123,36 +123,36 @@
                                         <div class="form-group col-lg-3">
                                                 <label class="form-label">HIV Status</label>
                                                 <select name="hiv_status" class="form-control">
-                                                    <option>Negative</option>
-                                                    <option>Positive</option>
+                                                    <option {{ (old('hiv_status') == 'Negative')?"selected":"" }}>Negative</option>
+                                                    <option {{ (old('hiv_status') == 'Positive')?"selected":"" }}>Positive</option>
                                                 </select>
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                                 <label class="form-label">Education Level</label>
                                                 <select name="education" class="form-control">
-                                                    <option>Degree</option>
-                                                    <option>High School</option>
-                                                    <option>Secondary</option>
-                                                    <option>Primary</option>
-                                                    <option>None</option>
+                                                    <option {{ (old('education') == 'Degree')?"selected":"" }}>Degree</option>
+                                                    <option {{ (old('education') == 'High School')?"selected":"" }}>High School</option>
+                                                    <option {{ (old('education') == 'Secondary')?"selected":"" }}>Secondary</option>
+                                                    <option {{ (old('education') == 'Primary')?"selected":"" }}>Primary</option>
+                                                    <option {{ (old('education') == 'None')?"selected":"" }}>None</option>
                                                 </select>
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                                 <label class="form-label">Marital Status</label>
                                                 <select name="marital_status" class="form-control">
-                                                    <option>Married</option>
-                                                    <option>Single</option>
-                                                    <option>Divorced</option>
+                                                    <option  {{ (old('marital_status') == 'Married')?"selected":"" }}>Married</option>
+                                                    <option {{ (old('marital_status') == 'Single')?"selected":"" }}>Single</option>
+                                                    <option {{ (old('marital_status') == 'Divorced')?"selected":"" }}>Divorced</option>
                                                 </select>
                                         </div>
 
 
                                         <div class="form-group col-lg-5 " id="autoElem">
                                                 <label class="form-label">Village/Address</label>
-                                                <input type="text" id="village" class="form-control" placeholder="Village">
-                                                <input type="hidden" name="village_id" id="village_id">
+                                                <input type="text" id="village" name="village" value="{{ old('village') }}" class="form-control" placeholder="Village" required>
+                                                <input type="hidden" name="village_id" id="village_id" value="{{ old('village_id') }}" >
                                         </div>
 
 
