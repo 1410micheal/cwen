@@ -11,4 +11,5 @@
     <td>{{ ($row->is_unbs_certified)?'Certified':'Not Certified' }}</td>
     <td>{{ ($row->recycles_packagin)?'Recyclable':'Non-Recyclable' }}</td>
     <td>{{ ($row->actively_recycles)?'YES':"NO" }}</td>
+    <td>{{ ($row->processing_method)?$row->processing->method_name:'N/A' }}</td>
 <tr>

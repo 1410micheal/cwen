@@ -5,10 +5,11 @@
         <div class="card-body">
             
            <h3 class="text-primary">Business Profiles</h3>
-           
+           @can('edit members')
            <a href="#add-business" data-bs-toggle="modal" class="btn btn-lg btn-outline-dark mt-2 col-lg-3 mb-2 d-print-none">
                        <i class="fa fa-plus"></i> Add New Business
             </a>
+            @endcan
            <hr>
             <div class="pb-4 pt-1">
             @php
@@ -29,14 +30,14 @@
 
                 <div class="col-lg-4">
                 <h5> No. of Employees:  <strong>{{ $business->no_of_employees }} Employees</strong></h5>
-                <h5>Premises:   <strong>{{ ($business->is_premise_owner)?'Owned':'Rented' }}</strong></h5>
-                <h5>Business Ownership: <strong>{{ ($business->is_biz_owner)?'Owner':' Not Owner' }}</strong></h5>
+                <h5>Premises:   <strong>{{ $business->premise_ownership }}</strong></h5>
+                <h5>Business Ownership: <strong>{{ $business->business_ownership }}</strong></h5>
                 <h5>Dev't Skills: <strong>{{ ($business->has_biz_skills)?'Has developemnt skills':'No developemnt skills' }}</strong></h5>
                 </div>
 
                 <div class="col-lg-4  text-start border-bottom border-lg-0">
                     <h5>Type: <strong>{{ $business->biz_type->biz_type_name }}</strong></h5>
-                    <h5>Gov't Regulator:<strong>{{$business->regulator->regulator_name}}</strong></h5>
+                    <h5>Regulators:<strong>{{$business->regulator_names}}</strong></h5>
                     <h5>Licenced:<strong>{{ ($business->is_licenced)?'YES':'NO'}}</strong></h5>
                 </div>
 

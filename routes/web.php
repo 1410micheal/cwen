@@ -101,6 +101,9 @@ Route::post('save-infochannel',[Common::class,'save_infochannel']);
 Route::get("businesstypes",[Common::class,'businesstypes']);
 Route::post("save-businesstype",[Common::class,'save_businesstype']);
 
+Route::get("services",[Common::class,'services']);
+Route::post("save-service",[Common::class,'save_service']);
+
 
 });
 

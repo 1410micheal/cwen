@@ -85,7 +85,7 @@ footer {
  	<tr>
  	<td>
  		<h1>{{$title ?? 'Data Export'}}</h1>
-        @if(@$search)
+        @if(@$search && @$search->from)
  		<h4>From {{$search->from}} to {{$search->to}}</h4>
         @endif
  	</td>

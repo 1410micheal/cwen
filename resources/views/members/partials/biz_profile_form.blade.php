@@ -39,6 +39,7 @@
                                                         <option value="" selected disabled>Select</option>
                                                         <option value="1" {{ (old('biz_ownership') == '1')?"selected":"" }}>Member Owned</option>
                                                         <option value="0" {{ (old('biz_ownership') == '0')?"selected":"" }}>Member Employed</option>
+                                                        <option value="2" {{ (old('biz_ownership') == '2')?"selected":"" }}>Jointly Owned</option>
                                                 </select>
                                                  <small class="text-muted">Does member own the business?</small>
                                             </div>
@@ -51,6 +52,7 @@
                                                         <option value="" selected disabled>Select</option>
                                                         <option value="1" {{ (old('prem_ownership') == '1')?"selected":"" }}>Owned</option>
                                                         <option value="0"{{ (old('prem_ownership') == '0')?"selected":"" }}>Rented</option>
+                                                        <option value="2" {{ (old('prem_ownership') == '2')?"selected":"" }}>Jointly Owned</option>
                                                 </select>
                                                  <small class="text-muted">Does member own the business premises?</small>
                                             </div>
@@ -82,10 +84,10 @@
                                         <div class="col-lg-4">
                                             <div class="control-group form-group">
                                                 <label class="form-label">Regulating Authority</label>
-                                                <select name="regulator" class="form-control" required>
+                                                <select name="regulator" class="form-control select2Modal" required multiple>
                                                     <option value="" disabled selected>Select</option>
                                                    @foreach($regulators as $reg)
-                                                        <option {{ (old('regulator')==$reg->id)?'selected':'' }} value="{{$reg->id}}">{{$reg->regulator_name}}</option>
+                                                        <option {{ in_array($reg->id,old('regulator')])?'selected':'' }} value="{{$reg->id}}">{{$reg->regulator_name}}</option>
                                                     @endforeach
                                                 </select>
                                                  <small class="text-muted">Government Regulator</small>

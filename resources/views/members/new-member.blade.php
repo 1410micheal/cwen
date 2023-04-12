@@ -181,7 +181,7 @@
     <!-- INTERNAl Jquery.steps js -->
     <script src="{{asset('assets/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
     <script src="{{asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
 
     <script>
         $( function() {
@@ -191,7 +191,7 @@
             var day   = new Date().getDay();
 
             $( ".datepick" ).datepicker({
-                maxDate: new Date(year, month+1, day),
+                maxDate: new Date(year, month, day),
             });
             
             $( ".dobdate" ).datepicker({

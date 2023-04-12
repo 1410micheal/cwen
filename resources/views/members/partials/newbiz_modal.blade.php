@@ -1,5 +1,5 @@
 
-<div class="modal" id="add-business">
+<div class="modal selectOnModal" id="add-business">
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
 

@@ -17,16 +17,21 @@ class Members extends Component
         $from_date = ($request->start_date)?$request->start_date:date('Y-01-01');
         $to_date   = ($request->end_date)?$request->end_date:date('Y-m-d');
 
-        $request['from_date'] = date('Y/m/d',strtotime($from_date));
-        $request['to_date']   = date('Y/m/d',strtotime($to_date));
+        if($request->start_date):
+            $from_date = $request->start_date;
+            $to_date   = $request->end_date;
+            $request['from_date'] = date('Y/m/d',strtotime($from_date));
+            $request['to_date']   = date('Y/m/d',strtotime($to_date));
+            
+            $request['from'] = date('m/d/Y',strtotime($from_date));
+            $request['to']   = date('m/d/Y',strtotime($to_date));
+        endif;
 
         if($request->export_pdf == 1)
          $request['rows'] = 1000;
 
         $data['members'] = $membersRepo->get($request);
 
-        $request['from'] = date('m/d/Y',strtotime($from_date));
-        $request['to']   = date('m/d/Y',strtotime($to_date));
 
         $data['search']  = (Object) $request->all();
 
@@ -209,7 +214,7 @@ class Members extends Component
     public function save_village(Request $request, MembersRepository $membersRepo){
        
         $request->validate([
-            'village_name'=>'require',
+            'village_name'=>'required',
             'district_id'=>'required'
         ]);
         

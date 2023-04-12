@@ -9,5 +9,6 @@
         <th class="bg-transparent border-bottom-0">UNBS Certification</th>
         <th class="bg-transparent border-bottom-0">Recylable Packaging</th>
         <th class="bg-transparent border-bottom-0">Recyling Practice</th>
+        <th class="bg-transparent border-bottom-0">Processing Method</th>
     </tr>
 </thead>

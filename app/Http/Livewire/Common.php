@@ -64,6 +64,29 @@ class Common extends Component
         return back()->with($alert);
     }
 
+
+    
+    public function services(Request $request,CommonRepository $commonRepo)
+    {
+        $data['heading'] = "Services";
+        $data['services'] = $commonRepo->get_services();
+
+        return view('common.services')->with($data);
+    }
+
+    public function save_service(Request $request,CommonRepository $commonRepo){
+
+        $member = $commonRepo->save_service($request);
+
+        $msg = (!$member)?"Operation failed, try again":"Service  saved successfuly";
+        $data["message"] = $msg;
+       
+        $alert_class = ($member)?'success':'danger';
+        $alert = ['alert-'.$alert_class=>$msg];
+
+        return back()->with($alert);
+    }
+
     public function save_method(Request $request,CommonRepository $commonRepo){
 
         $member = $commonRepo->save_method($request);

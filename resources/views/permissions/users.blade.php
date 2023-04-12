@@ -98,11 +98,13 @@
                                     <td><b class="badge badge-dark">{{  $statuses[$user->status] }}</b></td>
                                     <td>{{ strtoupper((@$userRole->name)?$userRole->name:'NO ROLE') }}</td>
                                     <td class="text-center">
+                                        @can('edit users')
                                              @include('permissions.partials.user_row_dropdown')
 
                                              @include('permissions.partials.user_edit_form_modal')
                                              @include('permissions.partials.reset_modal')
                                              @include('permissions.partials.delete_user_modal')
+                                        @endcan
   
                                     </td>
                                 </tr>

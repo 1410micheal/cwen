@@ -5,6 +5,7 @@ use App\Models\BusinessType;
 use App\Models\DistributionChannel;
 use App\Models\InfoChannel;
 use App\Models\ProcessingMethod;
+use App\Models\Service;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,21 @@ class CommonRepository{
         $types = BusinessType::paginate(15);
         return $types;
     } 
+
+    public function get_services(){
+
+        $services = Service::paginate(15);
+        return $services;
+    }
+
+    public function save_service(Request $request){
+
+        $service = new Service();
+        $service->service_name  = $request->service_name;
+      
+        return $service->save();
+    }
+   
 
     public function save_business_type(Request $request){
 

@@ -54,9 +54,11 @@
                     <p class="mb-1">Education: {{ $member->education_level }}</p>
                     <p class="mb-1">Cluster: {{ ($member->cluster)?$member->cluster->cluster_name:"N/A" }}</p>
                     <p class="mb-1">Group: {{ ($member->group)?$member->group->group_name:"N/A" }}</p>
+                    @can('edit members')
                     <a href="{{ url('edit-member') }}?ref={{$member->unique_id}}" class="btn btn-lg btn-outline-primary mt-2 d-print-none">
                        <i class="fa fa-pencil"></i> Edit Member Profile
                     </a>
+                    @endcan
                 </div>
             </div>
 
@@ -141,14 +143,16 @@
             </div>
             <div class="card-body pt-4">
                 
-                <div class="row mb-3 d-print-none">
-                    <div class="col-lg-3 float-end">
-                    <a href="#add-product" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12"><i class="fe fe-box"></i> Add Product</a>
+               @can('edit members')
+                    <div class="row mb-3 d-print-none">
+                        <div class="col-lg-3 float-end">
+                        <a href="#add-product" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12"><i class="fe fe-box"></i> Add Product</a>
+                        </div>
+                        <div class="col-lg-3 float-end">
+                        <a href="#add-sgbv" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
+                        </div>
                     </div>
-                    <div class="col-lg-3 float-end">
-                    <a href="#add-sgbv" data-bs-toggle="modal" class="btn btn-outline-dark col-lg-12" class="btn"><i class="fa fa-legal"></i> Capture SGBV Record</a>
-                    </div>
-                </div>
+                @endcan
 
                 <div class="grid-margin">
                     <div class="">
@@ -171,7 +175,9 @@
                                     <div class="tab-pane active" id="followup">
                                         <div class="d-print-none py-3">
                                         @include('members.partials.followup_form')
+                                          @can('edit members')
                                            <a href="#add-followup" data-bs-toggle="modal" class="btn btn-primary">Capture Folowup Record</a>
+                                           @endcan
                                         </div>
 
                                         <div class="table-responsive pt-4">

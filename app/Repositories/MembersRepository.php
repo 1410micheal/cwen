@@ -2,7 +2,9 @@
 namespace App\Repositories;
 
 use App\Models\BusinessProfile;
+use App\Models\BusinessRegulator;
 use App\Models\Cluster;
+use App\Models\District;
 use App\Models\FollowupLog;
 use App\Models\Member;
 use App\Models\MemberCategory;
@@ -100,8 +102,11 @@ class MembersRepository{
 
         $village = ($request->id)?Village::find($$request->id):new Village();
 
+        $district = District::find($request->district_id);
+
         $village->village_name   = $request->village_name;
-        $village->district_id   = $request->district_id;
+        $village->district_name  = $district->district_name;
+        $village->district_id    = $request->district_id;
 
         return ($request->id)?$village->update():$village->save();
     }
@@ -118,7 +123,7 @@ class MembersRepository{
         $member = ($request->ref)?$this->find_by_ref($request->ref):new Member();
 
         $last_member    = Member::whereRaw('id = (select max(`id`) from members)')->first();
-        $last_member_id = $last_member->id;
+        $last_member_id = ($last_member)?$last_member->id:1;
         $prefix = "000";
 
         if($last_member_id > 10){
@@ -194,7 +199,6 @@ class MembersRepository{
         $profile->business_type_id = $request->business_type;
         $profile->member_id        = $request->member_id;
         $profile->no_of_employees  = $request->employee_count;
-        $profile->regulator_id     = $request->regulator;
         $profile->is_biz_owner     = $request->biz_ownership;
         $profile->is_premise_owner = $request->prem_ownership;
         $profile->address_detail   = $request->address;
@@ -203,6 +207,26 @@ class MembersRepository{
 
         $saved = ($request->ref)?$profile->update():$profile->save();
 
+        $this->save_biz_regulators($request->regulator,$profile->id);
+
+    }
+
+    public function save_biz_regulators($regulators,$biz_id){
+
+        for($i=0; $i<count($regulators); $i++){
+
+            $regulator  = BusinessRegulator::where('business_profile_id',$biz_id)
+            ->where('regulator_id',$regulators[$i])->first();
+
+            if(!$regulator)
+            $regulator = new BusinessRegulator();
+
+            $regulator->business_profile_id = $biz_id;
+            $regulator->regulator_id = $regulators[$i];
+            $regulator->save();
+        }
+        
+        //$profile->regulator_id     = $request->regulator;
     }
 
     public function save_expected_services(Request $request){

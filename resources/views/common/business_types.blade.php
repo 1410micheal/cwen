@@ -144,7 +144,7 @@
 
     @section('scripts')
 
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
 
     <!-- INTERNAL Accordion-Wizard-Form js-->
 

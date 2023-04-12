@@ -29,7 +29,7 @@ class ProductDetail extends Model
         return $this->belongsTo(Member::class,"member_id","id");
     }
 
-    public function processing_method(){
+    public function processing(){
         return $this->belongsTo(ProcessingMethod::class,"processing_method","id");
     }
     

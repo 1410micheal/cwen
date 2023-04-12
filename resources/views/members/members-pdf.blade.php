@@ -10,9 +10,16 @@ class="table table-bordered text-nowrap mb-0">
     <th
         class="bg-transparent border-bottom-0">
         Date Registered</th>
+        
     <th
     class="bg-transparent border-bottom-0">
     Member Name</th>
+    <th
+        class="bg-transparent border-bottom-0">
+        Age</th>
+    <th
+        class="bg-transparent border-bottom-0">
+        Date of Birth</th>
     <th
     class="bg-transparent border-bottom-0">
     Phone No.</th>
